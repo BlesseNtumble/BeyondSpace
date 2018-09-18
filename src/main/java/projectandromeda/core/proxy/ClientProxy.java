@@ -24,7 +24,6 @@ public class ClientProxy extends CommonProxy {
 		
 		this.register_event(new PAClientEventsHandler());
 		MinecraftForge.EVENT_BUS.register(this);
-		ProjectAndromeda.debug("test");
 	}
 	
 	@Override

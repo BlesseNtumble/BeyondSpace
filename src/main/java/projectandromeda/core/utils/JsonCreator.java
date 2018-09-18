@@ -12,7 +12,7 @@ public class JsonCreator {
 
 	private static String modid = ProjectAndromeda.MODID;
 	public static String path = "K://MCP/codding/1.12.2/src/main/resources/assets/" + modid + "/";
-
+	
 	public static void addBlockJsonFiles(Block block, String addPath){
 		try{
 			File blockStates = new File(path + "/blockstates/", block.getUnlocalizedName().toLowerCase().substring(5) + ".json");
