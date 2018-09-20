@@ -16,21 +16,27 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import projectandromeda.ProjectAndromeda;
 import projectandromeda.core.events.PAClientEventsHandler;
+import projectandromeda.core.registers.blocks.BasicE.EnumBasicE;
+import projectandromeda.core.registers.blocks.PABlocks;
 
 public class ClientProxy extends CommonProxy {
 
 	@Override
     public void preload() {
-		
+		super.preload();
 		this.register_event(new PAClientEventsHandler());
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 	
 	@Override
-    public void load() {}
+    public void load() {
+		super.load();
+	}
 	
 	@Override
-    public void postload() {}
+    public void postload() {
+		super.postload();
+	}
 	
 	@SubscribeEvent
     @SideOnly(Side.CLIENT)
@@ -44,24 +50,27 @@ public class ClientProxy extends CommonProxy {
 		
 	}
 	
+	@SideOnly(Side.CLIENT)
 	@Override
-    public void registerRender()
-    {	
-		
+    public void registerRender() {
+		super.registerRender();
+		for(EnumBasicE val: EnumBasicE.values()) {
+			ClientUtil.registerBlockJson(ProjectAndromeda.TEXTURE_PREFIX, PABlocks.e, val.getMeta(), val.getName());
+		}
     }
 	
+	@SideOnly(Side.CLIENT)
 	@Override
-    public void registerVariants()
-    {
-		
+    public void registerVariants() {
+		super.registerVariants();
+		ClientUtil.addVariant(ProjectAndromeda.MODID, "e", "e0", "e1", "e2");
     }
 	
 	public void registerTexture(Pre event, String texture) {
 		event.getMap().registerSprite(new ResourceLocation(ProjectAndromeda.TEXTURE_PREFIX + texture));
 	}
 	
-	private void replaceModelDefault(ModelBakeEvent event, String resLoc, String objLoc, List<String> visibleGroups, Class<? extends ModelTransformWrapper> clazz, IModelState parentState, String... variants)
-    {
+	private void replaceModelDefault(ModelBakeEvent event, String resLoc, String objLoc, List<String> visibleGroups, Class<? extends ModelTransformWrapper> clazz, IModelState parentState, String... variants) {
         ClientUtil.replaceModel(ProjectAndromeda.ASSET_PREFIX, event, resLoc, objLoc, visibleGroups, clazz, parentState, variants);
     }
 	
