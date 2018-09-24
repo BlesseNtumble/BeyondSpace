@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "projectandromeda:blocks/e1"
+        "all": "projectandromeda:blocks/arterossystem/arteros_e/e1"
     }
 }

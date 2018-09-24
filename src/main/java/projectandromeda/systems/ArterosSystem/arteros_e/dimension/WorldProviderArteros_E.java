@@ -6,12 +6,18 @@ package projectandromeda.systems.ArterosSystem.arteros_e.dimension;
 import java.util.List;
 
 import asmodeuscore.core.astronomy.dimension.IProviderFreeze;
-import asmodeuscore.core.astronomy.dimension.world.gen.WorldProviderAdvancedSpace;
+import asmodeuscore.core.astronomy.dimension.world.worldengine.WE_Biome;
+import asmodeuscore.core.astronomy.dimension.world.worldengine.WE_ChunkProvider;
+import asmodeuscore.core.astronomy.dimension.world.worldengine.WE_WorldProvider;
+import asmodeuscore.core.astronomy.dimension.world.worldengine.standardcustomgen.WE_CaveGen;
+import asmodeuscore.core.astronomy.dimension.world.worldengine.standardcustomgen.WE_RavineGen;
+import asmodeuscore.core.astronomy.dimension.world.worldengine.standardcustomgen.WE_TerrainGenerator;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.client.CloudRenderer;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DimensionType;
@@ -24,9 +30,11 @@ import projectandromeda.core.utils.PADimensions;
 import projectandromeda.systems.ArterosSystem.ArterosBodies;
 import projectandromeda.systems.ArterosSystem.arteros_e.dimension.sky.SkyProviderArteros_E;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.BiomeProviderArteros_E;
+import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Forest;
+import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Mountain;
 
  
-public class WorldProviderArteros_E extends WorldProviderAdvancedSpace implements IProviderFreeze {
+public class WorldProviderArteros_E extends WE_WorldProvider implements IProviderFreeze {
 	
     @Override
     public double getHorizon() {
@@ -65,7 +73,7 @@ public class WorldProviderArteros_E extends WorldProviderAdvancedSpace implement
 
     @Override
     public Class<? extends IChunkGenerator> getChunkProviderClass() {
-        return ChunkProviderArteros_E.class;
+        return WE_ChunkProvider.class;
 
     }
     
@@ -157,6 +165,44 @@ public class WorldProviderArteros_E extends WorldProviderAdvancedSpace implement
 	public DimensionType getDimensionType() {
 	
 		return PADimensions.Arteros_E;
+	}
+
+	@Override
+	public void genSettings(WE_ChunkProvider cp) {
+		cp.createChunkGen_List .clear(); 
+		cp.createChunkGen_InXZ_List .clear(); 
+		cp.createChunkGen_InXYZ_List.clear(); 
+		cp.decorateChunkGen_List .clear(); 
+		
+		WE_Biome.setBiomeMap(cp, 1.2D, 4, 3200.0D, 0.375D);
+	
+		
+		WE_TerrainGenerator terrainGenerator = new WE_TerrainGenerator(); 
+		terrainGenerator.worldStoneBlock = Blocks.STONE; 
+		terrainGenerator.worldStoneBlockMeta = 0;
+		terrainGenerator.worldSeaGen = true;
+		terrainGenerator.worldSeaGenBlock = Blocks.WATER;
+		terrainGenerator.worldSeaGenMaxY = 64;
+		cp.createChunkGen_List.add(terrainGenerator);
+		
+		//-// 
+		WE_CaveGen cg = new WE_CaveGen(); 
+		cg.replaceBlocksList .clear(); 
+		cg.replaceBlocksMetaList.clear(); 
+		cg.addReplacingBlock(terrainGenerator.worldStoneBlock, (byte)terrainGenerator.worldStoneBlockMeta); 
+		//cg.lavaBlock = CW_Main.bfLava2; 
+		cp.createChunkGen_List.add(cg); 
+		//-// 
+		 
+		WE_RavineGen rg = new WE_RavineGen();
+		rg.replaceBlocksList    .clear();
+		rg.replaceBlocksMetaList.clear();
+		rg.addReplacingBlock(Blocks.STONE, (byte)0);
+		rg.lavaBlock = Blocks.LAVA;
+		cp.createChunkGen_List.add(rg);
+		
+		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Forest()); 
+		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Mountain()); 
 	}
 
 }

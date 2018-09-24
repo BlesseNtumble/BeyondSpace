@@ -7,7 +7,10 @@ import java.util.List;
 import org.apache.logging.log4j.Level;
 
 import micdoodle8.mods.galacticraft.core.Constants;
+import micdoodle8.mods.galacticraft.core.util.CreativeTabGC;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -26,6 +29,8 @@ import projectandromeda.core.configs.PAConfigCore;
 import projectandromeda.core.configs.PAConfigDimensions;
 import projectandromeda.core.events.PAEventsHandler;
 import projectandromeda.core.proxy.CommonProxy;
+import projectandromeda.core.registers.blocks.PABlocks;
+import projectandromeda.core.utils.PACreativeTabs;
 import projectandromeda.systems.ArterosSystem.ArterosBodies;
 
 @Mod(
@@ -64,6 +69,8 @@ public class ProjectAndromeda {
     	new PAConfigCore(new File(event.getModConfigurationDirectory(), "ProjectAndromeda/core.conf"));
     	new PAConfigDimensions(new File(event.getModConfigurationDirectory(), "ProjectAndromeda/dimensions.conf"));
     	
+    	PABlocks.initialize();
+    	
     	proxy.preload();
     	proxy.register_event(new PAEventsHandler());
     	
@@ -78,6 +85,8 @@ public class ProjectAndromeda {
     	proxy.load(); 
     	proxy.registerRender();
 
+    	PACreativeTabs.PABlocksTab = new CreativeTabGC(CreativeTabs.getNextID(), "andromeda_blocks", new ItemStack(PABlocks.ARTEROS_E_BLOCKS), null);
+    	
     	for(IBodiesHandler list : bodies)
     		list.init(event);
     }
@@ -86,6 +95,8 @@ public class ProjectAndromeda {
     public void postInit(FMLPostInitializationEvent event) {
     	proxy.postload();
 
+    	//NetworkRegistry.INSTANCE.registerGuiHandler(instance, new PAGuiHandler());
+    	
     	for(IBodiesHandler list : bodies)
     		list.postInit(event);
     }

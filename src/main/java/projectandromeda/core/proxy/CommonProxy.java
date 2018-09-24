@@ -2,12 +2,9 @@ package projectandromeda.core.proxy;
 
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import net.minecraftforge.common.MinecraftForge;
-import projectandromeda.core.registers.blocks.PABlocks;
 
 public class CommonProxy {
-	public void preload() {
-		PABlocks.register();
-	}
+	public void preload() {}
 	public void load() {}
 	public void postload() {}
 	public void registerVariants() {}

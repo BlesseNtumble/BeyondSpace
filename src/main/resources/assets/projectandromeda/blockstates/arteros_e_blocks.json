@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=e0": { "model": "projectandromeda:e0_model" },
+        "type=e1": { "model": "projectandromeda:e1_model" },
+        "type=e2": { "model": "projectandromeda:e2_model" }
+    }
+}
