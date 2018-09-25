@@ -64,6 +64,7 @@ public class ClientProxy extends CommonProxy {
     	for (ArterosEBlocks.EnumArterosEBlocks blockBasic : ArterosEBlocks.EnumArterosEBlocks.values())        
     		ClientUtil.registerBlockJson(ProjectAndromeda.TEXTURE_PREFIX, PABlocks.ARTEROS_E_BLOCKS, blockBasic.getMeta(), blockBasic.getName());
     	
+    	ClientUtil.registerBlockJson(ProjectAndromeda.TEXTURE_PREFIX, PABlocks.ARTEROS_E_LOG);
     	/*if(GCCoreUtil.isDeobfuscated()) 
 			GSUtils.addBlockMetadataJsonFiles(GSBlocks.DUNGEON_BLOCKS, name, DungeonBlocks.BASIC_TYPE.getName(), "");
     	*/

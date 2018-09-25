@@ -10,10 +10,12 @@ import projectandromeda.systems.ArterosSystem.arteros_e.items.ItemArterosEBlocks
 public class PABlocks {
 	
 	public static final Block ARTEROS_E_BLOCKS = new ArterosEBlocks("arteros_e_blocks").setHardness(3.0F);
+	public static final Block ARTEROS_E_LOG = new ArterosELog("arteros_e_log");
 	
 	public static void initialize() 
 	{
 		registerBlock(ARTEROS_E_BLOCKS, ItemArterosEBlocks.class);
+		registerBlock(ARTEROS_E_LOG, ItemBlockDesc.class);
 	}
 	
 	public static void oreDictRegistration() 
