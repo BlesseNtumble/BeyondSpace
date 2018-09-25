@@ -75,7 +75,8 @@ public class ArterosEBlocks extends Block implements ISortableBlock {
 	public enum EnumArterosEBlocks implements IStringSerializable {
 		SURFACE(0, "e0"),
 		SUBSURFACE(1, "e1"),
-		STONE(2, "e2");
+		STONE(2, "e2"),
+		GRASS(3, "e_grass");
 		
 		private final int meta;
 		private final String name;

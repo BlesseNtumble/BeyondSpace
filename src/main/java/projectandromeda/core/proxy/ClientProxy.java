@@ -87,7 +87,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
     public void registerVariants()
     {
-		addVariant(PABlocks.ARTEROS_E_BLOCKS.getRegistryName().getResourcePath(), "", "e0", "e1", "e2");
+		addVariant(PABlocks.ARTEROS_E_BLOCKS.getRegistryName().getResourcePath(), "", "e0", "e1", "e2", "e_grass");
     }
 	
 	public static void registerEntityRenderers()
