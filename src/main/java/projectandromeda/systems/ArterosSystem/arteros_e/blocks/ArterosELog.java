@@ -1,6 +1,5 @@
-package projectandromeda.core.registers.blocks;
+package projectandromeda.systems.ArterosSystem.arteros_e.blocks;
 
-import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -14,13 +13,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import projectandromeda.core.utils.PACreativeTabs;
 
 public class ArterosELog extends BlockRotatedPillar {
 	
-	public static final PropertyEnum<ArterosELog.EnumAxis> LOG_AXIS = PropertyEnum.<ArterosELog.EnumAxis>create("axis", ArterosELog.EnumAxis.class);
-
 	public ArterosELog(String name) {
 		super(Material.WOOD);
 		setUnlocalizedName(name);
@@ -47,7 +45,7 @@ public class ArterosELog extends BlockRotatedPillar {
 
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-		return this.getStateFromMeta(meta).withProperty(LOG_AXIS, ArterosELog.EnumAxis.fromFacingAxis(facing.getAxis()));
+		return this.getStateFromMeta(meta).withProperty(AXIS, facing.getAxis());
 	}
 	
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
@@ -55,11 +53,11 @@ public class ArterosELog extends BlockRotatedPillar {
 		case COUNTERCLOCKWISE_90:
 		case CLOCKWISE_90:
 
-			switch ((ArterosELog.EnumAxis) state.getValue(LOG_AXIS)) {
+			switch ((EnumFacing.Axis) state.getValue(AXIS)) {
 			case X:
-				return state.withProperty(LOG_AXIS, ArterosELog.EnumAxis.Z);
+				return state.withProperty(AXIS, EnumFacing.Axis.Z);
 			case Z:
-				return state.withProperty(LOG_AXIS, ArterosELog.EnumAxis.X);
+				return state.withProperty(AXIS, EnumFacing.Axis.X);
 			default:
 				return state;
 			}
@@ -70,46 +68,12 @@ public class ArterosELog extends BlockRotatedPillar {
 	}
 
 	@Override
-	public boolean canSustainLeaves(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos) {
+	public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos) {
 		return true;
 	}
 
 	@Override
-	public boolean isWood(net.minecraft.world.IBlockAccess world, BlockPos pos) {
+	public boolean isWood(IBlockAccess world, BlockPos pos) {
 		return true;
-	}
-	
-	public static enum EnumAxis implements IStringSerializable {
-		X("x"),
-		Y("y"),
-		Z("z"),
-		NONE("none");
-
-		private final String name;
-
-		private EnumAxis(String name) {
-			this.name = name;
-		}
-
-		public String toString() {
-			return this.name;
-		}
-
-		public static EnumAxis fromFacingAxis(EnumFacing.Axis axis) {
-			switch (axis) {
-			case X:
-				return X;
-			case Y:
-				return Y;
-			case Z:
-				return Z;
-			default:
-				return NONE;
-			}
-		}
-
-		public String getName() {
-			return this.name;
-		}
 	}
 }

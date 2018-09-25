@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import projectandromeda.core.prefab.items.ItemBlockDesc;
 import projectandromeda.systems.ArterosSystem.arteros_e.blocks.ArterosEBlocks;
+import projectandromeda.systems.ArterosSystem.arteros_e.blocks.ArterosELog;
 import projectandromeda.systems.ArterosSystem.arteros_e.items.ItemArterosEBlocks;
 
 public class PABlocks {

@@ -32,6 +32,7 @@ import projectandromeda.systems.ArterosSystem.arteros_e.dimension.sky.SkyProvide
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.BiomeProviderArteros_E;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Forest;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Mountain;
+import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_River;
 
  
 public class WorldProviderArteros_E extends WE_WorldProvider implements IProviderFreeze {
@@ -174,8 +175,7 @@ public class WorldProviderArteros_E extends WE_WorldProvider implements IProvide
 		cp.createChunkGen_InXYZ_List.clear(); 
 		cp.decorateChunkGen_List .clear(); 
 		
-		WE_Biome.setBiomeMap(cp, 1.2D, 4, 3200.0D, 0.375D);
-	
+		WE_Biome.setBiomeMap(cp, 1.2D, 4, 1200.0D, 0.375D);	
 		
 		WE_TerrainGenerator terrainGenerator = new WE_TerrainGenerator(); 
 		terrainGenerator.worldStoneBlock = Blocks.STONE; 
@@ -202,7 +202,8 @@ public class WorldProviderArteros_E extends WE_WorldProvider implements IProvide
 		cp.createChunkGen_List.add(rg);
 		
 		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Forest()); 
-		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Mountain()); 
+		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Mountain());
+		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_River()); 
 	}
 
 }

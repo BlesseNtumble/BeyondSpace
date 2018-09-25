@@ -13,12 +13,12 @@ public class Arteros_E_Mountain extends WE_Biome {
 		
 		biomeMinValueOnMap      =  0.35D;
 		biomeMaxValueOnMap      =  0.99D;
-		biomePersistence        =   1.9D;
-		biomeNumberOfOctaves    =      4;
+		biomePersistence        =   1.6D;
+		biomeNumberOfOctaves    =      8;
 		biomeScaleX             = 240.0D;
-		biomeScaleY             =   8.0D;
-		biomeSurfaceHeight      =    145;
-		biomeInterpolateQuality =     45;
+		biomeScaleY             =   2.0D;
+		biomeSurfaceHeight      =    135;
+		biomeInterpolateQuality =     25;
 		
 		decorateChunkGen_List.clear();
 		createChunkGen_InXZ_List.clear();
@@ -29,9 +29,9 @@ public class Arteros_E_Mountain extends WE_Biome {
 		decorateChunkGen_List.add(grass);
 		*/
 		WE_BiomeLayer standardBiomeLayers = new WE_BiomeLayer();
+		standardBiomeLayers.add(Blocks.PACKED_ICE, (byte)0,  Blocks.STONE, (byte)0, 3, 1,  7,  2, true);
 		standardBiomeLayers.add(Blocks.DIRT   , (byte)0, Blocks.STONE, (byte)0, -256, 0,   -1, -1,  true);
 		standardBiomeLayers.add(Blocks.GRASS , (byte)0, Blocks.DIRT , (byte)0, -256, 0, -256,  0, false);
-		standardBiomeLayers.add(Blocks.PACKED_ICE, (byte)0,                                3, 6,  -3,  -2, true);
 		standardBiomeLayers.add(Blocks.BEDROCK, (byte)0,                                0, 2,  0,  0, true);
 		createChunkGen_InXZ_List.add(standardBiomeLayers);
 		
