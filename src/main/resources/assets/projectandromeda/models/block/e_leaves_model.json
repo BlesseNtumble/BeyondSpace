@@ -1,5 +1,5 @@
 {
-    "parent": "block/cube_all",
+    "parent": "block/leaves",
     "textures": {
         "all": "projectandromeda:blocks/arterossystem/arteros_e/e_leaves"
     }

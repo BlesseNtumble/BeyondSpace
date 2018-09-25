@@ -12,11 +12,13 @@ public class PABlocks {
 	
 	public static final Block ARTEROS_E_BLOCKS = new ArterosEBlocks("arteros_e_blocks").setHardness(3.0F);
 	public static final Block ARTEROS_E_LOG = new ArterosELog("arteros_e_log");
+	public static final Block ARTEROS_E_LEAVES = new ArterosELeaves("arteros_e_leaves");
 	
 	public static void initialize() 
 	{
 		registerBlock(ARTEROS_E_BLOCKS, ItemArterosEBlocks.class);
 		registerBlock(ARTEROS_E_LOG, ItemBlockDesc.class);
+		registerBlock(ARTEROS_E_LEAVES, ItemBlockDesc.class);
 	}
 	
 	public static void oreDictRegistration() 

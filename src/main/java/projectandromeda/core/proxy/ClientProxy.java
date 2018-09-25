@@ -71,6 +71,7 @@ public class ClientProxy extends CommonProxy {
     	//--------------------------- BLOCKS -----------------------------------
     	//ClientUtil.registerBlockJson(GalaxySpace.TEXTURE_PREFIX, GSBlocks.ASSEMBLER);	
     	ClientUtil.registerBlockJson(ProjectAndromeda.TEXTURE_PREFIX, PABlocks.ARTEROS_E_LOG);
+    	ClientUtil.registerBlockJson(ProjectAndromeda.TEXTURE_PREFIX, PABlocks.ARTEROS_E_LEAVES);
     	// -------------------------- ITEMS ------------------------------------
     /*	int i = 0;
     	for(String basic : ItemBasicGS.names)		
