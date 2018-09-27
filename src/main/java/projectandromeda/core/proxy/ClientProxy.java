@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import projectandromeda.ProjectAndromeda;
 import projectandromeda.core.events.PAClientEventsHandler;
+import projectandromeda.core.handler.ColorBlockHandler;
 import projectandromeda.core.registers.blocks.PABlocks;
 import projectandromeda.systems.ArterosSystem.arteros_e.blocks.ArterosEBlocks;
 
@@ -38,7 +39,9 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	@Override
-    public void load() {}
+    public void load() {
+		//ColorBlockHandler.registerBlockColors();
+	}
 	
 	@Override
     public void postload() {
@@ -87,7 +90,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
     public void registerVariants()
     {
-		addVariant(PABlocks.ARTEROS_E_BLOCKS.getRegistryName().getResourcePath(), "", "e0", "e1", "e2", "e_grass");
+		addVariant(PABlocks.ARTEROS_E_BLOCKS.getRegistryName().getResourcePath(), "", "e0", "e1", "e2");
     }
 	
 	public static void registerEntityRenderers()

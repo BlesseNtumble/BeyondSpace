@@ -15,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -48,6 +49,12 @@ public class ArterosEBlocks extends Block implements ISortableBlock {
 
 	}
 	
+	@SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
+	
 	@Override
 	public int damageDropped(IBlockState state) {
 		return getMetaFromState(state);
@@ -75,8 +82,7 @@ public class ArterosEBlocks extends Block implements ISortableBlock {
 	public enum EnumArterosEBlocks implements IStringSerializable {
 		SURFACE(0, "e0"),
 		SUBSURFACE(1, "e1"),
-		STONE(2, "e2"),
-		GRASS(3, "e_grass");
+		STONE(2, "e2");
 		
 		private final int meta;
 		private final String name;

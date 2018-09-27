@@ -26,6 +26,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import projectandromeda.core.registers.blocks.PABlocks;
 import projectandromeda.core.utils.PADimensions;
 import projectandromeda.systems.ArterosSystem.ArterosBodies;
 import projectandromeda.systems.ArterosSystem.arteros_e.dimension.sky.SkyProviderArteros_E;
@@ -175,11 +176,11 @@ public class WorldProviderArteros_E extends WE_WorldProvider implements IProvide
 		cp.createChunkGen_InXYZ_List.clear(); 
 		cp.decorateChunkGen_List .clear(); 
 		
-		WE_Biome.setBiomeMap(cp, 1.2D, 4, 1200.0D, 0.375D);	
+		WE_Biome.setBiomeMap(cp, 1.2D, 6, 1200.0D, 0.375D);	
 		
 		WE_TerrainGenerator terrainGenerator = new WE_TerrainGenerator(); 
-		terrainGenerator.worldStoneBlock = Blocks.STONE; 
-		terrainGenerator.worldStoneBlockMeta = 0;
+		terrainGenerator.worldStoneBlock = PABlocks.ARTEROS_E_BLOCKS; 
+		terrainGenerator.worldStoneBlockMeta = 2;
 		terrainGenerator.worldSeaGen = true;
 		terrainGenerator.worldSeaGenBlock = Blocks.WATER;
 		terrainGenerator.worldSeaGenMaxY = 64;
@@ -197,7 +198,7 @@ public class WorldProviderArteros_E extends WE_WorldProvider implements IProvide
 		WE_RavineGen rg = new WE_RavineGen();
 		rg.replaceBlocksList    .clear();
 		rg.replaceBlocksMetaList.clear();
-		rg.addReplacingBlock(Blocks.STONE, (byte)0);
+		rg.addReplacingBlock(PABlocks.ARTEROS_E_BLOCKS, (byte)2);
 		rg.lavaBlock = Blocks.LAVA;
 		cp.createChunkGen_List.add(rg);
 		

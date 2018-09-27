@@ -5,6 +5,7 @@ import asmodeuscore.core.astronomy.dimension.world.worldengine.standardcustomgen
 import asmodeuscore.core.astronomy.dimension.world.worldengine.standardcustomgen.WE_LakeGen;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome.BiomeProperties;
+import projectandromeda.core.registers.blocks.PABlocks;
 
 public class Arteros_E_River extends WE_Biome {
 
@@ -15,17 +16,18 @@ public class Arteros_E_River extends WE_Biome {
 		biomeMaxValueOnMap      =   0.2D;
 		biomePersistence        =   0.8D;
 		biomeNumberOfOctaves    =      6;
-		biomeScaleX             = 240.0D;
+		biomeScaleX             = 280.0D;
 		biomeScaleY             =   2.0D;
 		biomeSurfaceHeight      =     54;
 		biomeInterpolateQuality =     45;
 
 		decorateChunkGen_List.clear();
 		createChunkGen_InXZ_List.clear();
+		
 		WE_BiomeLayer standardBiomeLayers = new WE_BiomeLayer();
-		standardBiomeLayers.add(Blocks.PACKED_ICE, (byte)0,  Blocks.STONE, (byte)0, 3, 1,  7,  2, true);
-		standardBiomeLayers.add(Blocks.DIRT   , (byte)0, Blocks.STONE, (byte)0, -256, 0,   -3, -2,  true);
-		standardBiomeLayers.add(Blocks.GRASS , (byte)0, Blocks.DIRT , (byte)0, -256, 0, -256,  0, false);
+		standardBiomeLayers.add(Blocks.PACKED_ICE, (byte)0, PABlocks.ARTEROS_E_BLOCKS, (byte)2, 3, 1,  7,  2, true);
+		standardBiomeLayers.add(PABlocks.ARTEROS_E_BLOCKS, (byte)1, PABlocks.ARTEROS_E_BLOCKS, (byte)2, -256, 0,   -1, -1,  true);
+		standardBiomeLayers.add(Blocks.GRASS , (byte)0, PABlocks.ARTEROS_E_BLOCKS, (byte)1, -256, 0, -256,  0, false);
 		standardBiomeLayers.add(Blocks.BEDROCK, (byte)0,                                0, 2,  0,  0, true);
 		createChunkGen_InXZ_List.add(standardBiomeLayers);
 	}

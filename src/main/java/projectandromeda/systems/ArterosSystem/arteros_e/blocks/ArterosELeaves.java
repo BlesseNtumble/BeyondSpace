@@ -1,4 +1,4 @@
-package projectandromeda.core.registers.blocks;
+package projectandromeda.systems.ArterosSystem.arteros_e.blocks;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -3,7 +3,7 @@
     "textures": {
         "particle": "projectandromeda:blocks/arterossystem/arteros_e/e1",
         "bottom": "projectandromeda:blocks/arterossystem/arteros_e/e1",
-        "top": "projectandromeda:blocks/arterossystem/arteros_e/e0",
+        "top": "projectandromeda:blocks/arterossystem/arteros_e/e1",
         "side": "projectandromeda:blocks/arterossystem/arteros_e/e1",
         "overlay": "projectandromeda:blocks/arterossystem/arteros_e/e0_layer"
     }
