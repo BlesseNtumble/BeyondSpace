@@ -2,26 +2,25 @@ package projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we;
 
 import asmodeuscore.core.astronomy.dimension.world.worldengine.WE_Biome;
 import asmodeuscore.core.astronomy.dimension.world.worldengine.standardcustomgen.WE_BiomeLayer;
-import asmodeuscore.core.astronomy.dimension.world.worldengine.standardcustomgen.WE_LakeGen;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome.BiomeProperties;
 import projectandromeda.core.registers.blocks.PABlocks;
 
-public class Arteros_E_River extends WE_Biome {
+public class Arteros_E_Plains extends WE_Biome {
 
-	public Arteros_E_River() {
-		super(new BiomeProperties("river"));
+	public Arteros_E_Plains() {
+		super(new BiomeProperties("plains"));
 		
-		biomeMinValueOnMap      =  -0.2D;
-		biomeMaxValueOnMap      =  -0.0D;
-		biomePersistence        =   1.1D;
+		biomeMinValueOnMap      =  -0.1D;
+		biomeMaxValueOnMap      =   0.6D;
+		biomePersistence        =   0.8D;
 		biomeNumberOfOctaves    =      4;
 		biomeScaleX             = 280.0D;
-		biomeScaleY             =   0.5D;
-		biomeSurfaceHeight      =     43;
-		biomeInterpolateQuality =     40;
-		biomeblockcolor = 0xFF0000;
-
+		biomeScaleY             =   1.5D;
+		biomeSurfaceHeight      =     70;
+		biomeInterpolateQuality =     35;
+		biomeblockcolor = 0xFF7515; //0x50c878
+		
 		decorateChunkGen_List.clear();
 		createChunkGen_InXZ_List.clear();
 		

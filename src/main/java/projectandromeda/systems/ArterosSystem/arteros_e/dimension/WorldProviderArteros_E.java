@@ -5,6 +5,8 @@ package projectandromeda.systems.ArterosSystem.arteros_e.dimension;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import asmodeuscore.core.astronomy.dimension.IProviderFreeze;
 import asmodeuscore.core.astronomy.dimension.world.worldengine.WE_Biome;
 import asmodeuscore.core.astronomy.dimension.world.worldengine.WE_ChunkProvider;
@@ -26,17 +28,24 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import projectandromeda.core.handler.ColorBlockHandler;
 import projectandromeda.core.registers.blocks.PABlocks;
 import projectandromeda.core.utils.PADimensions;
 import projectandromeda.systems.ArterosSystem.ArterosBodies;
 import projectandromeda.systems.ArterosSystem.arteros_e.dimension.sky.SkyProviderArteros_E;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.BiomeProviderArteros_E;
+import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Beach;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Forest;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Mountain;
+import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Ocean;
+import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Plains;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_River;
 
  
 public class WorldProviderArteros_E extends WE_WorldProvider implements IProviderFreeze {
+	
+	private final float[] colorsSunriseSunset = new float[4];
+	public static WE_ChunkProvider we_chunk;
 	
     @Override
     public double getHorizon() {
@@ -84,11 +93,36 @@ public class WorldProviderArteros_E extends WE_WorldProvider implements IProvide
     	return BiomeProviderArteros_E.class; 
     }
     
+    @Nullable
+    @SideOnly(Side.CLIENT)
+    public float[] calcSunriseSunsetColors(float celestialAngle, float partialTicks)
+    {
+        float f = 0.4F;
+        float f1 = MathHelper.cos(celestialAngle * ((float)Math.PI * 2F)) - 0.0F;
+        float f2 = -0.0F;
+
+        if (f1 >= -0.4F && f1 <= 0.4F)
+        {
+            float f3 = (f1 - -0.0F) / 0.4F * 0.5F + 0.5F;
+            float f4 = 1.0F - (1.0F - MathHelper.sin(f3 * (float)Math.PI)) * 0.99F;
+            f4 = f4 * f4;
+            this.colorsSunriseSunset[0] = f3 * 0.3F + 0.7F;
+            this.colorsSunriseSunset[1] = f3 * f3 * 0.7F + 0.2F;
+            this.colorsSunriseSunset[2] = f3 * f3 * 0.0F + 0.2F;
+            this.colorsSunriseSunset[3] = f4;
+            return this.colorsSunriseSunset;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
     @Override
     @SideOnly(Side.CLIENT)
     public Vector3 getFogColor() {
-    	float f = 1.0F - this.getStarBrightness(1.0F);
-        return new Vector3(187 / 255F * f, 108 / 255F * f, 54 / 255F * f);
+    	float f = 0.9F - this.getStarBrightness(1.0F);
+        return new Vector3(196 / 255.0F * f, 233 / 255.0F * f, 280 / 255.0F * f);
     }
 
     @Override
@@ -171,12 +205,14 @@ public class WorldProviderArteros_E extends WE_WorldProvider implements IProvide
 
 	@Override
 	public void genSettings(WE_ChunkProvider cp) {
+		this.we_chunk = cp;
+		
 		cp.createChunkGen_List .clear(); 
 		cp.createChunkGen_InXZ_List .clear(); 
 		cp.createChunkGen_InXYZ_List.clear(); 
 		cp.decorateChunkGen_List .clear(); 
 		
-		WE_Biome.setBiomeMap(cp, 1.2D, 6, 1200.0D, 0.375D);	
+		WE_Biome.setBiomeMap(cp, 1.2D, 6, 3200.0D, 0.475D);	
 		
 		WE_TerrainGenerator terrainGenerator = new WE_TerrainGenerator(); 
 		terrainGenerator.worldStoneBlock = PABlocks.ARTEROS_E_BLOCKS; 
@@ -205,6 +241,9 @@ public class WorldProviderArteros_E extends WE_WorldProvider implements IProvide
 		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Forest()); 
 		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Mountain());
 		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_River()); 
+		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Ocean()); 
+		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Plains()); 
+		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Beach()); 
 	}
 
 }

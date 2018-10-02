@@ -1,10 +1,13 @@
 package projectandromeda.systems.ArterosSystem.arteros_e.blocks;
 
+import java.util.Random;
+
 import javax.annotation.Nullable;
 
 import micdoodle8.mods.galacticraft.core.blocks.ISortableBlock;
 import micdoodle8.mods.galacticraft.core.util.EnumSortCategoryBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -24,7 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ArterosEBlocks extends Block implements ISortableBlock {
+public class ArterosEBlocks extends Block implements ISortableBlock, IGrowable {
 	
 	public static final PropertyEnum<EnumArterosEBlocks> BASIC = PropertyEnum.create("type", EnumArterosEBlocks.class);
 			
@@ -120,6 +123,27 @@ public class ArterosEBlocks extends Block implements ISortableBlock {
 	@Override
 	public BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, BASIC);
+	}
+
+	@Override
+	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+		if(state.getValue(BASIC) == EnumArterosEBlocks.SURFACE)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

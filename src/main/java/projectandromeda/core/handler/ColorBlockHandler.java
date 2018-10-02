@@ -5,6 +5,10 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import asmodeuscore.core.astronomy.dimension.world.worldengine.WE_Biome;
+import asmodeuscore.core.astronomy.dimension.world.worldengine.WE_ChunkProvider;
+import asmodeuscore.core.astronomy.dimension.world.worldengine.WE_WorldProvider;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.BlockColors;
@@ -17,18 +21,22 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import projectandromeda.ProjectAndromeda;
 import projectandromeda.core.registers.blocks.PABlocks;
+import projectandromeda.systems.ArterosSystem.arteros_e.dimension.WorldProviderArteros_E;
 
 @Mod.EventBusSubscriber(modid = ProjectAndromeda.MODID)
 public class ColorBlockHandler {
-
+	
 	@SubscribeEvent
 	public static void registerBlockColourHandlers(final ColorHandlerEvent.Block event) {
 		final BlockColors blockColors = event.getBlockColors();
@@ -36,6 +44,13 @@ public class ColorBlockHandler {
 		// Use the grass colour of the biome or the default grass colour
 		final IBlockColor grassColourHandler = (state, blockAccess, pos, tintIndex) -> {
 			if (blockAccess != null && pos != null) {
+				
+				WorldProvider provider = WorldUtil.getProviderForDimensionClient(FMLClientHandler.instance().getWorldClient().provider.getDimension());
+				if(provider instanceof WorldProviderArteros_E)
+				{
+					WE_ChunkProvider chunk = ((WorldProviderArteros_E)provider).we_chunk;
+					return WE_Biome.getBiomeAt(/*(WE_ChunkProvider) provider.world.getChunkProvider()*/chunk, (long)pos.getX(), (long)pos.getZ()).biomeblockcolor;
+				}
 				return ColorizerGrass.getGrassColor(0.6D, 1.0D);//BiomeColorHelper.getGrassColorAtPos(blockAccess, pos);
 			}
 
