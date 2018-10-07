@@ -8,18 +8,18 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome.BiomeProperties;
 import projectandromeda.core.registers.blocks.PABlocks;
 
-public class Arteros_E_Mountain extends WE_Biome {
-	public Arteros_E_Mountain() {
-		super(new BiomeProperties("mountain"));
+public class Arteros_E_Small_Mountain extends WE_Biome {
+	public Arteros_E_Small_Mountain() {
+		super(new BiomeProperties("small_mountain"));
 		
-		biomeMinValueOnMap      =  0.1D;
-		biomeMaxValueOnMap      =  0.5D;
-		biomePersistence        =  2.0D;
-		biomeNumberOfOctaves    =     4;
+		biomeMinValueOnMap      =  	0.0D;
+		biomeMaxValueOnMap      =  	0.1D;
+		biomePersistence        =   1.4D;
+		biomeNumberOfOctaves    =      4;
 		biomeScaleX             = 280.0D;
-		biomeScaleY             =   1.8D;
-		biomeSurfaceHeight      =    120;
-		biomeInterpolateQuality =     20;
+		biomeScaleY             =   1.7D;
+		biomeSurfaceHeight      =    100;
+		biomeInterpolateQuality =     10;
 		biomeBlockGrassColor    = 0x34c924;
 				
 		decorateChunkGen_List.clear();
@@ -30,14 +30,6 @@ public class Arteros_E_Mountain extends WE_Biome {
 		standardBiomeLayers.add(PABlocks.ARTEROS_E_BLOCKS, (byte)0, PABlocks.ARTEROS_E_BLOCKS, (byte)1, -256, 0, -256,  0, false);
 		standardBiomeLayers.add(Blocks.BEDROCK, (byte)0,                                0, 2,  0,  0, true);
 		createChunkGen_InXZ_List.add(standardBiomeLayers);
-		
-		WE_SnowGen snowGen = new WE_SnowGen();
-		snowGen.snowPoint       = 120;
-		snowGen.randomSnowPoint = 8;
-		snowGen.snowBlock       = Blocks.SNOW_LAYER;
-		snowGen.snowBlockMeta   = 0;
-		snowGen.iceBlock        = Blocks.ICE ;
-		snowGen.freezeMaterial  = Material.WATER;
-		createChunkGen_InXZ_List.add(snowGen);
+
 	}
 }

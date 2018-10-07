@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -32,6 +33,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import projectandromeda.ProjectAndromeda;
 import projectandromeda.core.registers.blocks.PABlocks;
+import projectandromeda.systems.ArterosSystem.arteros_e.blocks.ArterosEBlocks;
+import projectandromeda.systems.ArterosSystem.arteros_e.blocks.ArterosEBlocks.EnumArterosEBlocks;
 import projectandromeda.systems.ArterosSystem.arteros_e.dimension.WorldProviderArteros_E;
 
 @Mod.EventBusSubscriber(modid = ProjectAndromeda.MODID)
@@ -40,24 +43,43 @@ public class ColorBlockHandler {
 	@SubscribeEvent
 	public static void registerBlockColourHandlers(final ColorHandlerEvent.Block event) {
 		final BlockColors blockColors = event.getBlockColors();
-
+		
 		// Use the grass colour of the biome or the default grass colour
 		final IBlockColor grassColourHandler = (state, blockAccess, pos, tintIndex) -> {
+			
+			if (blockAccess != null && pos != null) {
+				WorldProvider provider = WorldUtil.getProviderForDimensionClient(FMLClientHandler.instance().getWorldClient().provider.getDimension());
+				
+				if(provider instanceof WorldProviderArteros_E)
+				{					
+					WE_ChunkProvider chunk = ((WorldProviderArteros_E)provider).chunk;
+					return WE_Biome.getBiomeAt(chunk, (long)pos.getX(), (long)pos.getZ()).biomeBlockGrassColor;
+				}
+				else return ColorizerGrass.getGrassColor(0.6D, 1.0D);//BiomeColorHelper.getGrassColorAtPos(blockAccess, pos);
+			}
+
+			return ColorizerGrass.getGrassColor(0.5D, 1.0D);
+		};
+		
+		blockColors.registerBlockColorHandler(grassColourHandler, PABlocks.ARTEROS_E_BLOCKS.getDefaultState().withProperty(ArterosEBlocks.BASIC, EnumArterosEBlocks.SURFACE).getBlock());
+		
+		/*
+		final IBlockColor waterColourHandler = (state, blockAccess, pos, tintIndex) -> {
 			if (blockAccess != null && pos != null) {
 				
 				WorldProvider provider = WorldUtil.getProviderForDimensionClient(FMLClientHandler.instance().getWorldClient().provider.getDimension());
 				if(provider instanceof WorldProviderArteros_E)
 				{
-					WE_ChunkProvider chunk = ((WorldProviderArteros_E)provider).we_chunk;
-					return WE_Biome.getBiomeAt(/*(WE_ChunkProvider) provider.world.getChunkProvider()*/chunk, (long)pos.getX(), (long)pos.getZ()).biomeblockcolor;
+					WE_ChunkProvider chunk = ((WorldProviderArteros_E)provider).chunk_provider;
+					return WE_Biome.getBiomeAt(chunk, (long)pos.getX(), (long)pos.getZ()).biomeBlockWaterColor;
 				}
-				return ColorizerGrass.getGrassColor(0.6D, 1.0D);//BiomeColorHelper.getGrassColorAtPos(blockAccess, pos);
+				return BiomeColorHelper.getWaterColorAtPos(blockAccess, pos);
 			}
 
-			return ColorizerGrass.getGrassColor(0.5D, 1.0D);
+			return BiomeColorHelper.getWaterColorAtPos(blockAccess, pos);
 		};
 
-		blockColors.registerBlockColorHandler(grassColourHandler, PABlocks.ARTEROS_E_BLOCKS.getStateFromMeta(0).getBlock());
+		blockColors.registerBlockColorHandler(waterColourHandler, Blocks.WATER);*/
 	}
 
 	@SubscribeEvent
@@ -72,6 +94,7 @@ public class ColorBlockHandler {
 			return blockColors.colorMultiplier(state, null, null, tintIndex);
 		};
 
-		itemColors.registerItemColorHandler(itemBlockColourHandler, PABlocks.ARTEROS_E_BLOCKS.getStateFromMeta(0).getBlock());
+		itemColors.registerItemColorHandler(itemBlockColourHandler, PABlocks.ARTEROS_E_BLOCKS.getStateFromMeta(0).getBlock());	
+		
 	}
 }

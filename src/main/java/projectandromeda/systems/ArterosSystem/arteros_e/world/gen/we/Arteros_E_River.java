@@ -12,15 +12,15 @@ public class Arteros_E_River extends WE_Biome {
 	public Arteros_E_River() {
 		super(new BiomeProperties("river"));
 		
-		biomeMinValueOnMap      =  -0.2D;
-		biomeMaxValueOnMap      =  -0.0D;
+		biomeMinValueOnMap      =  -0.5D;
+		biomeMaxValueOnMap      =  -0.4D;
 		biomePersistence        =   1.1D;
 		biomeNumberOfOctaves    =      4;
 		biomeScaleX             = 280.0D;
-		biomeScaleY             =   0.5D;
-		biomeSurfaceHeight      =     43;
+		biomeScaleY             =   1.7D;
+		biomeSurfaceHeight      =     50;
 		biomeInterpolateQuality =     40;
-		biomeblockcolor = 0xFF0000;
+		biomeBlockGrassColor    = 0xFF0000;
 
 		decorateChunkGen_List.clear();
 		createChunkGen_InXZ_List.clear();

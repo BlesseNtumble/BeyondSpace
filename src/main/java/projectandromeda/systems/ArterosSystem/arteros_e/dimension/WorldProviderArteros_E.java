@@ -28,7 +28,6 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.client.IRenderHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import projectandromeda.core.handler.ColorBlockHandler;
 import projectandromeda.core.registers.blocks.PABlocks;
 import projectandromeda.core.utils.PADimensions;
 import projectandromeda.systems.ArterosSystem.ArterosBodies;
@@ -36,16 +35,18 @@ import projectandromeda.systems.ArterosSystem.arteros_e.dimension.sky.SkyProvide
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.BiomeProviderArteros_E;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Beach;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Forest;
+import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_High_Mountain;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Mountain;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Ocean;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Plains;
 import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_River;
+import projectandromeda.systems.ArterosSystem.arteros_e.world.gen.we.Arteros_E_Small_Mountain;
 
  
 public class WorldProviderArteros_E extends WE_WorldProvider implements IProviderFreeze {
 	
 	private final float[] colorsSunriseSunset = new float[4];
-	public static WE_ChunkProvider we_chunk;
+	public static WE_ChunkProvider chunk;
 	
     @Override
     public double getHorizon() {
@@ -127,7 +128,7 @@ public class WorldProviderArteros_E extends WE_WorldProvider implements IProvide
 
     @Override
     public Vector3 getSkyColor() {
-    	float f = 1.0F - this.getStarBrightness(1.0F);
+    	float f = 0.7F - this.getStarBrightness(1.0F);
         return new Vector3(66 / 255.0F * f, 133 / 255.0F * f, 180 / 255.0F * f);
     }
      
@@ -205,14 +206,15 @@ public class WorldProviderArteros_E extends WE_WorldProvider implements IProvide
 
 	@Override
 	public void genSettings(WE_ChunkProvider cp) {
-		this.we_chunk = cp;
+
+		chunk = cp;
 		
 		cp.createChunkGen_List .clear(); 
 		cp.createChunkGen_InXZ_List .clear(); 
 		cp.createChunkGen_InXYZ_List.clear(); 
 		cp.decorateChunkGen_List .clear(); 
 		
-		WE_Biome.setBiomeMap(cp, 1.2D, 6, 3200.0D, 0.475D);	
+		WE_Biome.setBiomeMap(cp, 1.2D, 4, 2000.0D, 0.775D);	
 		
 		WE_TerrainGenerator terrainGenerator = new WE_TerrainGenerator(); 
 		terrainGenerator.worldStoneBlock = PABlocks.ARTEROS_E_BLOCKS; 
@@ -239,7 +241,9 @@ public class WorldProviderArteros_E extends WE_WorldProvider implements IProvide
 		cp.createChunkGen_List.add(rg);
 		
 		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Forest()); 
+		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_High_Mountain());
 		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Mountain());
+		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Small_Mountain());
 		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_River()); 
 		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Ocean()); 
 		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Plains()); 

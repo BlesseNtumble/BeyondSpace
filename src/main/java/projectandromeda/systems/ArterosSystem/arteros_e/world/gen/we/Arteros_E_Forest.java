@@ -14,15 +14,15 @@ public class Arteros_E_Forest extends WE_Biome {
 	public Arteros_E_Forest() {
 		super(new BiomeProperties("forest"));
 		
-		biomeMinValueOnMap      =  	-0.3D;
-		biomeMaxValueOnMap      =   -0.2D;
+		biomeMinValueOnMap      =  -0.75D;
+		biomeMaxValueOnMap      =   0.0D;
 		biomePersistence        =   1.8D;
 		biomeNumberOfOctaves    =      4;
 		biomeScaleX             = 280.0D;
-		biomeScaleY             =   2.0D;
-		biomeSurfaceHeight      =     75;
-		biomeInterpolateQuality =     45;
-		biomeblockcolor = 0x00FF00;
+		biomeScaleY             =   1.7D;
+		biomeSurfaceHeight      =     70;
+		biomeInterpolateQuality =     25;
+		biomeBlockGrassColor    = 0x00FF00;
 		
 		//decorateChunkGen_List.add(new MeteorGenWarm(512, 1, 16));
 		//-//
@@ -52,8 +52,7 @@ public class Arteros_E_Forest extends WE_Biome {
 		createChunkGen_InXZ_List.clear();
 		
 		WE_BiomeLayer standardBiomeLayers = new WE_BiomeLayer();
-		standardBiomeLayers.add(Blocks.PACKED_ICE, (byte)0, PABlocks.ARTEROS_E_BLOCKS, (byte)2, 3, 1,  7,  2, true);
-		standardBiomeLayers.add(PABlocks.ARTEROS_E_BLOCKS, (byte)1, PABlocks.ARTEROS_E_BLOCKS, (byte)2, -256, 0,   -1, -1,  true);
+		standardBiomeLayers.add(PABlocks.ARTEROS_E_BLOCKS, (byte)1, PABlocks.ARTEROS_E_BLOCKS, (byte)2, -256, 0,   -4, -1,  true);
 		standardBiomeLayers.add(PABlocks.ARTEROS_E_BLOCKS, (byte)0, PABlocks.ARTEROS_E_BLOCKS, (byte)1, -256, 0, -256,  0, false);
 		standardBiomeLayers.add(Blocks.BEDROCK, (byte)0,                                0, 2,  0,  0, true);
 		createChunkGen_InXZ_List.add(standardBiomeLayers);
