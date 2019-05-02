@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import asmodeuscore.core.astronomy.dimension.IProviderFreeze;
+import asmodeuscore.api.dimension.IProviderFreeze;
 import asmodeuscore.core.astronomy.dimension.world.worldengine.WE_Biome;
 import asmodeuscore.core.astronomy.dimension.world.worldengine.WE_ChunkProvider;
 import asmodeuscore.core.astronomy.dimension.world.worldengine.WE_WorldProvider;
@@ -15,6 +15,7 @@ import asmodeuscore.core.astronomy.dimension.world.worldengine.standardcustomgen
 import asmodeuscore.core.astronomy.dimension.world.worldengine.standardcustomgen.WE_RavineGen;
 import asmodeuscore.core.astronomy.dimension.world.worldengine.standardcustomgen.WE_TerrainGenerator;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
+import micdoodle8.mods.galacticraft.api.prefab.world.gen.BiomeDecoratorSpace;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.core.client.CloudRenderer;
 import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
@@ -248,6 +249,11 @@ public class WorldProviderArteros_E extends WE_WorldProvider implements IProvide
 		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Ocean()); 
 		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Plains()); 
 		WE_Biome.addBiomeToGeneration(cp, new Arteros_E_Beach()); 
+	}
+
+	@Override
+	public BiomeDecoratorSpace getDecorator() {
+		return null;
 	}
 
 }

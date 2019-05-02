@@ -1,11 +1,11 @@
 package projectandromeda;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.logging.log4j.Level;
 
+import asmodeuscore.api.IBodies;
+import asmodeuscore.api.IBodiesHandler;
 import micdoodle8.mods.galacticraft.core.Constants;
 import micdoodle8.mods.galacticraft.core.util.CreativeTabGC;
 import net.minecraft.creativetab.CreativeTabs;
@@ -24,22 +24,21 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.FMLRelaunchLog;
-import projectandromeda.api.IBodiesHandler;
 import projectandromeda.core.configs.PAConfigCore;
 import projectandromeda.core.configs.PAConfigDimensions;
 import projectandromeda.core.events.PAEventsHandler;
 import projectandromeda.core.proxy.CommonProxy;
 import projectandromeda.core.registers.blocks.PABlocks;
 import projectandromeda.core.utils.PACreativeTabs;
-import projectandromeda.systems.ArterosSystem.ArterosBodies;
 
 @Mod(
 		   modid = ProjectAndromeda.MODID,
 		   version = ProjectAndromeda.VERSION,
-		   dependencies = Constants.DEPENDENCIES_FORGE + "required-after:galacticraftcore; required-after:galacticraftplanets; required-after:asmodeuscore@[0.0.2,); after:galaxyspace@[2.0.1,);",
+		   dependencies = Constants.DEPENDENCIES_FORGE + "required-after:galacticraftcore; required-after:galacticraftplanets; required-after:asmodeuscore@[0.0.8,); after:galaxyspace@[2.0.1,);",
 		   acceptedMinecraftVersions = Constants.MCVERSION,
 		   name = ProjectAndromeda.NAME
 		)
+
 public class ProjectAndromeda {
 
 	public static final int major_version = 0;
@@ -62,10 +61,9 @@ public class ProjectAndromeda {
     @SidedProxy(clientSide="projectandromeda.core.proxy.ClientProxy", serverSide="projectandromeda.core.proxy.CommonProxy")
     public static CommonProxy proxy;
     
-    private static List<IBodiesHandler> bodies = new ArrayList<IBodiesHandler>();
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) 
-    {  
+    {      	
     	new PAConfigCore(new File(event.getModConfigurationDirectory(), "ProjectAndromeda/core.conf"));
     	new PAConfigDimensions(new File(event.getModConfigurationDirectory(), "ProjectAndromeda/dimensions.conf"));
     	
@@ -73,10 +71,6 @@ public class ProjectAndromeda {
     	
     	proxy.preload();
     	proxy.register_event(new PAEventsHandler());
-    	
-    	bodies.add(new ArterosBodies());
-    	for(IBodiesHandler list : bodies)
-    		list.preInit(event);
     }
     
     @EventHandler
@@ -86,9 +80,7 @@ public class ProjectAndromeda {
     	proxy.registerRender();
 
     	PACreativeTabs.PABlocksTab = new CreativeTabGC(CreativeTabs.getNextID(), "andromeda_blocks", new ItemStack(PABlocks.ARTEROS_E_BLOCKS), null);
-    	
-    	for(IBodiesHandler list : bodies)
-    		list.init(event);
+    	    
     }
     
     @EventHandler
@@ -96,19 +88,17 @@ public class ProjectAndromeda {
     	proxy.postload();
 
     	//NetworkRegistry.INSTANCE.registerGuiHandler(instance, new PAGuiHandler());
-    	
-    	for(IBodiesHandler list : bodies)
-    		list.postInit(event);
+    
     }
     
     public static void info(String message)
 	{ 
-		FMLRelaunchLog.log("Galaxy Space", Level.INFO, message);
+		FMLRelaunchLog.log("P:Andromeda", Level.INFO, message);
 	}
     
     public static void debug(String message)
    	{ 
-   		if(debug) FMLRelaunchLog.log("[DEBUG] Galaxy Space", Level.INFO, message);
+   		if(debug) FMLRelaunchLog.log("[DEBUG] P:Andromeda", Level.INFO, message);
    	}  
     
     @EventBusSubscriber(modid = MODID)
@@ -136,4 +126,5 @@ public class ProjectAndromeda {
     		//GSItems.oreDictRegistration();
         }
     }
+
 }

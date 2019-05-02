@@ -1,5 +1,7 @@
 package projectandromeda.systems.ArterosSystem;
 
+import asmodeuscore.api.IBodies;
+import asmodeuscore.api.IBodiesHandler;
 import asmodeuscore.core.astronomy.BodiesHelper;
 import asmodeuscore.core.astronomy.BodiesHelper.BodiesData;
 import asmodeuscore.core.astronomy.BodiesHelper.Galaxies;
@@ -16,18 +18,19 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import projectandromeda.ProjectAndromeda;
-import projectandromeda.api.IBodiesHandler;
 import projectandromeda.core.configs.PAConfigDimensions;
 import projectandromeda.core.utils.PADimensions;
 import projectandromeda.systems.ArterosSystem.arteros_e.dimension.TeleportTypeArteros_E;
 import projectandromeda.systems.ArterosSystem.arteros_e.dimension.WorldProviderArteros_E;
 
+@IBodies
 public class ArterosBodies implements IBodiesHandler {
 	
 	public static SolarSystem arterosSystem;
 	public static Star arteros_A;
 	public static Planet arteros_B, arteros_C, arteros_D, arteros_E;
 	
+	@Override
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		arterosSystem = new SolarSystem("arteros", Galaxies.ANDROMEDA.getName()).setMapPosition(new Vector3(1.5F, 0.0F, 0.0F));
@@ -42,14 +45,15 @@ public class ArterosBodies implements IBodiesHandler {
 		
 	}
 	
+	@Override
 	public void init(FMLInitializationEvent event)
 	{
 		registrycelestial();
     	registryteleport();
-    	registerRecipesWorkBench();
     	registerDungeonLoot();
 	}
 	
+	@Override
 	public void postInit(FMLPostInitializationEvent event)
 	{
 		PADimensions.Arteros_E = WorldUtil.getDimensionTypeById(PAConfigDimensions.dimensionIDArteros_E);
@@ -74,11 +78,11 @@ public class ArterosBodies implements IBodiesHandler {
 	
 	private static void registryteleport()
 	{
-		GalacticraftRegistry.registerTeleportType(WorldProviderArteros_E.class, new TeleportTypeArteros_E());
+	//	GalacticraftRegistry.registerTeleportType(WorldProviderArteros_E.class, new TeleportTypeArteros_E());
 	}
-	
-	private static void registerRecipesWorkBench()
-    {
-		
-    }
+
+	@Override
+	public boolean canRegister() {
+		return true;
+	}
 }
