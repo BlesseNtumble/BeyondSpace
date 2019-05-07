@@ -30,6 +30,7 @@ import projectandromeda.core.events.PAEventsHandler;
 import projectandromeda.core.proxy.CommonProxy;
 import projectandromeda.core.registers.blocks.PABlocks;
 import projectandromeda.core.utils.PACreativeTabs;
+import projectandromeda.systems.ArterosSystem.ArterosBodies;
 
 @Mod(
 		   modid = ProjectAndromeda.MODID,
@@ -66,11 +67,17 @@ public class ProjectAndromeda {
     {      	
     	new PAConfigCore(new File(event.getModConfigurationDirectory(), "ProjectAndromeda/core.conf"));
     	new PAConfigDimensions(new File(event.getModConfigurationDirectory(), "ProjectAndromeda/dimensions.conf"));
+    	debug = PAConfigCore.enableDebug;
     	
     	PABlocks.initialize();
     	
     	proxy.preload();
     	proxy.register_event(new PAEventsHandler());
+    	
+    	ArterosBodies.preInit(event);
+    	
+    	if(debug)
+    		System.out.println("[P:Andromeda DEBUG Mode on]");
     }
     
     @EventHandler
@@ -81,12 +88,14 @@ public class ProjectAndromeda {
 
     	PACreativeTabs.PABlocksTab = new CreativeTabGC(CreativeTabs.getNextID(), "andromeda_blocks", new ItemStack(PABlocks.ARTEROS_E_BLOCKS), null);
     	    
+    	ArterosBodies.init(event);
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
     	proxy.postload();
-
+    	
+    	ArterosBodies.postInit(event);
     	//NetworkRegistry.INSTANCE.registerGuiHandler(instance, new PAGuiHandler());
     
     }
