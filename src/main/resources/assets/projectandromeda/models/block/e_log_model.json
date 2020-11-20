@@ -1,7 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures": {
-        "end": "projectandromeda:blocks/arterossystem/arteros_e/e_log_top",
-        "side": "projectandromeda:blocks/arterossystem/arteros_e/e_log_side"
-    }
-}
