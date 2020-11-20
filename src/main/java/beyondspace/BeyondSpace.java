@@ -25,6 +25,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 		   acceptedMinecraftVersions = Constants.MCVERSION,
 		   name = BeyondSpace.NAME
 		   //guiFactory = "galaxyspace.core.client.gui.GSConfigGuiFactory"
+		   //
 		)
 public class BeyondSpace {
 	public static final int major_version = 1;
