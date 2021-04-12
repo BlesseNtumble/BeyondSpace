@@ -1,0 +1,19 @@
+{
+    "ionblast": {"category": "master", "sounds": [{"name": "ionblast", "stream": false}]},
+    "floaterLiving": {"category": "master", "sounds": [{"name": "floaterLiving", "stream": false}]},
+	"floaterHurt": {"category": "master", "sounds": [{"name": "floaterHurt", "stream": false}]},
+	"floaterDeath": {"category": "master", "sounds": [{"name": "floaterDeath", "stream": false}]},
+	
+    "records.Prelude": {"category": "record", "sounds": [{"name": "records/Prelude", "stream": true}]},
+    "records.Oblivion": {"category": "record", "sounds": [{"name": "records/Oblivion", "stream": true}]},
+    "records.ChallengeNihil": {"category": "record", "sounds": [{"name": "records/ChallengeNihil", "stream": true}]},
+    "records.Void": {"category": "record", "sounds": [{"name": "records/Void", "stream": true}]},
+    "records.AttackTheAbysmal": {"category": "record", "sounds": [{"name": "records/AttackTheAbysmal", "stream": true}]},
+    "records.Nonexistence": {"category": "record", "sounds": [{"name": "records/Nonexistence", "stream": true}]},
+    "records.DefendTheDormant": {"category": "record", "sounds": [{"name": "records/DefendTheDormant", "stream": true}]},
+    "records.BattleNothing": {"category": "record", "sounds": [{"name": "records/BattleNothing", "stream": true}]},
+    "records.NullVictory": {"category": "record", "sounds": [{"name": "records/NullVictory", "stream": true}]},
+    "records.DividingCipher": {"category": "record", "sounds": [{"name": "records/DividingCipher", "stream": true}]},
+    "records.InanisTenebrae": {"category": "record", "sounds": [{"name": "records/InanisTenebrae", "stream": true}]},
+    "records.InMorsDeNihil": {"category": "record", "sounds": [{"name": "records/InMorsDeNihil", "stream": true}]}
+}

@@ -1,80 +1,80 @@
 package beyondspace;
 
-import java.io.File;
-import java.util.Arrays;
+import beyondspace.proxy.CommonProxy;
+import beyondspace.proxy.network.GAGuiHandler;
+import beyondspace.utils.BSConfig;
+import beyondspace.utils.RegistrationsList;
+import beyondspace.utils.space.GASpaceUtilities;
+import beyondspace.world.generation.GAWorldGeneration;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.config.Configuration;
 
-import org.apache.logging.log4j.Logger;
-
-import beyondspace.core.configs.BSConfigCore;
-import beyondspace.core.proxy.CommonProxy;
-import beyondspace.systems.SolarSystem.SolarSystemBodies;
-import micdoodle8.mods.galacticraft.core.Constants;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.ModMetadata;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-
-@Mod(
-		   modid = BeyondSpace.MODID,
-		   version = BeyondSpace.VERSION,
-		   dependencies = Constants.DEPENDENCIES_FORGE + "required-after:galacticraftcore@[4.0.2.261,]; required-after:galacticraftplanets; required-after:asmodeuscore@[0.0.14,); required-after:galaxyspace@[2.0.14,)",
-		   acceptedMinecraftVersions = Constants.MCVERSION,
-		   name = BeyondSpace.NAME
-		   //guiFactory = "galaxyspace.core.client.gui.GSConfigGuiFactory"
-		)
+@Mod(modid=ModInfo.MODID, name=ModInfo.NAME, version=ModInfo.VERSION, guiFactory=ModInfo.MODID + ".gui.GUIFactory", dependencies="required-after:GalacticraftCore; required-after:GalacticraftMars; required-after:GalaxySpace;", useMetadata = true)
 public class BeyondSpace {
-	public static final int major_version = 1;
-	public static final int minor_version = 0;
-	public static final int build_version = 0;
-	
-	public static final String NAME = "BeyondSpace";
-	public static final String MODID = "beyondspace";
-    public static final String VERSION = major_version + "." + minor_version + "." + build_version;
-    public static final String ASSET_PREFIX = MODID;
-    public static final String TEXTURE_PREFIX = ASSET_PREFIX + ":";
-    public static final boolean DEBUG = true;
-    private static Logger log;
-    
-    @Instance(BeyondSpace.MODID)
-    public static BeyondSpace instance;
-    
-    @SidedProxy(clientSide=MODID+".core.proxy.ClientProxy", serverSide=MODID+".core.proxy.CommonProxy")
+	@Instance(ModInfo.MODID)
+	public static BeyondSpace instance;
+
+    @SidedProxy(clientSide = ModInfo.MODID + ".proxy.ClientProxy", serverSide = ModInfo.MODID + ".proxy.CommonProxy")
     public static CommonProxy proxy;
-    
+	
+	public GAWorldGeneration generator = new GAWorldGeneration();
+	public static Configuration config;
+	
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event) { 
-    	this.initModInfo(event.getModMetadata());
-    	log = event.getModLog();
-    	
-    	new BSConfigCore(new File(event.getModConfigurationDirectory(), NAME + "/core.conf"));
-    	
-    	proxy.preload(event);    
-    	SolarSystemBodies.preInit();
-    	
+    public void preInit(FMLPreInitializationEvent event) {
+    	FMLCommonHandler.instance().bus().register(BeyondSpace.instance);
+    	config = new Configuration(event.getSuggestedConfigurationFile());
+    	BSConfig.syncConfig();
+        GameRegistry.registerWorldGenerator(generator, 0);
+    	proxy.initializeAndRegisterHandlers();
+    	proxy.preInit();
     }
     
+	@SubscribeEvent
+	public void onConfigChange(ConfigChangedEvent.OnConfigChangedEvent event) {
+		if (event.modID.equals(ModInfo.MODID)) {
+			BSConfig.syncConfig();
+		}
+	}
+	
     @EventHandler
     public void init(FMLInitializationEvent event) {
-    	proxy.load(event);    	
+    	proxy.init();
+    	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GAGuiHandler());
     }
     
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-    	proxy.postload(event);
-    	SolarSystemBodies.postInit();
+    	proxy.postInit();
+    	proxy.registerRenderThings();
+    	proxy.RegisterKeyBinds();
+		GASpaceUtilities.init();
     }
     
-    private void initModInfo(ModMetadata info)
-    {
-        info.autogenerated = false;
-        info.modId = MODID;
-        info.name = NAME;
-        info.version = VERSION;
-        info.description = "Sub-module for GalaxySpace.";
-        info.authorList = Arrays.asList("BlesseNtumble, gug2");
-    }
+    public static CreativeTabs gaTab = new CreativeTabs(ModInfo.NAME) {
+		@Override
+		public Item getTabIconItem() {
+			return RegistrationsList.handRocket;
+		}
+	};
+    
+    public static CreativeTabs upTab = new CreativeTabs(ModInfo.NAME + ".upgrades") {
+		@Override
+		public Item getTabIconItem() {
+			return RegistrationsList.armorUpgrade;
+		}
+	};
 }

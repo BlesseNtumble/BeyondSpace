@@ -1,10 +1,10 @@
 [
 	{
-	  "modid": "projectandromeda",
-	  "name": "ProjectAndromeda",
-	  "description": "Addon for Galacticraft",
-	  "version": "1.12.2-0.0.1",
-	  "mcversion": "1.12.2",
+	  "modid": "beyondspace",
+	  "name": "Beyond Space",
+	  "description": "Addon for Galaxy Space",
+	  "version": "1.7.10-1.0.0",
+	  "mcversion": "1.7.10",
 	  "url": "",
 	  "updateUrl": "",
 	  "authorList": ["BlesseNtumble"],
