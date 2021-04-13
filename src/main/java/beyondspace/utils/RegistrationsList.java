@@ -59,7 +59,6 @@ import beyondspace.items.IonPlasmaRifle;
 import beyondspace.items.PlasmaHammer;
 import beyondspace.items.PlasmaOmnitool;
 import beyondspace.items.PortableBattery;
-import beyondspace.items.RepairKit;
 import beyondspace.items.TitaniumBattery;
 import beyondspace.items.modules.Kinetic;
 import beyondspace.items.modules.Protection;
@@ -256,7 +255,6 @@ public class RegistrationsList {
 		plasmaHammer = new PlasmaHammer();
 		plasmaOmnitool = new PlasmaOmnitool();
 		portableBattery = new PortableBattery("PortableBattery");
-		repairKit = new RepairKit();
 		wolframBattery = new TitaniumBattery("litium-titaniumBattery", BeyondSpace.gaTab);
 	
 		// Armor
@@ -390,7 +388,6 @@ public class RegistrationsList {
 	public void RegisterItems() {
 		registerItem(handRocket, getItemName(handRocket));
 		registerItem(armorUpgrade, "ArmorUpgrade");
-		registerItem(repairKit, getItemName(repairKit));
 		registerItem(ionPlasmaRifle, getItemName(ionPlasmaRifle));
 		registerItem(plasmaAmmo, getItemName(plasmaAmmo));
 		registerItem(flameThrower, getItemName(flameThrower));
@@ -502,7 +499,7 @@ public class RegistrationsList {
 		addRecipe(new ItemStack(sulfurTorch, 4, 0),
 			new Object[] {"S", "P",
 			'S', new ItemStack(GSItems.BasicItems, 1, 9),
-			'P', new ItemStack(GCItems.flagPole, 1, 0)});
+			'P', new ItemStack(Items.stick, 1, 0)});
 		
 		addRecipe(new ItemStack(advancedRefinery, 1, 0),
 			new Object[] {"2C2", "DCD", "SRS",
