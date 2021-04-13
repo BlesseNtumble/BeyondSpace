@@ -81,7 +81,7 @@ import galaxyspace.core.registers.blocks.GSBlocks;
 import galaxyspace.core.registers.items.GSItems;
 import galaxyspace.core.util.GSUtils;
 import galaxyspace.systems.SolarSystem.SolarSystemBodies;
-import galaxyspace.systems.SolarSystem.planets.overworld.recipe.AssemberRecipes;
+import galaxyspace.systems.SolarSystem.planets.overworld.recipe.AssemblyRecipes;
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
@@ -667,7 +667,7 @@ public class RegistrationsList {
 		*/
 		
 		
-		AssemberRecipes.instance.addRecipe(new ItemStack(ionPlasmaRifle),
+		AssemblyRecipes.instance.addRecipe(new ItemStack(ionPlasmaRifle),
 			new Object[] {"LTA", "CWC", "TBT",
 			'L', new ItemStack(AsteroidBlocks.beamReceiver),
 			'T', new ItemStack(AsteroidsItems.basicItem, 1, 6),		// compressedTitanium
@@ -676,7 +676,7 @@ public class RegistrationsList {
 			'A', new ItemStack(plasmaAmmo),
 			'B', new ItemStack(Blocks.stone_button)});
 		
-		AssemberRecipes.instance.addRecipe(new ItemStack(flameThrower), 
+		AssemblyRecipes.instance.addRecipe(new ItemStack(flameThrower), 
 			new Object[] {"FP ", "PS ", "QBS",
 			'F', new ItemStack(Items.flint_and_steel),
 			'P', new ItemStack(GCBlocks.oxygenPipe),
@@ -684,7 +684,7 @@ public class RegistrationsList {
 			'Q', new ItemStack(fuelTank),
 			'B', new ItemStack(Blocks.stone_button)});
 		
-		AssemberRecipes.instance.addRecipe(new ItemStack(plasmaOmnitool, 1, 100000),
+		AssemblyRecipes.instance.addRecipe(new ItemStack(plasmaOmnitool, 1, 100000),
 			new Object[] {"CCC", "BRC", "PWC",
 			'C', new ItemStack(GSItems.CompressedPlates, 1, 1),
 			'B', new ItemStack(wolframBattery, 1, 0),
