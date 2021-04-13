@@ -5,6 +5,7 @@ import java.util.List;
 
 import beyondspace.entity.RedLightningEntity;
 import beyondspace.items.HighPressureResistantModularArmor;
+import beyondspace.items.PortableBattery;
 import beyondspace.utils.BSConfig;
 import beyondspace.utils.BSUtilities;
 import beyondspace.utils.RegistrationsList;
@@ -308,10 +309,40 @@ public class CommonEventHandler {
 		}
 	}
 	
+	public static NBTTagCompound getCompound(ItemStack stack){
+		if (stack.getTagCompound() == null) 
+		stack.setTagCompound(new NBTTagCompound());
+		return stack.getTagCompound();
+	}
+	
+	public static boolean verifyExistance(ItemStack stack, String tag) {
+		NBTTagCompound compound = stack.getTagCompound();
+		if (compound == null)
+			return false;
+		else
+			return stack.getTagCompound().hasKey(tag);
+	}
+	
+	public static short getShort(ItemStack stack, String tag, short defaultExpected) {
+		return verifyExistance(stack, tag) ? stack.getTagCompound().getShort(tag) : defaultExpected;
+	}
+	
+	public static ItemStack setShort(ItemStack stack, String tag, short s)
+	{
+		NBTTagCompound compound = getCompound(stack);
+		compound.setShort(tag, s);
+		stack.setTagCompound(compound);
+		return stack;
+	}
+	
 	/** Uses energy from portable charger to charge items */
 	private void chargeItems(EntityPlayer player) {
 		for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
 			if (player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() == RegistrationsList.portableBattery) {
+				ItemStack stack = player.inventory.getStackInSlot(i);
+				int mode = getShort(stack, "Mode", (short) 0);
+				if(mode == 0)
+					return;
 				if (((ItemElectricBase)player.inventory.getStackInSlot(i).getItem()).getElectricityStored((player.inventory.getStackInSlot(i))) == 0) continue;
 				for (int j = 0; j < player.inventory.getSizeInventory(); j++) {
 					if (player.inventory.getStackInSlot(j) != null && player.inventory.getStackInSlot(j).getItem() != RegistrationsList.portableBattery) {
