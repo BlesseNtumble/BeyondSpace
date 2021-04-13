@@ -64,14 +64,14 @@ public class BeyondSpace {
 		GASpaceUtilities.init();
     }
     
-    public static CreativeTabs gaTab = new CreativeTabs(ModInfo.NAME) {
+    public static CreativeTabs gaTab = new CreativeTabs(ModInfo.MODID) {
 		@Override
 		public Item getTabIconItem() {
 			return RegistrationsList.handRocket;
 		}
 	};
     
-    public static CreativeTabs upTab = new CreativeTabs(ModInfo.NAME + ".upgrades") {
+    public static CreativeTabs upTab = new CreativeTabs(ModInfo.MODID + ".upgrades") {
 		@Override
 		public Item getTabIconItem() {
 			return RegistrationsList.armorUpgrade;
