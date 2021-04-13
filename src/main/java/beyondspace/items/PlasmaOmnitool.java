@@ -270,7 +270,7 @@ public class PlasmaOmnitool extends ItemTool implements IItemElectric {
 						return true;
 					} else {
 						world.setBlock(x, y, z, block1);
-						CommonEventHandler.dischargeStack(stack, 10.0F);
+						CommonEventHandler.dischargeStack(stack, 50.0F);
 						return true;
 					}
 				} else {
