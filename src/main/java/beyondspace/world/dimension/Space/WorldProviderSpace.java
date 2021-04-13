@@ -122,7 +122,7 @@ public class WorldProviderSpace extends WorldProviderAdvancedSpace implements IG
 
 	@Override
 	public CelestialBody getCelestialBody() {
-		return RegistrationsList.enderStar;
+		return RegistrationsList.holiday;
 	}
 
 	@Override

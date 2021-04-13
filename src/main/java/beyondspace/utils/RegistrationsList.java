@@ -73,7 +73,6 @@ import beyondspace.world.dimension.SaturnNew.WorldProviderSaturnNew;
 import beyondspace.world.dimension.SaturnRings.TeleportTypeSaturnRings;
 import beyondspace.world.dimension.SaturnRings.WorldProviderSaturnRings;
 import beyondspace.world.dimension.Space.WorldProviderSpace;
-import beyondspace.world.dimension.TheEnd.WorldProviderTheEnd;
 import beyondspace.world.dimension.UranusNew.WorldProviderUranusNew;
 import galaxyspace.api.BodiesHelper;
 import galaxyspace.api.BodiesHelper.BodiesData;
@@ -181,13 +180,10 @@ public class RegistrationsList {
 	
 	// Space Objects
 	public static SolarSystem holidays;
-	public static SolarSystem theEnd;
 	public static Star holiday;
-	public static Star enderStar;
 	public static Planet planetHalloween;
 	public static Planet planetNewYear;
 	public static Planet thanatos;
-	public static Planet end;
 	public static Moon saturnRings;
 	//public static Planet planetValentine;
 	//public static Planet planetYeaster;
@@ -273,15 +269,12 @@ public class RegistrationsList {
 	public void constructSpace() {
 		// Solar Systems
 		holidays = new SolarSystem("Holidays", "Alternate").setMapPosition(new Vector3(0.7D, -0.5D, 0));
-		theEnd = new SolarSystem("TheEnd", "Alternate").setMapPosition(new Vector3(2.0D, 2.0D, 0));
 		RegisterSolarSystems();
 
 		// Stars
 		holiday = (Star) new Star("Holiday").setParentSolarSystem(holidays).setTierRequired(-1).setBodyIcon(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/celestialbodies/sun.png")).setRelativeSize(1.0F);
 		holidays.setMainStar(holiday);
 
-		enderStar = (Star) new Star("EnderStar").setParentSolarSystem(theEnd).setTierRequired(-1).setBodyIcon(new ResourceLocation(ModInfo.MODID, "textures/gui/celestialbodies/EnderStar.png")).setRelativeSize(3.0F);
-		theEnd.setMainStar(enderStar);
 		
 		// Planets
 		if (isNewYear){
@@ -318,19 +311,6 @@ public class RegistrationsList {
 
 		DimensionManager.unregisterDimension(1);
 		DimensionManager.unregisterProviderType(1);
-		
-		end = (Planet) new Planet("TheEnd")
-		.setParentSolarSystem(theEnd)
-		.setRingColorRGB(0.3F, 1.0F, 0.3F)
-		.setPhaseShift(0)
-		.setBodyIcon(new ResourceLocation(ModInfo.MODID, "textures/gui/celestialbodies/TheEnd.png"))
-		.setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(6F, 6F))
-		.setRelativeOrbitTime(1 / 0.01F)
-		.setTierRequired(1)
-		.setDimensionInfo(1, WorldProviderTheEnd.class)
-		.atmosphereComponent(IAtmosphericGas.NITROGEN)
-		.atmosphereComponent(IAtmosphericGas.OXYGEN)
-		.atmosphereComponent(IAtmosphericGas.ARGON);
 		
 		SolarSystemBodies.planetJupiter.setTierRequired(8)
 		.setDimensionInfo(BSConfig.jupiter, WorldProviderJupiterNew.class)
@@ -437,7 +417,6 @@ public class RegistrationsList {
 
 	private void RegisterSolarSystems() {
 		GalaxyRegistry.registerSolarSystem(holidays);
-		GalaxyRegistry.registerSolarSystem(theEnd);
 	}
 	
 	public void RegisterPlanets() {
@@ -456,11 +435,6 @@ public class RegistrationsList {
 			GalaxyRegistry.registerPlanet(planetHalloween);
 			GalacticraftRegistry.registerTeleportType(WorldProviderHalloweenNew.class, new WorldProviderHalloweenNew());
 		}
-		
-		
-		BodiesData data = new BodiesData(BodiesHelper.asteroid, BSUtilities.calculateGravity(7F), 0, 0, 1, 0, true, false);
-		BodiesHelper.registerBody(end, data, true);
-		GalacticraftRegistry.registerTeleportType(WorldProviderTheEnd.class, new WorldProviderTheEnd());
 			
 		//GalaxyRegistry.registerPlanet(SolarSystemBodies.planetJupiter);
 		GalacticraftRegistry.registerTeleportType(WorldProviderJupiterNew.class, new WorldProviderJupiter());
