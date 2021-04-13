@@ -57,13 +57,16 @@ public class PortableBattery extends ItemElectricBase {
 	}
 	
     @Override
+    public boolean hasEffect(ItemStack stack, int pass) {
+        return getShort(stack, "Mode", (short) 0) > 0;
+    }
+	
+    @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
     	NBTTagCompound compound = getCompound(stack);
         if (player.isSneaking()) {
             int mode = getShort(stack, "Mode", (short) 0);
             setShort(stack, "Mode", (short) ((short) mode == 1 ? mode = 0 : mode+1));
-            if (!world.isRemote)
-                player.addChatComponentMessage(new ChatComponentTranslation(StatCollector.translateToLocal("beyondspace.charger") + ": " + StatCollector.translateToLocal("beyondspace.charger.mode") + mode));
         }
         return stack;
     }
