@@ -14,7 +14,7 @@ public class LightningRodTop extends Block implements ITileEntityProvider {
 	public LightningRodTop() {
 		super(Material.iron);
 		this.setBlockName("LightningRodTop");
-        this.setBlockTextureName(GalacticraftCore.TEXTURE_PREFIX + "machine.png");
+        this.setBlockTextureName(GalacticraftCore.TEXTURE_PREFIX + "machine");
         this.setCreativeTab(BeyondSpace.gaTab);
         this.setHardness(1.0F);
         this.setHarvestLevel("pickaxe", 2);
