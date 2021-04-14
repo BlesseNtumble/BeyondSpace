@@ -174,8 +174,7 @@ public class RegistrationsList {
 	public static Item plasmaHammer;
 	public static Item plasmaOmnitool;
 	public static Item portableBattery;
-	public static Item repairKit;
-	public static Item wolframBattery;
+	//public static Item wolframBattery;
 	
 	// Space Objects
 	public static SolarSystem holidays;
@@ -184,16 +183,6 @@ public class RegistrationsList {
 	public static Planet planetNewYear;
 	public static Planet thanatos;
 	public static Moon saturnRings;
-	//public static Planet planetValentine;
-	//public static Planet planetYeaster;
-	public static AchievementPage gaAchievements;
-	public static Achievement jupiter;
-	public static Achievement saturn;
-	public static Achievement diamond_rain;
-	public static Achievement saturn_rings;
-	public static Achievement uranus;
-	public static Achievement neptune;
-	public static Achievement indestructible;
 
 	public static boolean isNewYear = (Calendar.getInstance().get(2) + 1 == 12 && Calendar.getInstance().get(5) >= 16 && Calendar.getInstance().get(5) <= 31) || (Calendar.getInstance().get(2) + 1 == 1 && Calendar.getInstance().get(5) >= 1 && Calendar.getInstance().get(5) <= 16) || BSConfig.isNewYear;
 	public static boolean isHalloween = (Calendar.getInstance().get(2) + 1 == 10 && Calendar.getInstance().get(5) >= 16 && Calendar.getInstance().get(5) <= 31) || (Calendar.getInstance().get(2) + 1 == 11 && Calendar.getInstance().get(5) >= 1 && Calendar.getInstance().get(5) <= 16) || BSConfig.isHalloween;
@@ -201,16 +190,6 @@ public class RegistrationsList {
 	public static final ArmorMaterial HPRMA = EnumHelper.addArmorMaterial("HPRMA", 50, new int[] {5, 8, 7, 4}, 0);
 	
 	public void construct() {
-		// Achievements
-		jupiter = new Achievement("ach0", "jupiter", 0, 0, AsteroidsItems.tier3Rocket, (Achievement)null).initIndependentStat().registerStat();
-		saturn = new Achievement("ach1", "saturn", 2, 0, AsteroidsItems.tier3Rocket, jupiter).initIndependentStat().registerStat();
-		diamond_rain = new Achievement("ach2", "diamond_rain", 4, 0, Items.diamond, jupiter).initIndependentStat().registerStat();
-		saturn_rings = new Achievement("ach3", "saturn_rings", 4, 2, AsteroidsItems.tier3Rocket, saturn).initIndependentStat().registerStat();
-		uranus = new Achievement("ach4", "uranus", 4, 4, AsteroidsItems.tier3Rocket, saturn_rings).initIndependentStat().registerStat();
-		neptune = new Achievement("ach5", "neptune", 4, 6, AsteroidsItems.tier3Rocket, uranus).initIndependentStat().registerStat();
-		indestructible = new Achievement("ach6", "indestructible", 0, 4, AsteroidsItems.titaniumChestplate, (Achievement)null).initIndependentStat().registerStat();
-		gaAchievements = new AchievementPage("GA", new Achievement[]{jupiter, diamond_rain, saturn, saturn_rings, uranus, neptune, indestructible});
-		gaAchievements.registerAchievementPage(gaAchievements);
 		
 		// Blocks		
 		advancedRefinery = new AdvancedRefinery("AdvancedRefinery");
@@ -245,7 +224,7 @@ public class RegistrationsList {
 		// WARNING: register ammo BEFORE weapon!!!
 		advancedOxygenTank = new AdvancedOxygenTank(5, "AdvancedOxygenTank");
 		armorUpgrade = new ArmorUpgrade();
-		dehydratedFood = new DehydratedFood();
+		dehydratedFood = new DehydratedFood(0, 0, false);
 		floaterDrop = new FloaterDrop();
 		fuelTank = new AmmoBase(250, BeyondSpace.gaTab, "FuelTank", ModInfo.MODID + ":FuelTank");
 		flameThrower = new FlameThrower();
@@ -255,7 +234,7 @@ public class RegistrationsList {
 		plasmaHammer = new PlasmaHammer();
 		plasmaOmnitool = new PlasmaOmnitool();
 		portableBattery = new PortableBattery("PortableBattery");
-		wolframBattery = new TitaniumBattery("litium-titaniumBattery", BeyondSpace.gaTab);
+		//wolframBattery = new TitaniumBattery("litium-titaniumBattery", BeyondSpace.gaTab);
 	
 		// Armor
 		highPressureResistantModularArmorHead = new HighPressureResistantModularArmor(0).setUnlocalizedName("HPRMAMKIHelmet").setTextureName(ModInfo.MODID + ":HPRMAMKIHelmet");
@@ -266,16 +245,16 @@ public class RegistrationsList {
 
 	public void constructSpace() {
 		// Solar Systems
-		holidays = new SolarSystem("Holidays", "Alternate").setMapPosition(new Vector3(0.7D, -0.5D, 0));
+		/*holidays = new SolarSystem("Holidays", "Alternate").setMapPosition(new Vector3(0.7D, -0.5D, 0)); ;*/
 		RegisterSolarSystems();
 
 		// Stars
-		holiday = (Star) new Star("Holiday").setParentSolarSystem(holidays).setTierRequired(-1).setBodyIcon(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/celestialbodies/sun.png")).setRelativeSize(1.0F);
-		holidays.setMainStar(holiday);
+		/*holiday = (Star) new Star("Holiday").setParentSolarSystem(holidays).setTierRequired(-1).setBodyIcon(new ResourceLocation(GalacticraftCore.ASSET_PREFIX, "textures/gui/celestialbodies/sun.png")).setRelativeSize(1.0F);
+		holidays.setMainStar(holiday);*/
 
 		
 		// Planets
-		if (isNewYear){
+		/*if (isNewYear){
 	    planetNewYear = (Planet) new Planet("NewYear")
 		.setParentSolarSystem(holidays)
 		.setRingColorRGB(1.0F, 1.0F, 1.0F)
@@ -289,9 +268,9 @@ public class RegistrationsList {
 		.atmosphereComponent(IAtmosphericGas.OXYGEN)
 		.atmosphereComponent(IAtmosphericGas.ARGON)
 		.atmosphereComponent(IAtmosphericGas.WATER);
-		}
+	    }*/
 		
-		if (isHalloween) {
+		/*if (isHalloween) {
 		planetHalloween = (Planet) new Planet("Halloween")
 		.setParentSolarSystem(holidays)
 		.setRingColorRGB(1.0F, 1.0F, 1.0F)
@@ -305,27 +284,27 @@ public class RegistrationsList {
 		.atmosphereComponent(IAtmosphericGas.OXYGEN)
 		.atmosphereComponent(IAtmosphericGas.ARGON)
 		.atmosphereComponent(IAtmosphericGas.WATER);
-		}
+		}*/
 
 		DimensionManager.unregisterDimension(1);
 		DimensionManager.unregisterProviderType(1);
 		
-		SolarSystemBodies.planetJupiter.setTierRequired(8)
+		SolarSystemBodies.planetJupiter.setTierRequired(6)
 		.setDimensionInfo(BSConfig.jupiter, WorldProviderJupiterNew.class)
 		.atmosphereComponent(IAtmosphericGas.HYDROGEN)
 		.atmosphereComponent(IAtmosphericGas.HELIUM);
 		
-		SolarSystemBodies.planetSaturn.setTierRequired(8)
+		SolarSystemBodies.planetSaturn.setTierRequired(6)
 		.setDimensionInfo(BSConfig.saturn, WorldProviderSaturnNew.class)
 		.atmosphereComponent(IAtmosphericGas.HYDROGEN);
 		
-		SolarSystemBodies.planetUranus.setTierRequired(7)
+		SolarSystemBodies.planetUranus.setTierRequired(5)
 		.setDimensionInfo(BSConfig.uranus, WorldProviderUranusNew.class)
 		.atmosphereComponent(IAtmosphericGas.HYDROGEN)
 		.atmosphereComponent(IAtmosphericGas.HELIUM)
 		.atmosphereComponent(IAtmosphericGas.METHANE);
 		
-		SolarSystemBodies.planetNeptune.setTierRequired(7)
+		SolarSystemBodies.planetNeptune.setTierRequired(5)
 		.setDimensionInfo(BSConfig.neptune, WorldProviderNeptuneNew.class)
 		.atmosphereComponent(IAtmosphericGas.HYDROGEN)
 		.atmosphereComponent(IAtmosphericGas.HELIUM)
@@ -394,7 +373,7 @@ public class RegistrationsList {
 		registerItem(fuelTank, getItemName(fuelTank));
 		registerItem(plasmaHammer, getItemName(plasmaHammer));
 		registerItem(plasmaOmnitool, getItemName(plasmaOmnitool));
-		registerItem(wolframBattery, getItemName(wolframBattery));
+		//registerItem(wolframBattery, getItemName(wolframBattery));
 		registerItem(portableBattery, getItemName(portableBattery));
 		//registerItem(nuclearRod, getItemName(nuclearRod));
 		//registerItem(nuclearRodEmpty, getItemName(nuclearRodEmpty));
@@ -413,7 +392,7 @@ public class RegistrationsList {
 	}
 
 	private void RegisterSolarSystems() {
-		GalaxyRegistry.registerSolarSystem(holidays);
+		//GalaxyRegistry.registerSolarSystem(holidays);
 	}
 	
 	public void RegisterPlanets() {
@@ -423,15 +402,15 @@ public class RegistrationsList {
 			GalacticraftRegistry.registerTeleportType(WorldProviderSpace.class, new WorldProviderSpace());
 		}
 		
-		if (isNewYear) {
+		/*if (isNewYear) {
 			GalaxyRegistry.registerPlanet(planetNewYear);
 			GalacticraftRegistry.registerTeleportType(WorldProviderNewYear.class, new WorldProviderNewYear());
-		}
+			}*/
 		
-		if(isHalloween) {
+		/*if(isHalloween) {
 			GalaxyRegistry.registerPlanet(planetHalloween);
 			GalacticraftRegistry.registerTeleportType(WorldProviderHalloweenNew.class, new WorldProviderHalloweenNew());
-		}
+		}*/
 			
 		//GalaxyRegistry.registerPlanet(SolarSystemBodies.planetJupiter);
 		GalacticraftRegistry.registerTeleportType(WorldProviderJupiterNew.class, new WorldProviderJupiter());
@@ -480,13 +459,13 @@ public class RegistrationsList {
 
 	public void RegisterRecipes() {
 		/** CRAFT TABLE  */
-		addRecipe(new ItemStack(wolframBattery), //Battery
+		/*addRecipe(new ItemStack(wolframBattery), //Battery
 			new Object[] {"WPW", "SBS", "VVV",
 			'W', new ItemStack(GCBlocks.aluminumWire, 1, 0),
 			'B', GCItems.battery,
 			'P', new ItemStack(GCItems.basicItem, 1, 14),
 			'S', new ItemStack(GSItems.CompressedPlates, 1, 8),
-			'V', new ItemStack(GSItems.CompressedPlates, 1, 9)});
+			'V', new ItemStack(GSItems.CompressedPlates, 1, 9)});*/
 		
 		addRecipe(new ItemStack(advancedOxygenTank), //Ox Tank 4 level
 			new Object[] {"TRT", "POP", "PWP",
@@ -553,11 +532,6 @@ public class RegistrationsList {
 			'S', new ItemStack(GSItems.BasicItems, 1, 9),
 			'A', new ItemStack(GCItems.basicItem, 1, 8)});			// compressedAluminum
 		
-		addRecipe(new ItemStack(repairKit),
-			new Object[] {"SSS", "SWS", "SSS",
-			'S', new ItemStack(GCItems.basicItem, 1, 9),
-			'W', GCItems.wrench,
-			});
 		
 		addShapelessRecipe(new ItemStack(netherCore), Items.nether_star, Items.nether_star, Items.nether_star, Items.nether_star, Items.nether_star, Items.nether_star, Items.nether_star, Items.nether_star, Items.nether_star);
 		addShapelessRecipe(new ItemStack(GCItems.basicItem, 1, 2), silicate, silicate, silicate, silicate, silicate, silicate, silicate, silicate, silicate);
@@ -658,7 +632,7 @@ public class RegistrationsList {
 		AssemblyRecipes.instance.addRecipe(new ItemStack(plasmaOmnitool, 1, 100000),
 			new Object[] {"CCC", "BRC", "PWC",
 			'C', new ItemStack(GSItems.CompressedPlates, 1, 1),
-			'B', new ItemStack(wolframBattery, 1, 0),
+			'B', new ItemStack(GSItems.AdvancedBattery, 1, 0),
 			'R', new ItemStack(AsteroidBlocks.beamReceiver),
 			'P', new ItemStack(GCItems.flagPole),
 			'W', new ItemStack(GCBlocks.aluminumWire, 1, 1)});

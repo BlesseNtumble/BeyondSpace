@@ -184,16 +184,6 @@ public class CommonEventHandler {
 		}
 		return null;
 	}
-	
-    @SubscribeEvent
-    public void onPlayerPickupItem(ItemPickupEvent event){
-    	EntityPlayer player = event.player;
-		if (player.dimension == BSConfig.saturn) {
-			if (event.pickedUp.getEntityItem().isItemEqual(new ItemStack(Items.diamond))) {
-				player.addStat(RegistrationsList.diamond_rain, 1);
-			}
-		}
-    }
 
 	@SubscribeEvent
 	public void onEntityUpdate(LivingUpdateEvent event) {
@@ -288,7 +278,6 @@ public class CommonEventHandler {
 			   player.inventory.armorItemInSlot(2) != null && player.inventory.armorItemInSlot(2).getItem() == RegistrationsList.highPressureResistantModularArmorBody &&
 			   player.inventory.armorItemInSlot(1) != null && player.inventory.armorItemInSlot(1).getItem() == RegistrationsList.highPressureResistantModularArmorLegs &&
 			   player.inventory.armorItemInSlot(0) != null && player.inventory.armorItemInSlot(0).getItem() == RegistrationsList.highPressureResistantModularArmorBoot){
-			   player.addStat(RegistrationsList.indestructible, 1);
 			}
 			
 			// Storm on Gas Giants

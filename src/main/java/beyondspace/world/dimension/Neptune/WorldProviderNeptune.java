@@ -205,7 +205,6 @@ public class WorldProviderNeptune extends WorldProviderAdvancedSpace implements 
 			EntityEntryPod lander = new EntityEntryPod(player);
 			if (!world.isRemote) {
 				world.spawnEntityInWorld(lander);
-				player.addStat(RegistrationsList.neptune, 1);
 			}
 			
 			GCPlayerStats.get(player).teleportCooldown = 10;

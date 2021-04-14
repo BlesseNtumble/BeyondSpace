@@ -195,7 +195,6 @@ public class WorldProviderSaturnNew extends WE_WorldProvider implements IGalacti
 			EntityEntryPod lander = new EntityEntryPod(player);
 			if (!world.isRemote) {
 				world.spawnEntityInWorld(lander);
-				player.addStat(RegistrationsList.saturn, 1);
 			}
 			
 			GCPlayerStats.get(player).teleportCooldown = 10;

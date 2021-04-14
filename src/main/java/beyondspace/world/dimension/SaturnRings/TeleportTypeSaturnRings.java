@@ -265,7 +265,6 @@ public class TeleportTypeSaturnRings implements ITeleportType {
 				if (!newWorld.isRemote) {
 					EntityEntryPod entryPod = new EntityEntryPod(player);
 					newWorld.spawnEntityInWorld(entryPod);
-					player.addStat(RegistrationsList.saturn_rings, 1);
 				}
 
 				stats.teleportCooldown = 10;
