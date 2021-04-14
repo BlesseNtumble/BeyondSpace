@@ -7,16 +7,20 @@ import beyondspace.BeyondSpace;
 import beyondspace.ModInfo;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import galaxyspace.api.item.IItemSpaceFood;
+import micdoodle8.mods.galacticraft.core.items.GCItems;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
-public class DehydratedFood extends Item {
-	
+public class DehydratedFood extends ItemFood implements IItemSpaceFood {
+
 	public static final String[] dehydrated = new String[] {
 	"BeefCooked", "BeefRaw", "Cheese", "ChickenCooked", "ChickenRaw", "FishCooked", "FishRaw", "MushroomStew", "PorkchopCooked", "PorkchopRaw", "PotatoBaked", "PumpkinPie",};
 	
@@ -24,11 +28,13 @@ public class DehydratedFood extends Item {
 	private IIcon[] texture;
 	public static Random rand = new Random();
 	
-	public DehydratedFood() {
-		this.setCreativeTab(BeyondSpace.gaTab);
-		this.setHasSubtypes(true);
-		this.setMaxStackSize(1);
+	public DehydratedFood(int p_i45339_1_, float p_i45339_2_, boolean p_i45339_3_) {
+		super(p_i45339_1_, p_i45339_2_, p_i45339_3_);
+			this.setCreativeTab(BeyondSpace.gaTab);
+			this.setHasSubtypes(true);
 	}
+	
+
 	
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconRegister){
@@ -77,5 +83,52 @@ public class DehydratedFood extends Item {
 	    	case 11: desc = "PumpkinPie.name"; break;
     	}
     	list.add(StatCollector.translateToLocal("DehydratedFood.desc." + desc));
+    }
+    
+    public int getHealAmount(ItemStack par1ItemStack)
+    {
+        switch (par1ItemStack.getItemDamage())
+        {
+        case 15:
+        case 1:
+            return 4;
+        case 4:
+            return 4;
+        case 6:
+            return 4;
+        case 9:
+            return 4;
+        default:
+            return 8;
+        }
+    }
+
+    public float getSaturationModifier(ItemStack par1ItemStack)
+    {
+        switch (par1ItemStack.getItemDamage())
+        {
+        case 1:
+            return 0.3F;
+        case 4:
+            return 0.3F;
+        case 6:
+            return 0.3F;
+        case 9:
+            return 0.3F;
+        default:
+            return 0.7F;
+        }
+    }
+    
+    @Override
+    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    {
+            par3EntityPlayer.getFoodStats().addStats(this.getHealAmount(par1ItemStack), this.getSaturationModifier(par1ItemStack));
+            if (!par2World.isRemote)
+            {
+                par3EntityPlayer.entityDropItem(new ItemStack(GCItems.canister, 1, 0), 0.0F);
+            }
+
+        return super.onEaten(par1ItemStack, par2World, par3EntityPlayer);
     }
 }
