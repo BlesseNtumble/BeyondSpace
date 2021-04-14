@@ -49,8 +49,8 @@ public class GasGeneratorGui extends GuiContainerGC {
     public void initGui(){
         super.initGui();
         //gas
-        this.gasTankRegion.xPosition = (this.width - this.xSize) / 2 + 22;
-        this.gasTankRegion.yPosition = (this.height - this.ySize) / 2 + 17;
+        this.gasTankRegion.xPosition = (this.width - this.xSize) / 2 + 6;
+        this.gasTankRegion.yPosition = (this.height - this.ySize) / 2 + 19;
         this.gasTankRegion.parentWidth = this.width;
         this.gasTankRegion.parentHeight = this.height;
         this.infoRegions.add(this.gasTankRegion);
@@ -59,7 +59,7 @@ public class GasGeneratorGui extends GuiContainerGC {
         electricityDesc.add(GCCoreUtil.translate("gui.energyStorage.desc.0"));
         electricityDesc.add(EnumColor.YELLOW + GCCoreUtil.translate("gui.energyStorage.desc.1") + ((int) Math.floor(this.tileEntity.getEnergyStoredGC()) + " / " + (int) Math.floor(this.tileEntity.getMaxEnergyStoredGC())));
         this.electricInfoRegion.tooltipStrings = electricityDesc;
-        this.electricInfoRegion.xPosition = (this.width - this.xSize) / 2 + 139;
+        this.electricInfoRegion.xPosition = (this.width - this.xSize) / 2 + 27;
         this.electricInfoRegion.yPosition = (this.height - this.ySize) / 2 + 6;
         this.electricInfoRegion.parentWidth = this.width;
         this.electricInfoRegion.parentHeight = this.height;
@@ -71,9 +71,10 @@ public class GasGeneratorGui extends GuiContainerGC {
         //atmospheric valve
         List<String> atmosphericValveDesc = new ArrayList<String>();
         atmosphericValveDesc.add(GCCoreUtil.translate("gui.atmosphericValveDesc.0"));
-        this.infoRegions.add(new GuiElementInfoRegion((this.width - this.xSize) / 2 + 47, (this.height - this.ySize) / 2 + 17, 18, 18, atmosphericValveDesc, this.width, this.height, this));
+        this.infoRegions.add(new GuiElementInfoRegion((this.width - this.xSize) / 2 + 36, (this.height - this.ySize) / 2 + 54, 18, 18, atmosphericValveDesc, this.width, this.height, this));
         //button
         this.buttonList.add(this.buttonEnable = new GuiButton(0, this.width / 2 - 36, this.height / 2 - 25, 72, 20, GCCoreUtil.translate("gui.button.enable.name")));
+        this.buttonEnable.visible = false;
     }
 
     @Override
@@ -85,14 +86,14 @@ public class GasGeneratorGui extends GuiContainerGC {
         this.buttonEnable.displayString = !this.tileEntity.getDisabled(0) ? GCCoreUtil.translate("gui.button.disable.name") : GCCoreUtil.translate("gui.button.enable.name");
         //inventory
         String inventory = this.tileEntity.getInventoryName();
-        this.fontRendererObj.drawString(inventory, this.xSize / 2 - this.fontRendererObj.getStringWidth(inventory) / 2, 7, 4210752);
+        this.fontRendererObj.drawString(inventory, ((this.xSize / 2) + 12) - this.fontRendererObj.getStringWidth(inventory) / 2, 3, 4210752);
         //status
         String status = GCCoreUtil.translate("gui.message.status.name") + ": " + this.getStatus();
-        this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2 + 10, 45 + 23 - 46 + offsetY - 10, 4210752);
+        this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2 + 10, 37 + 23 - 46 + offsetY - 10, 4210752);
         //container
-        this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 94, 4210752);
+        this.fontRendererObj.drawString(EnumColor.WHITE + GCCoreUtil.translate("container.inventory"), 13, this.ySize - 93, 4210752);
         //gen
-        this.fontRendererObj.drawString(GCCoreUtil.translate("gui.generate.name")+" "+ gen(), this.xSize / 2 - this.fontRendererObj.getStringWidth("gui.generate.name"+" "+ gen()) / 2 + 10, 45 + 23 - 46 + offsetY - 20, 4210752);
+        this.fontRendererObj.drawString(GCCoreUtil.translate("gui.generate.name")+" "+ gen(), this.xSize / 2 + 5 - this.fontRendererObj.getStringWidth("gui.generate.name"+" "+ gen()) / 2 + 10, 38 + 23 - 46 + offsetY - 20, 4210752);
     }
 
     private String gen(){
@@ -141,14 +142,14 @@ public class GasGeneratorGui extends GuiContainerGC {
 			gasType = 2;
 		}
 		if (gasType >= 0) {
-			this.drawTexturedModalRect(width + 22, height + 55 - displayInt, 176, 0, 16, displayInt);
+			this.drawTexturedModalRect(width + 6, height + 57 - displayInt, 176, 0, 16, displayInt);
 		}
 		this.addToolTips();
         if (this.tileEntity.getEnergyStoredGC() > 0){
-            this.drawTexturedModalRect(width + 139, height + 64, 199, 0, 9, 8);
+            this.drawTexturedModalRect(width + 27, height + 63, 199, 0, 9, 8);
         }
-        int electricalInt = this.tileEntity.getScaledElecticalLevel(54);
-        this.drawTexturedModalRect(width + 140, height + 54 + 7 - electricalInt, 192, 0, 7, Math.min(this.tileEntity.getScaledElecticalLevel(54), 54));
+        int electricalInt = this.tileEntity.getScaledElecticalLevel(55);
+        this.drawTexturedModalRect(width + 28, height + 52 + 9 - electricalInt, 192, 0, 7, Math.min(this.tileEntity.getScaledElecticalLevel(54), 54));
     }
     
     private void addToolTips() {

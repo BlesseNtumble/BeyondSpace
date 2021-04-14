@@ -20,26 +20,28 @@ public class UltimateFurnaceContainer extends Container
         this.tileEntity = tileEntity;
 
         // Electric Input Slot
-        this.addSlotToContainer(new SlotSpecific(tileEntity, 0, 8, 49, IItemElectric.class));
+        this.addSlotToContainer(new SlotSpecific(tileEntity, 0, 77, 93, IItemElectric.class));
 
         // To be smelted
-        this.addSlotToContainer(new Slot(tileEntity, 1, 56, 25));
+        this.addSlotToContainer(new Slot(tileEntity, 1, 47, 27));
+        //this.addSlotToContainer(new Slot(tileEntity, 1, 23, 27));
 
         // Smelting result
-        this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player, tileEntity, 2, 109, 25));
+        this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player, tileEntity, 2, 111, 27));
+        //this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player, tileEntity, 2, 135, 27));
         int var3;
 
         for (var3 = 0; var3 < 3; ++var3)
         {
             for (int var4 = 0; var4 < 9; ++var4)
             {
-                this.addSlotToContainer(new Slot(par1InventoryPlayer, var4 + var3 * 9 + 9, 8 + var4 * 18, 84 + var3 * 18));
+                this.addSlotToContainer(new Slot(par1InventoryPlayer, var4 + var3 * 9 + 9, 8 + var4 * 18, 118 + var3 * 18));
             }
         }
 
         for (var3 = 0; var3 < 9; ++var3)
         {
-            this.addSlotToContainer(new Slot(par1InventoryPlayer, var3, 8 + var3 * 18, 142));
+            this.addSlotToContainer(new Slot(par1InventoryPlayer, var3, 8 + var3 * 18, 176));
         }
 
         tileEntity.playersUsing.add(par1InventoryPlayer.player);
@@ -63,9 +65,8 @@ public class UltimateFurnaceContainer extends Container
      * clicking.
      */
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1)
-    {
-        ItemStack var2 = null;
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
+    	ItemStack var2 = null;
         Slot var3 = (Slot) this.inventorySlots.get(par1);
 
         if (var3 != null && var3.getHasStack())
@@ -133,5 +134,5 @@ public class UltimateFurnaceContainer extends Container
         }
 
         return var2;
-    }
+      }
 }

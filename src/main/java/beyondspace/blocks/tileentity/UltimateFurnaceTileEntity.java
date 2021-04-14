@@ -215,13 +215,13 @@ public class UltimateFurnaceTileEntity extends TileBaseElectricBlockWithInventor
     public boolean isItemValidForSlot(int slotID, ItemStack itemStack)
     {
         if (itemStack == null) return false;
-    	return slotID == 1 ? FurnaceRecipes.smelting().getSmeltingResult(itemStack) != null : slotID == 0 && ItemElectricBase.isElectricItem(itemStack.getItem());
+    	return slotID == 1 | slotID == 3 ? FurnaceRecipes.smelting().getSmeltingResult(itemStack) != null : slotID == 0 && ItemElectricBase.isElectricItem(itemStack.getItem());
     }
 
     @Override
     public int[] getAccessibleSlotsFromSide(int side)
     {
-        return new int[] { 0, 1, 2 };
+        return new int[] { 0, 1, 2, 3, 4 };
     }
 
     @Override
@@ -233,7 +233,7 @@ public class UltimateFurnaceTileEntity extends TileBaseElectricBlockWithInventor
     @Override
     public boolean canExtractItem(int slotID, ItemStack par2ItemStack, int par3)
     {
-        return slotID == 2;
+        return slotID == 2 && slotID == 4;
     }
 
     @Override

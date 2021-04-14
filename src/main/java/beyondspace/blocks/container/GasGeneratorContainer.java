@@ -16,18 +16,18 @@ public class GasGeneratorContainer extends Container {
 		this.tileEntity = tileEntity;
 
 		// valve Input Slot
-		this.addSlotToContainer(new SlotSpecific(tileEntity, 0, 48, 17, ItemAtmosphericValve.class));
+		this.addSlotToContainer(new SlotSpecific(tileEntity, 0, 38, 54, ItemAtmosphericValve.class));
 		int var3;
 
 		for (var3 = 0; var3 < 3; ++var3) {
 			for (int var4 = 0; var4 < 9; ++var4) {
 				this.addSlotToContainer(
-						new Slot(par1InventoryPlayer, var4 + var3 * 9 + 9, 8 + var4 * 18, 104 + var3 * 18 - 18));
+						new Slot(par1InventoryPlayer, var4 + var3 * 9 + 9, 8 + var4 * 18, 104 + var3 * 18 - 20));
 			}
 		}
 
 		for (var3 = 0; var3 < 9; ++var3) {
-			this.addSlotToContainer(new Slot(par1InventoryPlayer, var3, 8 + var3 * 18, 144));
+			this.addSlotToContainer(new Slot(par1InventoryPlayer, var3, 8 + var3 * 18, 142));
 		}
 
 		tileEntity.openInventory();
@@ -51,49 +51,6 @@ public class GasGeneratorContainer extends Container {
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
 		ItemStack var2 = null;
-		final Slot slot = (Slot) this.inventorySlots.get(par1);
-
-		if (slot != null && slot.getHasStack()) {
-			final ItemStack var4 = slot.getStack();
-			var2 = var4.copy();
-
-			if (par1 < 3) {
-				if (!this.mergeItemStack(var4, 3, 39, true)) {
-					return null;
-				}
-
-				if (par1 == 2) {
-					slot.onSlotChange(var4, var2);
-				}
-			} else {
-				if (var4.getItem() instanceof ItemAtmosphericValve) {
-					if (!this.mergeItemStack(var4, 0, 1, false)) {
-						return null;
-					}
-				} else {
-					if (par1 < 30) {
-						if (!this.mergeItemStack(var4, 30, 39, false)) {
-							return null;
-						}
-					} else if (!this.mergeItemStack(var4, 3, 30, false)) {
-						return null;
-					}
-				}
-			}
-
-			if (var4.stackSize == 0) {
-				slot.putStack((ItemStack) null);
-			} else {
-				slot.onSlotChanged();
-			}
-
-			if (var4.stackSize == var2.stackSize) {
-				return null;
-			}
-
-			slot.onPickupFromSlot(par1EntityPlayer, var4);
-		}
-
-		return var2;
+        return var2;
 	}
 }

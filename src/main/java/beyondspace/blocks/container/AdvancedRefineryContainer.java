@@ -21,24 +21,24 @@ public class AdvancedRefineryContainer extends Container
 		this.tileEntity = tileEntity;
 
 		// Electric Input Slot
-		this.addSlotToContainer(new SlotSpecific(tileEntity, 0, 50, 51, ItemElectricBase.class));
+		this.addSlotToContainer(new SlotSpecific(tileEntity, 0, 50, 61, ItemElectricBase.class));
 		// To be smelted
-		this.addSlotToContainer(new Slot(tileEntity, 1, 7, 7));
+		this.addSlotToContainer(new Slot(tileEntity, 1, 7, 17));
 		// Smelting result
-		this.addSlotToContainer(new Slot(tileEntity, 2, 153, 7));
+		this.addSlotToContainer(new Slot(tileEntity, 2, 153, 17));
 		int var3;
 
 		for (var3 = 0; var3 < 3; ++var3)
 		{
 			for (int var4 = 0; var4 < 9; ++var4)
 			{
-				this.addSlotToContainer(new Slot(par1InventoryPlayer, var4 + var3 * 9 + 9, 8 + var4 * 18, 104 + var3 * 18 - 18));
+				this.addSlotToContainer(new Slot(par1InventoryPlayer, var4 + var3 * 9 + 9, 8 + var4 * 18, 137 + var3 * 18 - 18));
 			}
 		}
 
 		for (var3 = 0; var3 < 9; ++var3)
 		{
-			this.addSlotToContainer(new Slot(par1InventoryPlayer, var3, 8 + var3 * 18, 144));
+			this.addSlotToContainer(new Slot(par1InventoryPlayer, var3, 8 + var3 * 18, 177));
 		}
 
 		tileEntity.openInventory();

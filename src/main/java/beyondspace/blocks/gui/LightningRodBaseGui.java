@@ -103,7 +103,7 @@ public class LightningRodBaseGui extends GuiContainerGC
         this.buttonEnable.displayString = !this.tileEntity.getDisabled(0) ? GCCoreUtil.translate("gui.button.disable.name") : GCCoreUtil.translate("gui.button.enable.name");
         //inventory
         String inventory = this.tileEntity.getInventoryName();
-        this.fontRendererObj.drawString(inventory, this.xSize / 2 - this.fontRendererObj.getStringWidth(inventory) / 2, 7, 4210752);
+        this.fontRendererObj.drawString(inventory, ((this.xSize / 2) + 1) - this.fontRendererObj.getStringWidth(inventory) / 2, 1, 4210752);
         //status
         String status = GCCoreUtil.translate("gui.message.status.name") + ": " + this.getStatus();
         this.fontRendererObj.drawString(status, this.xSize / 2 - this.fontRendererObj.getStringWidth(status) / 2 + 10, 45 + 23 - 46 + offsetY, 4210752);
@@ -111,7 +111,7 @@ public class LightningRodBaseGui extends GuiContainerGC
         String multiplier = GCCoreUtil.translate("gui.multiplier.name") + ": " + (world.provider instanceof ILightning ? GCCoreUtil.translate("1.25") : GCCoreUtil.translate("1.0"));
         this.fontRendererObj.drawString(multiplier, this.xSize / 2 - this.fontRendererObj.getStringWidth(multiplier) / 2 + 10, 34 + 23 - 46 + offsetY, 4210752);
         //container
-        this.fontRendererObj.drawString(GCCoreUtil.translate("container.inventory"), 8, this.ySize - 94, 4210752);
+        this.fontRendererObj.drawString(EnumColor.WHITE + GCCoreUtil.translate("container.inventory"), 13, this.ySize - 92, 4210752);
     }
 
     private String getStatus()
