@@ -20,6 +20,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
 @Mod(modid=ModInfo.MODID, name=ModInfo.NAME, version=ModInfo.VERSION, guiFactory=ModInfo.MODID + ".gui.GUIFactory", dependencies="required-after:GalacticraftCore; required-after:GalacticraftMars; required-after:GalaxySpace;", useMetadata = true)
@@ -67,8 +68,9 @@ public class BeyondSpace {
     public static CreativeTabs gaTab = new CreativeTabs(ModInfo.MODID) {
 		@Override
 		public Item getTabIconItem() {
-			return RegistrationsList.handRocket;
+			return Item.getItemFromBlock(RegistrationsList.lightningrodBase);
 		}
+
 	};
     
     public static CreativeTabs upTab = new CreativeTabs(ModInfo.MODID + ".upgrades") {
