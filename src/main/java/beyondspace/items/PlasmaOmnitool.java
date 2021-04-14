@@ -349,13 +349,13 @@ public class PlasmaOmnitool extends ItemTool implements IItemElectric {
 		return this.getMaxDamage();
 	}
 
-	@Override
-	public void setElectricity(ItemStack stack, float joules) {
-		float electricityStored = Math.max(Math.min(joules, getMaxElectricityStored(stack)), 0.0F);
-		stack.getTagCompound().setFloat("electricity", electricityStored);
-		
-		stack.setItemDamage((int)(stack.getMaxDamage() - (electricityStored / getMaxElectricityStored(stack) * stack.getMaxDamage())));
-	}
+	  public void setElectricity(ItemStack itemStack, float joules) {
+		    if (itemStack.getTagCompound() == null)
+		      itemStack.setTagCompound(new NBTTagCompound()); 
+		    float electricityStored = Math.max(Math.min(joules, getMaxElectricityStored(itemStack)), 0.0F);
+		    itemStack.getTagCompound().setFloat("electricity", electricityStored);
+		    itemStack.setItemDamage((int)(100.0F - electricityStored / getMaxElectricityStored(itemStack) * 100.0F));
+		  }
 
 	@Override
 	public float getTransfer(ItemStack stack) {

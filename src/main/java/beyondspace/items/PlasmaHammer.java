@@ -59,8 +59,27 @@ public class PlasmaHammer extends ItemTool implements IItemElectric {
 		textures[1] = iconRegister.registerIcon(ModInfo.MODID + ":PlasmaHammer");
 	}
 
+	  
+	@Override
+	public float getElectricityStored(ItemStack stack) {
+		float energyStored = 0.0F;
+		if (stack.getTagCompound().hasKey("electricity")) {
+			NBTBase obj = stack.getTagCompound().getTag("electricity");
+			if ((obj instanceof NBTTagDouble)) {
+				energyStored = ((NBTTagDouble) obj).func_150288_h();
+			} else if ((obj instanceof NBTTagFloat)) {
+				energyStored = ((NBTTagFloat) obj).func_150288_h();
+			}
+		}
+		
+		stack.setItemDamage((int)(stack.getMaxDamage() - (energyStored / getMaxElectricityStored(stack) * stack.getMaxDamage())));
+		return energyStored;
+	}
+	
 	@Override
 	public boolean onBlockStartBreak(ItemStack stack, int x, int y, int z, EntityPlayer player) {
+		if(getElectricityStored(stack) <= 50)
+			return super.onBlockStartBreak(stack, x, y, z, player);
 		MovingObjectPosition mop = ASJUtilities.getSelectedBlock(player, 1.0F, 4.5D, false);
 		if (mop == null)
 			return super.onBlockStartBreak(stack, x, y, z, player);
@@ -251,34 +270,19 @@ public class PlasmaHammer extends ItemTool implements IItemElectric {
 		return energyToTransfer;
 	}
 
-	@Override
-	public float getElectricityStored(ItemStack stack) {
-		float energyStored = 0.0F;
-		if (stack.getTagCompound().hasKey("electricity")) {
-			NBTBase obj = stack.getTagCompound().getTag("electricity");
-			if ((obj instanceof NBTTagDouble)) {
-				energyStored = ((NBTTagDouble) obj).func_150288_h();
-			} else if ((obj instanceof NBTTagFloat)) {
-				energyStored = ((NBTTagFloat) obj).func_150288_h();
-			}
-		}
-		
-		stack.setItemDamage((int)(stack.getMaxDamage() - (energyStored / getMaxElectricityStored(stack) * stack.getMaxDamage())));
-		return energyStored;
-	}
 
 	@Override
 	public float getMaxElectricityStored(ItemStack theItem) {
 		return this.getMaxDamage();
 	}
 
-	@Override
-	public void setElectricity(ItemStack stack, float joules) {
-		float electricityStored = Math.max(Math.min(joules, getMaxElectricityStored(stack)), 0.0F);
-		stack.getTagCompound().setFloat("electricity", electricityStored);
-		
-		stack.setItemDamage((int)(stack.getMaxDamage() - (electricityStored / getMaxElectricityStored(stack) * stack.getMaxDamage())));
-	}
+	  public void setElectricity(ItemStack itemStack, float joules) {
+		    if (itemStack.getTagCompound() == null)
+		      itemStack.setTagCompound(new NBTTagCompound()); 
+		    float electricityStored = Math.max(Math.min(joules, getMaxElectricityStored(itemStack)), 0.0F);
+		    itemStack.getTagCompound().setFloat("electricity", electricityStored);
+		    itemStack.setItemDamage((int)(100.0F - electricityStored / getMaxElectricityStored(itemStack) * 100.0F));
+		  }
 
 	@Override
 	public float getTransfer(ItemStack stack) {
