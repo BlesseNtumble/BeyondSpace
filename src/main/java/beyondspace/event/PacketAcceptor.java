@@ -41,12 +41,6 @@ public class PacketAcceptor {
 		}
 	}
 	
-	public static void onRepair(EntityPlayer player) {
-		ItemStack stack = player.getCurrentEquippedItem();
-		if (stack != null && stack.getItem() instanceof WeaponBase) {
-			((WeaponBase) stack.getItem()).repair(player, stack);
-		}
-	}
 
 	public static void onSwitch(EntityPlayerMP player, int ID) {
 		ItemStack boot = player.getCurrentArmor(0);

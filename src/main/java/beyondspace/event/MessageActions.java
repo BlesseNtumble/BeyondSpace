@@ -60,7 +60,6 @@ public class MessageActions implements IMessage {
 
 			if (packet.action == MessageIDs.FIRE	 .ordinal())	PacketAcceptor.onFire(player);
 			if (packet.action == MessageIDs.RELOAD	 .ordinal())	PacketAcceptor.onReload(player);
-			if (packet.action == MessageIDs.REPAIR	 .ordinal())	PacketAcceptor.onRepair(player);
 			if (packet.action == MessageIDs.SNEAK	 .ordinal())	PacketAcceptor.onSneak(player, packet.state);
 			if (packet.action == MessageIDs.SNEAKTICK.ordinal())	PacketAcceptor.onSneakTick(player, packet.ticks);
 			

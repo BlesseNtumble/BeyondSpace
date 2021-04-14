@@ -167,30 +167,6 @@ public class WeaponBase extends Item {
     	}
 	}
 
-	/**
-	 * Repairs the gun if player has repair kit
-	 * @param stack Stack with the gun
-	 * @param player Player with this gun
-	 */
-	public void repair(EntityPlayer player, ItemStack stack) {
-		if (player.inventory.hasItem(RegistrationsList.repairKit) && stack.getItemDamage() > 0) {
-    		int slot = ASJUtilities.getSlotWithItem(RegistrationsList.repairKit, player.inventory);
-    		int need = stack.getItemDamage();
-    		ItemStack kit = player.inventory.getStackInSlot(slot);
-    		int have = (2048 - kit.getItemDamage());
-    		if (have > 0) {
-	    		if (have >= need) {
-	    			stack.setItemDamage(0);
-	    			kit.damageItem(need, player);
-	    			if (kit.getItemDamage() == kit.getMaxDamage()) player.inventory.setInventorySlotContents(slot, null);
-	    		} else if (have < need) {
-	    			stack.setItemDamage(stack.getItemDamage() - have);
-	    			player.inventory.setInventorySlotContents(slot, null);
-	    		}
-    		}
-		}
-	}
-
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		player.setItemInUse(stack, Int.MaxValue());
