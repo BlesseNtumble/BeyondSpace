@@ -49,12 +49,12 @@ public class AdvancedRefinery extends BlockAdvancedTile implements IBlockShiftDe
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister par1IconRegister)
 	{
-		this.iconMachineSide = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "machine_blank");
-		this.iconFuelOutput = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "machine_fuel_input");
-		this.iconOilInput = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "machine_oil_input");
-		this.iconFront = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "refinery_front");
-		this.iconBack = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "refinery_side");
-		this.iconTop = par1IconRegister.registerIcon(GalacticraftCore.TEXTURE_PREFIX + "machine_input");
+		this.iconMachineSide = par1IconRegister.registerIcon("beyondspace:" + "ultimateFurnaceIcon");
+		this.iconFuelOutput = par1IconRegister.registerIcon("beyondspace:" + "machine_fuel_input");
+		this.iconOilInput = par1IconRegister.registerIcon("beyondspace:" + "machine_oil_input");
+		this.iconFront = par1IconRegister.registerIcon("beyondspace:" + "refinery_front");
+		this.iconBack = par1IconRegister.registerIcon("beyondspace:" + "refinery_side");
+		this.iconTop = par1IconRegister.registerIcon("beyondspace:" + "oxygenModuleInput");
 	}
 
 	@Override

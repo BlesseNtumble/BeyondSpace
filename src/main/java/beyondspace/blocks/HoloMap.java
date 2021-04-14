@@ -20,10 +20,19 @@ public class HoloMap extends Block implements ITileEntityProvider {
 		this.setHarvestLevel("pickaxe", 1);
 		this.setResistance(10.0F);
 		this.setStepSound(soundTypeMetal);
+		this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new HoloMapTileEntity();
+	}
+	
+	public boolean isOpaqueCube() {
+		return false;
+	}
+		  
+	public boolean renderAsNormalBlock() {
+		return false;
 	}
 }
