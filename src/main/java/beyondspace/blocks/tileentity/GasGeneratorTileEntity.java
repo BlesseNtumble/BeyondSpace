@@ -100,6 +100,7 @@ public class GasGeneratorTileEntity extends TileBaseUniversalElectricalSource im
             		}
             	} else{
             		generate();
+            		if(storage.getEnergyStoredGC() < 29895)
             		this.gas.drain(1, true);
             	}
             }
