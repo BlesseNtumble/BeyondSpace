@@ -22,7 +22,7 @@ public class FloaterDrop extends Item {
 	public static Random rand = new Random();
 	
 	public FloaterDrop() {
-		this.setCreativeTab(BeyondSpace.gaTab);
+		this.setCreativeTab(BeyondSpace.bsTab);
 		this.setHasSubtypes(true);
 		this.setMaxStackSize(1);
 		this.setUnlocalizedName("FloaterItems");

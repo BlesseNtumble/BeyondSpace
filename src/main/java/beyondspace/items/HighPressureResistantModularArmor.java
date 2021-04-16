@@ -87,7 +87,7 @@ public class HighPressureResistantModularArmor extends ItemArmor implements IIte
 	
 	public HighPressureResistantModularArmor(int type) {
 		super(RegistrationsList.HPRMA, 0, type);
-		this.setCreativeTab(BeyondSpace.gaTab);
+		this.setCreativeTab(BeyondSpace.bsTab);
 		this.setMaxStackSize(1);
 		this.setNoRepair();
 	}

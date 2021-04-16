@@ -17,7 +17,7 @@ public class LaserTurret extends Block implements ITileEntityProvider {
 		super(Material.iron);
 		this.setBlockName("LaserTurret");
         this.setBlockTextureName(ModInfo.MODID + ":LaserTurret");
-        this.setCreativeTab(BeyondSpace.gaTab);
+        this.setCreativeTab(BeyondSpace.bsTab);
         this.setHardness(1.0F);
         this.setHarvestLevel("pickaxe", 2);
         this.setResistance(18.0F);

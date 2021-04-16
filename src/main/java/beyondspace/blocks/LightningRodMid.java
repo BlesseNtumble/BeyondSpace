@@ -15,7 +15,7 @@ public class LightningRodMid extends Block implements ITileEntityProvider {
 		super(Material.iron);
 		this.setBlockName("LightningRodMid");
         this.setBlockTextureName(GalacticraftCore.TEXTURE_PREFIX + "machine");
-        this.setCreativeTab(BeyondSpace.gaTab);
+        this.setCreativeTab(BeyondSpace.bsTab);
         this.setHardness(1.0F);
         this.setHarvestLevel("pickaxe", 2);
         this.setResistance(18.0F);

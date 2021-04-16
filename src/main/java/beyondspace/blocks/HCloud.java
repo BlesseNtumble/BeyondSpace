@@ -20,7 +20,7 @@ public class HCloud extends Block {
 		super(Material.ice);
 		this.setBlockName("HCloud");
 		this.setBlockTextureName(ModInfo.MODID + ":HCloud");
-		this.setCreativeTab(BeyondSpace.gaTab);
+		this.setCreativeTab(BeyondSpace.bsTab);
 		this.setLightOpacity(0);
 		this.setHardness(4.0F);
 		this.setStepSound(soundTypeCloth);

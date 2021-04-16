@@ -20,7 +20,7 @@ public class SealableChameleonBlock extends Block implements ITileEntityProvider
 		super(Material.iron);
 		this.setBlockName("SealableChameleonBlock");
 		this.setBlockTextureName(ModInfo.MODID + ":SealableChameleonBlock");
-		this.setCreativeTab(BeyondSpace.gaTab);
+		this.setCreativeTab(BeyondSpace.bsTab);
 		this.setHardness(1.0F);
 		this.setStepSound(soundTypeMetal);
 	}

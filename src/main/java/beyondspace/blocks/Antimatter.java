@@ -27,7 +27,7 @@ public class Antimatter extends Block {
         this.setBlockUnbreakable();
         this.setLightLevel(1.0F);
         this.setLightOpacity(0);
-        this.setCreativeTab(BeyondSpace.gaTab);
+        this.setCreativeTab(BeyondSpace.bsTab);
         this.setStepSound(soundTypeSnow);
 	}
 	

@@ -18,7 +18,7 @@ public class ManaToFuelWrapper extends Block implements ITileEntityProvider {
 		super(Material.iron);
 		this.setBlockName("ManaToFuelWrapper");
         this.setBlockTextureName(ModInfo.MODID + ":ManaToFuelWrapper");
-        this.setCreativeTab(BeyondSpace.gaTab);
+        this.setCreativeTab(BeyondSpace.bsTab);
         this.setHardness(5.0F);
         this.setHarvestLevel("pickaxe", 1);
         this.setResistance(25.0F);

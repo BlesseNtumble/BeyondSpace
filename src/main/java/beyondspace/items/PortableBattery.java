@@ -2,17 +2,12 @@ package beyondspace.items;
 
 import beyondspace.BeyondSpace;
 import beyondspace.ModInfo;
-import beyondspace.utils.BSUtilities;
-import beyondspace.utils.RegistrationsList;
 import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 public class PortableBattery extends ItemElectricBase {
@@ -21,7 +16,7 @@ public class PortableBattery extends ItemElectricBase {
 		
     public PortableBattery(String assetName){
         this.setUnlocalizedName(assetName);
-        this.setCreativeTab(BeyondSpace.gaTab);
+        this.setCreativeTab(BeyondSpace.bsTab);
         this.setTextureName(ModInfo.MODID + ":" + assetName);
     }
     

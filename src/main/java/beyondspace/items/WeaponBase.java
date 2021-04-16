@@ -4,7 +4,6 @@ import java.util.List;
 
 import beyondspace.BeyondSpace;
 import beyondspace.asjlib.ASJUtilities;
-import beyondspace.utils.RegistrationsList;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +32,7 @@ public class WeaponBase extends Item {
 	protected WeaponBase(int capacity, int durability, boolean flames, AmmoBase holder, String name, int reloadSpeed, int speed) {
 		this.maxStackSize = 1;
 		this.setCapacity(capacity);
-		this.setCreativeTab(BeyondSpace.gaTab);
+		this.setCreativeTab(BeyondSpace.bsTab);
 		this.setDurability(durability);
 		this.setFlames(flames);
 		this.setFull3D();

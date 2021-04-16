@@ -32,7 +32,7 @@ public class GasGenerator extends BlockAdvancedTile implements IBlockShiftDesc {
 		setHardness(1.0F);
 		setStepSound(soundTypeMetal);
 		setBlockName(assetName);
-		setCreativeTab(BeyondSpace.gaTab);
+		setCreativeTab(BeyondSpace.bsTab);
 	}
 
 	@Override

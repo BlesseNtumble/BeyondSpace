@@ -19,7 +19,7 @@ public class NuclearReactor extends Block implements ITileEntityProvider {
 		super(Material.iron);
 		this.setBlockName("NuclearReactor");
         this.setBlockTextureName(ModInfo.MODID + ":NuclearReactor");
-        this.setCreativeTab(BeyondSpace.gaTab);
+        this.setCreativeTab(BeyondSpace.bsTab);
         this.setHardness(5.0F);
         this.setHarvestLevel("pickaxe", 2);
         this.setResistance(256.0F);

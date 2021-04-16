@@ -1,12 +1,14 @@
 package beyondspace.utils.space;
 
 import beyondspace.Switches;
+import beyondspace.asjlib.ASJUtilities;
 import beyondspace.utils.BSConfig;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.galaxies.Moon;
 import micdoodle8.mods.galacticraft.api.galaxies.Planet;
 import micdoodle8.mods.galacticraft.api.galaxies.Star;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,9 +16,10 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.WorldServer;
 
 /** Utility class with methods used in Space dimension and for related mechanics */
-public class GASpaceUtilities {
+public class BSSpaceUtilities {
 	
 	/** Star damage source */
 	public static final DamageSource star = new DamageSource("Star").setDamageBypassesArmor().setDamageIsAbsolute();
@@ -29,22 +32,22 @@ public class GASpaceUtilities {
 		EntityPlayer 	 player = living instanceof EntityPlayer	 ? (EntityPlayer)	  living : null;
 		
 		// Kill entities within the star
-		if (GASpaceUtilities.getStarAt(entity.posX, entity.posZ) != null) {
+		if (getStarAt(entity.posX, entity.posZ) != null) {
 			if (player != null) {
 				if (player.capabilities.isCreativeMode) return;
 				if (player.capabilities.disableDamage)  player.capabilities.disableDamage = false;
 			}
-			if (entity instanceof EntityLivingBase) ((EntityLivingBase) entity).attackEntityFrom(GASpaceUtilities.star, Float.MAX_VALUE);
+			if (entity instanceof EntityLivingBase) ((EntityLivingBase) entity).attackEntityFrom(star, Float.MAX_VALUE);
 			else entity.setDead();
 		}
 		
 		// Landing on Planets/Moons
-		//CelestialBody body = GASpaceUtilities.getLandableBodyAt(entity.posX, entity.posZ);
-		//if (body != null && body.getWorldProvider() != null && entity.posY < 5) {
-			//ASJUtilities.sendToDimensionWithoutPortal(entity, body.getDimensionID(), 0.5, 255.5, 0.5);
-			//entity.setLocationAndAngles(0.5, 255.5, 0.5, 0, 0);
-			//if (!entity.worldObj.isRemote) WorldUtil.transferEntityToDimension(entity, body.getDimensionID(), (WorldServer) entity.worldObj, false, null);
-		//}
+	    CelestialBody body = getLandableBodyAt(entity.posX, entity.posZ);
+		if (body != null && body.getWorldProvider() != null && entity.posY < 5) {
+			ASJUtilities.sendToDimensionWithoutPortal1(entity, body.getDimensionID(), 0.5, 255.5, 0.5);
+			entity.setLocationAndAngles(0.5, 255.5, 0.5, 0, 0);
+			if (!entity.worldObj.isRemote) WorldUtil.transferEntityToDimension(entity, body.getDimensionID(), (WorldServer) entity.worldObj, false, null);
+		}
 	}
 
 	/** Create Galaxy Container */
@@ -88,7 +91,7 @@ public class GASpaceUtilities {
 	
 	/** @returns Planet/Moon on given coordinates or null */
 	public static CelestialBody getLandableBodyAt(double x, double z) {
-		CelestialBody body = GASpaceUtilities.getBodyAt(x, z);
+		CelestialBody body = getBodyAt(x, z);
 		if (body != null && (body instanceof Planet || body instanceof Moon)) return body;
 		return null;
 	}

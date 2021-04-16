@@ -6,7 +6,6 @@ import beyondspace.BeyondSpace;
 import beyondspace.blocks.tileentity.AdvancedRefineryTileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.BlockAdvancedTile;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
 import micdoodle8.mods.galacticraft.core.energy.tile.TileBaseUniversalElectrical;
@@ -42,7 +41,7 @@ public class AdvancedRefinery extends BlockAdvancedTile implements IBlockShiftDe
 		setHardness(1.0F);
 		setStepSound(soundTypeMetal);
 		setBlockName(assetName);
-		setCreativeTab(BeyondSpace.gaTab);
+		setCreativeTab(BeyondSpace.bsTab);
 	}
 
 	@Override

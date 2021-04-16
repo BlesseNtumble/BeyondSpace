@@ -32,8 +32,8 @@ public class LightningRodBase extends BlockTileGC implements IBlockShiftDesc {
 	public LightningRodBase() {
 		super(GCBlocks.machine);
 		this.setBlockName("LightningRodBase");
-        this.setBlockTextureName(ModInfo.MODID + ":LightningRodBase"); // ����� � ����� ������� ������ ���� ������ (�� ���������), ������ ������ ���� �����, ���������� ������ ������ (��� �� ���������) �������, � �� ����� ����� ������ ���� ������ ��� ��-��
-        this.setCreativeTab(BeyondSpace.gaTab);
+        this.setBlockTextureName(ModInfo.MODID + ":LightningRodBase");
+        this.setCreativeTab(BeyondSpace.bsTab);
         this.setHardness(3F);
         this.setHarvestLevel("pickaxe", 2);
         this.setResistance(8F);

@@ -1,11 +1,11 @@
 package beyondspace;
 
 import beyondspace.proxy.CommonProxy;
-import beyondspace.proxy.network.GAGuiHandler;
+import beyondspace.proxy.network.BSGuiHandler;
 import beyondspace.utils.BSConfig;
 import beyondspace.utils.RegistrationsList;
-import beyondspace.utils.space.GASpaceUtilities;
-import beyondspace.world.generation.GAWorldGeneration;
+import beyondspace.utils.space.BSSpaceUtilities;
+import beyondspace.world.generation.BSWorldGeneration;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
@@ -20,7 +20,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
 @Mod(modid=ModInfo.MODID, name=ModInfo.NAME, version=ModInfo.VERSION, guiFactory=ModInfo.MODID + ".gui.GUIFactory", dependencies="required-after:GalacticraftCore; required-after:GalacticraftMars; required-after:GalaxySpace;", useMetadata = true)
@@ -31,7 +30,7 @@ public class BeyondSpace {
     @SidedProxy(clientSide = ModInfo.MODID + ".proxy.ClientProxy", serverSide = ModInfo.MODID + ".proxy.CommonProxy")
     public static CommonProxy proxy;
 	
-	public GAWorldGeneration generator = new GAWorldGeneration();
+	public BSWorldGeneration generator = new BSWorldGeneration();
 	public static Configuration config;
 	
     @EventHandler
@@ -54,7 +53,7 @@ public class BeyondSpace {
     @EventHandler
     public void init(FMLInitializationEvent event) {
     	proxy.init();
-    	NetworkRegistry.INSTANCE.registerGuiHandler(this, new GAGuiHandler());
+    	NetworkRegistry.INSTANCE.registerGuiHandler(this, new BSGuiHandler());
     }
     
     @EventHandler
@@ -62,10 +61,10 @@ public class BeyondSpace {
     	proxy.postInit();
     	proxy.registerRenderThings();
     	proxy.RegisterKeyBinds();
-		GASpaceUtilities.init();
+		BSSpaceUtilities.init();
     }
     
-    public static CreativeTabs gaTab = new CreativeTabs(ModInfo.MODID) {
+    public static CreativeTabs bsTab = new CreativeTabs(ModInfo.MODID) {
 		@Override
 		public Item getTabIconItem() {
 			return Item.getItemFromBlock(RegistrationsList.lightningrodBase);

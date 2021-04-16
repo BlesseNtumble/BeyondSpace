@@ -18,7 +18,7 @@ public class VisToFuelWrapper extends Block implements ITileEntityProvider {
 		super(Material.iron);
 		this.setBlockName("VisToFuelWrapper");
         this.setBlockTextureName(ModInfo.MODID + ":VisToFuelWrapper");
-        this.setCreativeTab(BeyondSpace.gaTab);
+        this.setCreativeTab(BeyondSpace.bsTab);
         this.setHardness(5.0F);
         this.setHarvestLevel("pickaxe", 1);
         this.setResistance(25.0F);

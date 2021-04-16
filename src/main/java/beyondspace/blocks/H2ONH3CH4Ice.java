@@ -11,7 +11,7 @@ public class H2ONH3CH4Ice extends Block {
 		super(Material.packedIce);
 		this.setBlockName("H2ONH3CH4Ice");
         this.setBlockTextureName(ModInfo.MODID + ":H2ONH3CH4Ice");
-        this.setCreativeTab(BeyondSpace.gaTab);
+        this.setCreativeTab(BeyondSpace.bsTab);
         this.setHardness(4.0F);
         this.setHarvestLevel("pickaxe", 2);
         this.setResistance(200.0F);

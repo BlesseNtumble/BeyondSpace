@@ -6,9 +6,8 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.Minecraft;
 
-/** EventActions */
 public class EventReactions {
-	// --------------------------------------------------------------------------------------------------------------
+
 	boolean leftclick, leftclick_last = false;
 	int tick_leftclick = 1;
 

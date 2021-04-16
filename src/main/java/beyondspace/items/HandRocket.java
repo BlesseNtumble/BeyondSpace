@@ -6,13 +6,12 @@ import beyondspace.entity.RedLightningEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 public class HandRocket extends Item {
 	
 	public HandRocket() {
-        this.setCreativeTab(BeyondSpace.gaTab);
+        this.setCreativeTab(BeyondSpace.bsTab);
         this.setMaxStackSize(1);
         this.setTextureName(ModInfo.MODID + ":HandRocket");
         this.setUnlocalizedName("HandRocket");

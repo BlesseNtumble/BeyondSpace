@@ -56,7 +56,7 @@ public class PlasmaOmnitool extends ItemTool implements IItemElectric {
 
 	public PlasmaOmnitool() {
 		super(0.0F, ToolMaterial.WOOD, someVanillaStuff);
-		this.setCreativeTab(BeyondSpace.gaTab);
+		this.setCreativeTab(BeyondSpace.bsTab);
 		this.setMaxDamage(100000);
 		this.setMaxStackSize(1);
 		this.setNoRepair();
