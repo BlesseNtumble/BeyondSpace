@@ -3,6 +3,7 @@
     "floaterLiving": {"category": "master", "sounds": [{"name": "floaterLiving", "stream": false}]},
 	"floaterHurt": {"category": "master", "sounds": [{"name": "floaterHurt", "stream": false}]},
 	"floaterDeath": {"category": "master", "sounds": [{"name": "floaterDeath", "stream": false}]},
+	"toyRocket": {"category": "master", "sounds": [{"name": "Rocket1", "stream": false}]},
 	
     "records.Prelude": {"category": "record", "sounds": [{"name": "records/Prelude", "stream": true}]},
     "records.Oblivion": {"category": "record", "sounds": [{"name": "records/Oblivion", "stream": true}]},
