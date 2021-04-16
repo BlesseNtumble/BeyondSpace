@@ -1,3 +1,6 @@
+info.newVersion.txt= Доступна новая версия:
+info.note.txt=Смотрите список изменений на CurseForge!
+
 key.reload.desc=Перезарядка
 key.repair.desc=Починка
 
@@ -21,6 +24,10 @@ tile.SulfurTorch.name=Серный Факел
 tile.GasGenerator.name=§9Генератор на Природном Газе
 tile.GasGenerator.desc=Генерирует энергию, благодаря природному газу, который добывается на Марсе или Юпитере
 tile.HoloMap.name=§9Голографическая Карта
+tile.advancedRefinery.name=§fПродвинутый Очистительный Завод
+tile.OxygenModule.name=§fУлучшенный Кислородный Модуль
+tile.UltimateFurnace.name=§fУлучшенная Дуговая Печь
+tile.ToyRocket.name=Игрушечная Ракета
 
 gui.jupiterInfo.0.name=Удар молнии на газовых гигантах
 gui.jupiterInfo.1.name=вырабатывает больше энергии
@@ -37,7 +44,8 @@ item.HPRMAMKIHelmet.name=Шлем HPRMA-MK-I
 item.HPRMAMKIChestplate.name=Нагрудник HPRMA-MK-I
 item.HPRMAMKILeggings.name=Поножи HPRMA-MK-I
 item.HPRMAMKIBoots.name=Ботинки HPRMA-MK-I
-item.AdvancedOxygenTank.name=Продвинутый Кислородный Баллон
+item.AdvancedOxygenEPPTank.name=Продвинутая EPP Канистра Кислорода
+item.BigOxygenCanister.name=Большая канистра кислорода
 item.litium-titaniumBattery.name=Платиново-Вольфрамовый Аккумулятор
 item.DehydratedFood.name=§9Консервированная еда
 item.RepairKit.name=Набор Починки Оружия
@@ -46,7 +54,8 @@ item.IonPlasmaAmmo.name=Ионно-Плазменный Снаряд
 item.FlameThrower.name=Огнемёт
 item.IonPlasmaRifle.name=Ионно-Плазменная Пушка
 item.PlasmaOmnitool.name=Плазменный Уни-инструмент
-item.PortableBattery.name=Карманный Безпроводной Зарядник
+item.PlasmaHammer.name=Плазменный Молот
+item.PortableBattery.name=Карманный Беспроводной Зарядник
 item.NuclearRod.name=Урановый Стержень
 item.NuclearRodEmpty.name=Истощённый Урановый Стержень
 item.FloaterGasBags.name=Газовый Мешок Флоатера

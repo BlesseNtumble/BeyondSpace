@@ -1,3 +1,6 @@
+info.newVersion.txt= New version available:
+info.note.txt=See changelog on CurseForge!
+
 key.reload.desc=Reload
 key.repair.desc=Repair
 
@@ -21,6 +24,10 @@ tile.SulfurTorch.name=Sulfur Torch
 tile.GasGenerator.name=§9Nature Gas Generator
 tile.GasGenerator.desc=Generating energy, due to the nature gas, which is produced on Mars or Jupiter
 tile.HoloMap.name=§9Holo Map
+tile.advancedRefinery.name=§fAdvanced Refinery
+tile.OxygenModule.name=§fUltimate Oxygen Module
+tile.UltimateFurnace.name=§fUltimate Arc Furnace
+tile.ToyRocket.name=Toy Rocket
 
 gui.jupiterInfo.0.name=Lightning strike on gas giants
 gui.jupiterInfo.1.name=produces more energy
@@ -37,7 +44,8 @@ item.HPRMAMKIHelmet.name=HPRMA-MK-I Helmet
 item.HPRMAMKIChestplate.name=HPRMA-MK-I Chestplate
 item.HPRMAMKILeggings.name=HPRMA-MK-I Leggings
 item.HPRMAMKIBoots.name=HPRMA-MK-I Boots
-item.AdvancedOxygenTank.name=Advanced Oxygen Tank
+item.AdvancedOxygenEPPTank.name=Advanced Environmental Protection Oxygen Tank
+item.BigOxygenCanister.name=Big Oxygen Canister
 item.litium-titaniumBattery.name=Platinum-Wolfram Battery
 item.DehydratedFood.name=§9Can of Food
 item.RepairKit.name=Repair Kit
@@ -46,6 +54,7 @@ item.IonPlasmaAmmo.name=Ion-Plasma Ammo
 item.FlameThrower.name=Flame Thrower
 item.IonPlasmaRifle.name=Ion-Plasma Gun
 item.PlasmaOmnitool.name=Plasma Omnitool
+item.PlasmaHammer.name=Plasma Hammer
 item.PortableBattery.name=Pocket Wireless Charger
 item.NuclearRod.name=Uranium Rod
 item.NuclearRodEmpty.name=Depleted Uranium Rod
