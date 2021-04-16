@@ -26,6 +26,9 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import galaxyspace.core.client.models.ModelOxygenTank;
+import galaxyspace.core.handler.GSColorRingClient;
+import galaxyspace.core.util.GSAttributePlayer;
 import micdoodle8.mods.galacticraft.api.event.client.CelestialBodyRenderEvent;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.galaxies.Moon;
@@ -39,8 +42,11 @@ import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerHandler.EnumMod
 import micdoodle8.mods.galacticraft.core.items.ItemOxygenTank;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
 public class ClientEventHandler {
@@ -114,46 +120,6 @@ public class ClientEventHandler {
 			}
 		}
 	}
-	
-	@SubscribeEvent
-	public void onPlayerUpdate(LivingUpdateEvent event) {
-	if(event.entity instanceof EntityPlayerMP) {
-		EntityPlayerMP playerMP = (EntityPlayerMP)event.entity;
-		EntityPlayer player = (EntityPlayer)event.entity;
-		
-		/**Render Advanced Oxygen Tank*/
-		if(!(onCheckAdvancedOxygenTankInSlot1(playerMP))) {
-			GCPlayerHandler.sendGearUpdatePacket(playerMP, EnumModelPacket.REMOVE_LEFT_TANK);
-		}
-		if(onCheckAdvancedOxygenTankInSlot1(playerMP)) {
-			GCPlayerHandler.sendGearUpdatePacket(playerMP, EnumModelPacket.ADDLEFTREDTANK);
-		}
-		if(!(onCheckAdvancedOxygenTankInSlot2(playerMP))) {
-			GCPlayerHandler.sendGearUpdatePacket(playerMP, EnumModelPacket.REMOVE_RIGHT_TANK);
-		}
-		if(onCheckAdvancedOxygenTankInSlot2(playerMP)) {
-			GCPlayerHandler.sendGearUpdatePacket(playerMP, EnumModelPacket.ADDRIGHTREDTANK);
-		}
-		if(onCheckAdvancedOxygenTankInSlot1(playerMP) && onCheckAdvancedOxygenTankInSlot2(playerMP)) {
-			GCPlayerHandler.sendGearUpdatePacket(playerMP, EnumModelPacket.ADDRIGHTREDTANK);
-			GCPlayerHandler.sendGearUpdatePacket(playerMP, EnumModelPacket.ADDLEFTREDTANK);
-		}
-		if(!(onCheckAdvancedOxygenTankInSlot1(playerMP)) && !(onCheckAdvancedOxygenTankInSlot2(playerMP))) {
-			GCPlayerHandler.sendGearUpdatePacket(playerMP, EnumModelPacket.REMOVE_RIGHT_TANK);
-			GCPlayerHandler.sendGearUpdatePacket(playerMP, EnumModelPacket.REMOVE_LEFT_TANK);
-		}
-	}
-}
-
-    public static boolean onCheckAdvancedOxygenTankInSlot1(EntityPlayerMP player) {
-	    IInventoryGC invGC = AccessInventoryGC.getGCInventoryForPlayer(player);
-	    return ((invGC.getStackInSlot(2) != null) && (invGC.getStackInSlot(2).getItem() instanceof AdvancedOxygenEPPTank));
-    }	
-
-    public static boolean onCheckAdvancedOxygenTankInSlot2(EntityPlayerMP player) {
-	    IInventoryGC invGC = AccessInventoryGC.getGCInventoryForPlayer(player);
-	    return ((invGC.getStackInSlot(3) != null) && (invGC.getStackInSlot(3).getItem() instanceof AdvancedOxygenEPPTank));
-    }
     
 	/**Render Loop around Saturn*/
 	@SideOnly(Side.CLIENT)
@@ -163,6 +129,30 @@ public class ClientEventHandler {
 			drawAsteroidRings(renderEvent, RegistrationsList.saturnRings);
 		}
 	}
+	
+	  @SubscribeEvent
+	  @SideOnly(Side.CLIENT)
+	  public void onRender(RenderPlayerEvent.Specials.Post event) {
+	    GSColorRingClient.onPostRender(event);
+	    EntityPlayer player = event.entityPlayer;
+	    if (player != null) {
+	      ModelOxygenTank tank = new ModelOxygenTank();
+	      GL11.glPushMatrix();
+	      GL11.glDisable(3042);
+	      if (player.getEntityAttribute(GSAttributePlayer.OXTANKS_LEFT).getBaseValue() > 0.0D) {
+	        double tex = player.getEntityAttribute(GSAttributePlayer.OXTANKS_LEFT).getBaseValue() + 1.0D;
+	        (Minecraft.getMinecraft()).renderEngine.bindTexture(new ResourceLocation("beyondspace" + ":textures/model/EPPOxTank.png"));
+	        tank.renderLeft((Entity)event.entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+	      } 
+	      if (player.getEntityAttribute(GSAttributePlayer.OXTANKS_RIGHT).getBaseValue() > 0.0D) {
+	        double tex = player.getEntityAttribute(GSAttributePlayer.OXTANKS_RIGHT).getBaseValue() + 1.0D;
+	        (Minecraft.getMinecraft()).renderEngine.bindTexture(new ResourceLocation("beyondspace" + ":textures/model/EPPOxTank.png"));
+	        tank.renderRight((Entity)event.entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+	      } 
+	      GL11.glEnable(3042);
+	      GL11.glPopMatrix();
+	    } 
+	  }
 	
     protected void drawAsteroidRings(CelestialBodyRenderEvent.CelestialRingRenderEvent.Pre renderEvent, CelestialBody aroundBody) {
         Vector3f mapPos = renderEvent.parentOffset;
