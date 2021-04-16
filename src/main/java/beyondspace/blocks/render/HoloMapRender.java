@@ -52,7 +52,7 @@ public class HoloMapRender extends TileEntitySpecialRenderer {
 	public void renderSystem(Tessellator tes, SolarSystem system) {
 
 		GL11.glPushMatrix();
-		GL11.glTranslated(0.5, 1.5, 0.5);
+		GL11.glTranslated(0.5, 1.125, 0.5);
 		GL11.glScaled(0.25, 0.25, 0.25);
 		double s = system.getMainStar().getRelativeSize();
 		GL11.glScaled(s, s, s);
@@ -110,7 +110,7 @@ public class HoloMapRender extends TileEntitySpecialRenderer {
 		Minecraft.getMinecraft().renderEngine.bindTexture(planet.getBodyIcon());
 				
 		GL11.glColor3f(1,1,1);
-		GL11.glTranslated(0.5, 1.5, 0.5);
+		GL11.glTranslated(0.5, 1.125, 0.5);
 		GL11.glRotated(planet.getPhaseShift() * (180 / Math.PI), 0, 1, 0);
 		GL11.glRotated((double)(Minecraft.getMinecraft().theWorld.getWorldTime()) % (1200.0 * planet.getRelativeOrbitTime()) * 360.0 / (1200.0 * planet.getRelativeOrbitTime()), 0, 1, 0);
 		GL11.glTranslated(planet.getRelativeDistanceFromCenter().scaledDistance, 0, 0);
@@ -155,7 +155,7 @@ public class HoloMapRender extends TileEntitySpecialRenderer {
 		GL11.glPopMatrix();
 		
 		GL11.glPushMatrix();
-		GL11.glTranslated(0.5, 1.5, 0.5);
+		GL11.glTranslated(0.5, 1.125, 0.5);
 		GL11.glRotated(planet.getPhaseShift() * (180 / Math.PI), 0, 1, 0);
 		GL11.glRotated((double)(Minecraft.getMinecraft().theWorld.getWorldTime() % (1200 * planet.getRelativeOrbitTime())) * 360.0 / (1200.0 * planet.getRelativeOrbitTime()), 0, 1, 0);
 		GL11.glTranslated(planet.getRelativeDistanceFromCenter().scaledDistance, 0, 0);
@@ -170,7 +170,7 @@ public class HoloMapRender extends TileEntitySpecialRenderer {
 
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glTranslated(0.5, 1.5, 0.5);
+		GL11.glTranslated(0.5, 1.125, 0.5);
 		GL11.glRotated(90.0, 1.0, 0.0, 0.0);
 		float color = count % 2 == 0 ? 0.9F : 0.5F;
 		GL11.glColor4f(0, 0.4F, color, 0.4F);
