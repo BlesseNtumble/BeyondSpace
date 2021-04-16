@@ -2,7 +2,6 @@ package beyondspace.world.generation.structures;
 
 import java.util.Random;
 
-import beyondspace.utils.RegistrationsList;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
@@ -4643,7 +4642,7 @@ public class NewYearSprucePiece
 		world.setBlock(x + 13, y + 55, z + 15, Blocks.gold_block, 0, 3);
 		world.setBlock(x + 14, y + 55, z + 15, Blocks.gold_block, 0, 3);
 		world.setBlock(x + 15, y + 55, z + 15, Blocks.diamond_block, 0, 3);
-		world.setBlock(x + 16, y + 55, z + 15, RegistrationsList.netherCore, 0, 3);
+		world.setBlock(x + 16, y + 55, z + 15, Blocks.diamond_block, 0, 3);
 		world.setBlock(x + 17, y + 55, z + 15, Blocks.gold_block, 0, 3);
 		world.setBlock(x + 18, y + 55, z + 15, Blocks.gold_block, 0, 3);
 		world.setBlock(x + 13, y + 55, z + 16, Blocks.gold_block, 0, 3);
