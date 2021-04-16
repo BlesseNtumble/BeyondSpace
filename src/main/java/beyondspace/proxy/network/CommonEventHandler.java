@@ -3,20 +3,22 @@ package beyondspace.proxy.network;
 import java.util.Iterator;
 import java.util.List;
 
+import beyondspace.Switches;
+import beyondspace.asjlib.ASJUtilities;
 import beyondspace.entity.RedLightningEntity;
 import beyondspace.items.HighPressureResistantModularArmor;
-import beyondspace.items.PortableBattery;
 import beyondspace.utils.BSConfig;
 import beyondspace.utils.BSUtilities;
 import beyondspace.utils.RegistrationsList;
+import beyondspace.utils.space.BSSpaceUtilities;
+import beyondspace.world.dimension.Space.WorldProviderSpace;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import galaxyspace.core.registers.potions.GSPotions;
 import galaxyspace.systems.SolarSystem.planets.overworld.items.armor.ItemSpaceArmors;
 import micdoodle8.mods.galacticraft.api.item.IItemElectric;
 import micdoodle8.mods.galacticraft.core.energy.item.ItemElectricBase;
-import micdoodle8.mods.galacticraft.core.entities.EntityMeteor;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
@@ -28,7 +30,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldProviderSurface;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -187,15 +192,15 @@ public class CommonEventHandler {
 
 	@SubscribeEvent
 	public void onEntityUpdate(LivingUpdateEvent event) {
-		/*// Do space stuff
-		if (Switches.spaceDim) if (!event.entity.worldObj.isRemote && event.entity.dimension == GAConfig.space) GASpaceUtilities.doStuffInSpaceDim(event.entity);
+	/*	// Do space stuff
+		if (Switches.spaceDim) if (!event.entity.worldObj.isRemote && event.entity.dimension == BSConfig.space && event.entity.posY < -5) BSSpaceUtilities.doStuffInSpaceDim(event.entity);
 		// Launch to space!!!
-		if (Switches.spaceDim) if (!event.entity.worldObj.isRemote && event.entity.dimension != GAConfig.space && (event.entity.worldObj.provider instanceof WorldProviderSpace || event.entity.worldObj.provider instanceof WorldProviderSurface) && event.entity.posY > 500) {
-			Vec3 pos = GASpaceUtilities.getBodyPositionFromDimID(event.entity.dimension);
-			ASJUtilities.sendToDimensionWithoutPortal(event.entity, GAConfig.space, pos.xCoord, pos.yCoord, pos.zCoord);
-			//if (event.entity.worldObj instanceof WorldServer) WorldUtil.transferEntityToDimension(event.entity, GAConfig.space, (WorldServer) event.entity.worldObj, false, null);
-		}
-		*/
+		if (Switches.spaceDim) if (!event.entity.worldObj.isRemote && event.entity.dimension != BSConfig.space && (event.entity.worldObj.provider instanceof WorldProviderSpace || event.entity.worldObj.provider instanceof WorldProviderSurface) && event.entity.posY > 500) {
+			Vec3 pos = BSSpaceUtilities.getBodyPositionFromDimID(event.entity.dimension);
+			ASJUtilities.sendToDimensionWithoutPortal1(event.entity, BSConfig.space, pos.xCoord, pos.yCoord, pos.zCoord);
+			if (event.entity.worldObj instanceof WorldServer) WorldUtil.transferEntityToDimension(event.entity, BSConfig.space, (WorldServer) event.entity.worldObj, false, null);
+		}*/
+		
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
 			
@@ -266,11 +271,6 @@ public class CommonEventHandler {
 			// Diamond Rain on Saturn
 			if (player.dimension == BSConfig.saturn && BSConfig.isSaturnDiamondRain && player.worldObj.rand.nextInt(1000) == 0) {
 				if (!player.worldObj.isRemote) player.worldObj.spawnEntityInWorld(new EntityItem(player.worldObj, player.posX + player.worldObj.rand.nextInt(24) - 12, 255, player.posZ + player.worldObj.rand.nextInt(24) - 12, new ItemStack(Items.diamond)));
-			}
-
-			//Meteors in Overworld
-			if (player.dimension == 0 && BSConfig.isOverworldMeteors && player.worldObj.rand.nextInt(20*60*60*24) == 0) {
-				if (!player.worldObj.isRemote) player.worldObj.spawnEntityInWorld(new EntityMeteor(player.worldObj, player.posX + player.worldObj.rand.nextInt(24) - 12, 255, player.posZ + player.worldObj.rand.nextInt(24) - 12, 0, -5, 0, 5));
 			}
 			
 			// Craft armor set

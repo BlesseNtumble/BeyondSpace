@@ -34,6 +34,7 @@ import beyondspace.blocks.LightningRodBase;
 import beyondspace.blocks.LightningRodMid;
 import beyondspace.blocks.LightningRodTop;
 import beyondspace.blocks.SulfurTorch;
+import beyondspace.blocks.ToyRocket;
 import beyondspace.blocks.UltimateFurnace;
 import beyondspace.blocks.UltimateOxygenModule;
 import beyondspace.blocks.tileentity.AdvancedRefineryTileEntity;
@@ -42,14 +43,16 @@ import beyondspace.blocks.tileentity.HoloMapTileEntity;
 import beyondspace.blocks.tileentity.LightningRodBaseTileEntity;
 import beyondspace.blocks.tileentity.LightningRodMidTileEntity;
 import beyondspace.blocks.tileentity.LightningRodTopTileEntity;
+import beyondspace.blocks.tileentity.ToyRocketTileEntity;
 import beyondspace.blocks.tileentity.UltimateFurnaceTileEntity;
 import beyondspace.blocks.tileentity.UltimateOxygenModuleTileEntity;
 import beyondspace.entity.FloaterEntity;
 import beyondspace.entity.IonPlasmaBurstEntity;
 import beyondspace.entity.RedLightningEntity;
-import beyondspace.items.AdvancedOxygenTank;
+import beyondspace.items.AdvancedOxygenEPPTank;
 import beyondspace.items.AmmoBase;
 import beyondspace.items.ArmorUpgrade;
+import beyondspace.items.BigOxygenCanister;
 import beyondspace.items.DehydratedFood;
 import beyondspace.items.FlameThrower;
 import beyondspace.items.FloaterDrop;
@@ -59,22 +62,18 @@ import beyondspace.items.IonPlasmaRifle;
 import beyondspace.items.PlasmaHammer;
 import beyondspace.items.PlasmaOmnitool;
 import beyondspace.items.PortableBattery;
-import beyondspace.items.TitaniumBattery;
 import beyondspace.items.modules.Kinetic;
 import beyondspace.items.modules.Protection;
 import beyondspace.items.modules.SolarPanel;
-import beyondspace.world.dimension.HalloweenNew.WorldProviderHalloweenNew;
 import beyondspace.world.dimension.Jupiter.WorldProviderJupiter;
 import beyondspace.world.dimension.JupiterNew.WorldProviderJupiterNew;
 import beyondspace.world.dimension.NeptuneNew.WorldProviderNeptuneNew;
-import beyondspace.world.dimension.NewYear.WorldProviderNewYear;
 import beyondspace.world.dimension.SaturnNew.WorldProviderSaturnNew;
 import beyondspace.world.dimension.SaturnRings.TeleportTypeSaturnRings;
 import beyondspace.world.dimension.SaturnRings.WorldProviderSaturnRings;
 import beyondspace.world.dimension.Space.WorldProviderSpace;
+import beyondspace.world.dimension.Thanatos.WorldProviderThanatos;
 import beyondspace.world.dimension.UranusNew.WorldProviderUranusNew;
-import galaxyspace.api.BodiesHelper;
-import galaxyspace.api.BodiesHelper.BodiesData;
 import galaxyspace.core.registers.blocks.GSBlocks;
 import galaxyspace.core.registers.items.GSItems;
 import galaxyspace.core.util.GSUtils;
@@ -87,7 +86,6 @@ import micdoodle8.mods.galacticraft.api.galaxies.Moon;
 import micdoodle8.mods.galacticraft.api.galaxies.Planet;
 import micdoodle8.mods.galacticraft.api.galaxies.SolarSystem;
 import micdoodle8.mods.galacticraft.api.galaxies.Star;
-import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.api.world.IAtmosphericGas;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import micdoodle8.mods.galacticraft.core.blocks.GCBlocks;
@@ -104,9 +102,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.stats.Achievement;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.Fluid;
@@ -133,8 +129,6 @@ public class RegistrationsList {
 	/** Part of WarpCore tileentity */
 	public static Block machineFrame;
 	/** Part of WarpCore tileentity */
-	public static Block netherCore;
-	/** Part of WarpCore tileentity */
 	//public static Block nuclearReactor;
 	public static Block resonantCasing;
 	public static Block silicate;
@@ -146,7 +140,9 @@ public class RegistrationsList {
 	public static Block warpControlMonitor;
 	/** Part of WarpCore tileentity */
 	public static Block warpEngineMultiblock;
-
+	
+	public static Block toyRocket;
+	
 	// Fluids
 	public static Block diamondLiquid;
 	public static Block H2ONH3CH4Liquid;
@@ -157,12 +153,13 @@ public class RegistrationsList {
 	
 	// Items
 	public static Item advancedOxygenTank;
+	public static Item bigOxygenCanister;
 	public static Item armorUpgrade;
 	public static Item dehydratedFood;
 	public static Item flameThrower;
 	public static Item floaterDrop;
 	public static Item fuelTank;
-	public static Item handRocket;
+	//public static Item handRocket;
 	public static Item highPressureResistantModularArmorHead;
 	public static Item highPressureResistantModularArmorBody;
 	public static Item highPressureResistantModularArmorLegs;
@@ -196,45 +193,46 @@ public class RegistrationsList {
 		//antimatter = new Antimatter();
 		//chameleonBlock = new SealableChameleonBlock();
 		//energyConductor = new EnergyConductor();
-		FeNiMetal = new BlockPattern(ModInfo.MODID, Material.rock, "FeNiMetal", BeyondSpace.gaTab, 16.0F, "pickaxe", 3, 6000.0F, soundTypeStone, true);
+		FeNiMetal = new BlockPattern(ModInfo.MODID, Material.rock, "FeNiMetal", BeyondSpace.bsTab, 16.0F, "pickaxe", 3, 6000.0F, soundTypeStone, true);
 		gasGenerator = new GasGenerator("GasGenerator");
 		H2ONH3CH4Ice = new H2ONH3CH4Ice();
 		HCloud = new HCloud();
-		HMetal = new BlockPattern(ModInfo.MODID, Material.rock, "HMetal", BeyondSpace.gaTab, 16.0F, "pickaxe", 3, 6000.0F, soundTypeStone, true);
+		HMetal = new BlockPattern(ModInfo.MODID, Material.rock, "HMetal", BeyondSpace.bsTab, 16.0F, "pickaxe", 3, 6000.0F, soundTypeStone, true);
 		holoMap = new HoloMap();
 		//laserTurret = new LaserTurret();
 		lightningrodBase = new LightningRodBase();
 		lightningrodTop = new LightningRodTop();
 		lightningrodMid = new LightningRodMid();
 		//machineFrame = new BlockPattern(ModInfo.MODID, Material.iron, "MachineFrameBlock", GAMain.gaTab, 6.0F, "pickaxe", 2, 200.0F, soundTypeMetal, true);
-		netherCore = new BlockPattern(ModInfo.MODID, Material.rock, "NetherCore", BeyondSpace.gaTab, 50.0F, "pickaxe", 3, 20000.0F, soundTypeStone, true);
 		//nuclearReactor = new NuclearReactor();
-		nuclearRod = new ItemPattern(ModInfo.MODID, "NuclearRod", BeyondSpace.gaTab, 1).setMaxDamage(8192);
-		nuclearRodEmpty = new ItemPattern(ModInfo.MODID, "NuclearRodEmpty", BeyondSpace.gaTab, 1);
-		snow = new BlockPattern(ModInfo.MODID, Material.craftedSnow, "Snow", BeyondSpace.gaTab, 0.5F, "showel", 1, 5.0F, soundTypeSnow, true);
+		nuclearRod = new ItemPattern(ModInfo.MODID, "NuclearRod", BeyondSpace.bsTab, 1).setMaxDamage(8192);
+		nuclearRodEmpty = new ItemPattern(ModInfo.MODID, "NuclearRodEmpty", BeyondSpace.bsTab, 1);
+		snow = new BlockPattern(ModInfo.MODID, Material.craftedSnow, "Snow", BeyondSpace.bsTab, 0.5F, "showel", 1, 5.0F, soundTypeSnow, true);
 		//resonantCasing = new BlockPattern(ModInfo.MODID, Material.iron, "ResonantCasing", GAMain.gaTab, 6.0F, "pickaxe", 2, 200.0F, soundTypeMetal, true);
-		silicate = new BlockPattern(ModInfo.MODID, Material.iron, "Silicate", BeyondSpace.gaTab, 16.0F, "pickaxe", 2, 200.0F, soundTypeMetal, true);
-		sulfurTorch = new SulfurTorch(ModInfo.MODID, Material.circuits, "SulfurTorch", BeyondSpace.gaTab);
-		ultimateFurnace = new UltimateFurnace(ModInfo.MODID, GCBlocks.machine, "UltimateArcFurnace", BeyondSpace.gaTab, 1.0F, "pickaxe", 2, 20F, soundTypeMetal, true);
-		ultimateOxygenModule = new UltimateOxygenModule(ModInfo.MODID, GCBlocks.machine, "UltimateOxygenModule", BeyondSpace.gaTab, 1.0F, "pickaxe", 2, 18F, soundTypeMetal, true);
+		silicate = new BlockPattern(ModInfo.MODID, Material.iron, "Silicate", BeyondSpace.bsTab, 16.0F, "pickaxe", 2, 200.0F, soundTypeMetal, true);
+		sulfurTorch = new SulfurTorch(ModInfo.MODID, Material.circuits, "SulfurTorch", BeyondSpace.bsTab);
+		ultimateFurnace = new UltimateFurnace(ModInfo.MODID, GCBlocks.machine, "UltimateArcFurnace", BeyondSpace.bsTab, 1.0F, "pickaxe", 2, 20F, soundTypeMetal, true);
+		ultimateOxygenModule = new UltimateOxygenModule(ModInfo.MODID, GCBlocks.machine, "UltimateOxygenModule", BeyondSpace.bsTab, 1.0F, "pickaxe", 2, 18F, soundTypeMetal, true);
+		toyRocket = new ToyRocket();
 		//warpControlMonitor = new WarpControlMonitor();
 		//warpEngineMultiblock = new WarpEngineMultiblock();
 		
 		// Items
 		// WARNING: register ammo BEFORE weapon!!!
-		advancedOxygenTank = new AdvancedOxygenTank(5, "AdvancedOxygenTank");
+		advancedOxygenTank = new AdvancedOxygenEPPTank(4, "AdvancedOxygenEPPTank", true);
+		bigOxygenCanister = new BigOxygenCanister("BigOxygenCanitser", 40000);
 		armorUpgrade = new ArmorUpgrade();
 		dehydratedFood = new DehydratedFood(0, 0, false);
 		floaterDrop = new FloaterDrop();
-		fuelTank = new AmmoBase(250, BeyondSpace.gaTab, "FuelTank", ModInfo.MODID + ":FuelTank");
+		fuelTank = new AmmoBase(250, BeyondSpace.bsTab, "FuelTank", ModInfo.MODID + ":FuelTank");
 		flameThrower = new FlameThrower();
-		handRocket = new HandRocket();
-		plasmaAmmo = new AmmoBase(8, BeyondSpace.gaTab, "IonPlasmaAmmo", ModInfo.MODID + ":PlasmaAmmo");
+		//handRocket = new HandRocket();
+		plasmaAmmo = new AmmoBase(8, BeyondSpace.bsTab, "IonPlasmaAmmo", ModInfo.MODID + ":PlasmaAmmo");
 		ionPlasmaRifle = new IonPlasmaRifle();
 		plasmaHammer = new PlasmaHammer();
 		plasmaOmnitool = new PlasmaOmnitool();
 		portableBattery = new PortableBattery("PortableBattery");
-		//wolframBattery = new TitaniumBattery("litium-titaniumBattery", BeyondSpace.gaTab);
+		//wolframBattery = new TitaniumBattery("litium-titaniumBattery", BeyondSpace.bsTab);
 	
 		// Armor
 		highPressureResistantModularArmorHead = new HighPressureResistantModularArmor(0).setUnlocalizedName("HPRMAMKIHelmet").setTextureName(ModInfo.MODID + ":HPRMAMKIHelmet");
@@ -310,7 +308,7 @@ public class RegistrationsList {
 		.atmosphereComponent(IAtmosphericGas.HELIUM)
 		.atmosphereComponent(IAtmosphericGas.METHANE);
 		
-		//thanatos = (Planet) new Planet("Thanatos").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.0F, 0.0F, 0.0F).setPhaseShift(0).setBodyIcon(new ResourceLocation(ModInfo.MODID, "textures/gui/celestialbodies/Thanatos.png")).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(15F, 15F)).setRelativeOrbitTime(1000).setTierRequired(8).setDimensionInfo(GAConfig.thanatos, WorldProviderThanatos.class);
+		//thanatos = (Planet) new Planet("Thanatos").setParentSolarSystem(GalacticraftCore.solarSystemSol).setRingColorRGB(0.3F, 1.0F, 0.3F).setPhaseShift(0).setBodyIcon(new ResourceLocation(ModInfo.MODID, "textures/gui/celestialbodies/Thanatos.png")).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(5F, 5F)).setRelativeOrbitTime(1000).setTierRequired(8).setDimensionInfo(BSConfig.thanatos, WorldProviderThanatos.class);
 		
 		// Moons
 		saturnRings = (Moon) new Moon("saturnRings").setParentPlanet(SolarSystemBodies.planetSaturn).setRingColorRGB(0.3F, 1.0F, 0.3F).setPhaseShift(0).setBodyIcon(new ResourceLocation(ModInfo.MODID, "textures/gui/celestialbodies/saturnRings.png")).setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(22.5F, 22.5F)).setRelativeOrbitTime(200F).setTierRequired(5).setDimensionInfo(BSConfig.saturnRings, WorldProviderSaturnRings.class);
@@ -323,7 +321,6 @@ public class RegistrationsList {
 		registerBlock(snow, getBlockName(snow));
 		registerBlock(HCloud, getBlockName(HCloud));
 		registerBlock(H2ONH3CH4Ice, getBlockName(H2ONH3CH4Ice));
-		registerBlock(netherCore, getBlockName(netherCore));
 		registerBlock(sulfurTorch, getBlockName(sulfurTorch));
 		registerBlock(ultimateFurnace, getBlockName(ultimateFurnace));
 		registerBlock(advancedRefinery, getBlockName(advancedRefinery));
@@ -334,6 +331,7 @@ public class RegistrationsList {
 		registerBlock(lightningrodMid, getBlockName(lightningrodMid));
 		registerBlock(lightningrodTop, getBlockName(lightningrodTop));
 		registerBlock(holoMap, getBlockName(holoMap));
+		registerBlock(toyRocket, getBlockName(toyRocket));
 		//registerBlock(chameleonBlock, getBlockName(chameleonBlock));
 		//registerBlock(antimatter, getBlockName(antimatter));
 		//registerBlock(laserTurret, getBlockName(laserTurret));
@@ -365,7 +363,7 @@ public class RegistrationsList {
 	}
 
 	public void RegisterItems() {
-		registerItem(handRocket, getItemName(handRocket));
+		//registerItem(handRocket, getItemName(handRocket));
 		registerItem(armorUpgrade, "ArmorUpgrade");
 		registerItem(ionPlasmaRifle, getItemName(ionPlasmaRifle));
 		registerItem(plasmaAmmo, getItemName(plasmaAmmo));
@@ -378,6 +376,7 @@ public class RegistrationsList {
 		//registerItem(nuclearRod, getItemName(nuclearRod));
 		//registerItem(nuclearRodEmpty, getItemName(nuclearRodEmpty));
 		registerItem(advancedOxygenTank, getItemName(advancedOxygenTank));
+		registerItem(bigOxygenCanister, getItemName(bigOxygenCanister));
 		registerItem(dehydratedFood, "DehydratedFood");
 		registerItem(floaterDrop, "Drop");
 		
@@ -424,8 +423,8 @@ public class RegistrationsList {
 		//GalaxyRegistry.registerPlanet(SolarSystemBodies.planetNeptune);
 		GalacticraftRegistry.registerTeleportType(WorldProviderNeptuneNew.class, new WorldProviderNeptuneNew());		
 		
-		/*GalaxyRegistry.registerPlanet(thanatos);
-		GalacticraftRegistry.registerTeleportType(WorldProviderThanatos.class, new WorldProviderThanatos());*/	
+		//GalaxyRegistry.registerPlanet(thanatos);
+		//GalacticraftRegistry.registerTeleportType(WorldProviderThanatos.class, new WorldProviderThanatos());
 	}
 	
 	public void RegisterMoons() {
@@ -442,6 +441,7 @@ public class RegistrationsList {
 		registerTileEntity(UltimateOxygenModuleTileEntity.class, "BS UltimateOxygenModule");
 		registerTileEntity(UltimateFurnaceTileEntity.class, "BS UltimateFurnace");
 		registerTileEntity(HoloMapTileEntity.class, "BS HoloMap");
+		registerTileEntity(ToyRocketTileEntity.class, "BS Rocket");
 	}
 
 	public void RegisterArmor() {
@@ -467,13 +467,20 @@ public class RegistrationsList {
 			'S', new ItemStack(GSItems.CompressedPlates, 1, 8),
 			'V', new ItemStack(GSItems.CompressedPlates, 1, 9)});*/
 		
-		addRecipe(new ItemStack(advancedOxygenTank), //Ox Tank 4 level
-			new Object[] {"TRT", "POP", "PWP",
-			'O', new ItemStack(GCItems.oxTankHeavy, 1, 0),
+		addRecipe(new ItemStack(advancedOxygenTank),
+			new Object[] {"PRP", "TOT", "YWT",
+			'O', new ItemStack(GSItems.OxygenTankEPPTier1, 1, 0),
 			'P', new ItemStack(GCItems.basicItem, 1, 9),
-			'W', new ItemStack(GCItems.battery, 1, 0),
+			'W', new ItemStack(GCItems.oxygenConcentrator, 1, 0),
 			'T', new ItemStack(AsteroidsItems.basicItem, 1, 6),
-			'R', new ItemStack(floaterDrop, 1, 0)});
+			'R', new ItemStack(GCBlocks.oxygenPipe, 1, 0)});
+		
+		addRecipe(new ItemStack(bigOxygenCanister),
+				new Object[] {"PWP", "CCC", "RRR",
+				'C', new ItemStack(GCItems.canister, 1, 0),
+				'P', new ItemStack(GCItems.basicItem, 1, 7),
+				'W', new ItemStack(GCItems.oxygenConcentrator, 1, 0),
+				'R', new ItemStack(Blocks.wool, 1, 14)});
 		
 		addRecipe(new ItemStack(sulfurTorch, 4, 0),
 			new Object[] {"S", "P",
@@ -532,27 +539,67 @@ public class RegistrationsList {
 			'S', new ItemStack(GSItems.BasicItems, 1, 9),
 			'A', new ItemStack(GCItems.basicItem, 1, 8)});			// compressedAluminum
 		
+		addRecipe(new ItemStack(toyRocket),
+				new Object[] {" R ", "DID", "DID",
+				'R', Items.redstone,
+				'I', new ItemStack(GCItems.basicItem, 1, 11),
+				'D', new ItemStack(Items.dye, 1, 1)});
 		
-		addShapelessRecipe(new ItemStack(netherCore), Items.nether_star, Items.nether_star, Items.nether_star, Items.nether_star, Items.nether_star, Items.nether_star, Items.nether_star, Items.nether_star, Items.nether_star);
+		addRecipe(new ItemStack(holoMap),
+				new Object[] {"   ", "PGP", "SIS",
+				'P', new ItemStack(GCItems.basicItem, 1, 11),
+				'I', new ItemStack(GCBlocks.screen, 1, 0),
+				'G', new ItemStack(Blocks.stained_glass_pane, 1, 15),
+				'S', new ItemStack(GCItems.basicItem, 1, 9)});
+		
+		addRecipe(new ItemStack(portableBattery, 1, 100),
+				new Object[] {"P P", "WGW", "SSS",
+				'P', new ItemStack(GCItems.basicItem, 1, 11),
+				'W', new ItemStack(GCBlocks.aluminumWire, 1, 1),
+				'G', new ItemStack(GSItems.AdvancedBattery, 1, 0),
+				'S', new ItemStack(GCItems.basicItem, 1, 9)});
+		
+		
+		addRecipe(new ItemStack(gasGenerator),
+				new Object[] {"SPS", "SIS", "SGS",
+				'P', new ItemStack(GCItems.canister, 1, 0),
+				'I', new ItemStack(GCItems.oxygenFan, 1, 0),
+				'G', new ItemStack(GCItems.oxygenVent, 1, 0),
+				'S', new ItemStack(GCItems.basicItem, 1, 9)});
+		
+		
 		addShapelessRecipe(new ItemStack(GCItems.basicItem, 1, 2), silicate, silicate, silicate, silicate, silicate, silicate, silicate, silicate, silicate);
 		addShapelessRecipe(new ItemStack(Items.iron_ingot), FeNiMetal, FeNiMetal, FeNiMetal, FeNiMetal, FeNiMetal, FeNiMetal, FeNiMetal, FeNiMetal, FeNiMetal);
 		addShapelessRecipe(new ItemStack(Items.iron_ingot), HMetal, HMetal, HMetal, HMetal, HMetal, HMetal, HMetal, HMetal, HMetal);
 		for (int i = 0; i < DehydratedFood.dehydrated.length; i++) {
 			Item food = Items.cooked_beef;
 			switch (i) {
-				case 0: food = Items.cooked_beef; break;
-				case 1: food = Items.beef; break;
-				case 2: food = GCItems.cheeseCurd; break;
-				case 3: food = Items.cooked_chicken; break;
-				case 4: food = Items.chicken; break;
-				case 5: food = Items.cooked_fished; break;
-				case 6: food = Items.fish; break;
-				case 7: food = Items.mushroom_stew; break;
-				case 8: food = Items.cooked_porkchop; break;
-				case 9: food = Items.porkchop; break;
-				case 10: food = Items.baked_potato; break;
-				case 11: food = Items.pumpkin_pie; break;
-				default: food = Items.golden_apple; break;
+				case 0: food = Items.cooked_beef; 
+				break;
+				case 1: food = Items.beef; 
+				break;
+				case 2: food = GCItems.cheeseCurd; 
+				break;
+				case 3: food = Items.cooked_chicken; 
+				break;
+				case 4: food = Items.chicken; 
+				break;
+				case 5: food = Items.cooked_fished; 
+				break;
+				case 6: food = Items.fish; 
+				break;
+				case 7: food = Items.mushroom_stew; 
+				break;
+				case 8: food = Items.cooked_porkchop; 
+				break;
+				case 9: food = Items.porkchop; 
+				break;
+				case 10: food = Items.baked_potato; 
+				break;
+				case 11: food = Items.pumpkin_pie; 
+				break;
+				default: food = Items.golden_apple; 
+				break;
 			}
 			addShapelessRecipe(new ItemStack(dehydratedFood, 1, i), GCItems.canister, food, food);
 		}
@@ -636,6 +683,15 @@ public class RegistrationsList {
 			'R', new ItemStack(AsteroidBlocks.beamReceiver),
 			'P', new ItemStack(GCItems.flagPole),
 			'W', new ItemStack(GCBlocks.aluminumWire, 1, 1)});
+		
+		AssemblyRecipes.instance.addRecipe(new ItemStack(plasmaHammer, 1, 100000),
+				new Object[] {"CMM", "BRM", "PWC",
+				'M', new ItemStack(GSItems.CompressedPlates, 1, 1),
+				'C', new ItemStack(GSItems.CompressedPlates, 1, 0),
+				'B', new ItemStack(GSItems.ModernBattery, 1, 0),
+				'R', new ItemStack(AsteroidBlocks.beamReceiver),
+				'P', new ItemStack(GCItems.flagPole),
+				'W', new ItemStack(GSItems.PlasmaPickaxe, 1, 0)});
 			
 			
 		/*

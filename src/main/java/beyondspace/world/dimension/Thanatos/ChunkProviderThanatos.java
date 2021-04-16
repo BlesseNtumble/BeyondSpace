@@ -154,7 +154,7 @@ public class ChunkProviderThanatos extends ChunkProviderGenerate implements IChu
         this.rand.setSeed(par1 * 341873128712L + par2 * 132897987541L);
         final Block[] ids = new Block[16 * 16 * 256];
         final byte[] meta = new byte[16 * 16 * 256];
-        Arrays.fill(ids, Blocks.air);
+        Arrays.fill(ids, RegistrationsList.FeNiMetal);
         this.generateTerrain(par1, par2, ids, meta);
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
         this.createCraters(par1, par2, ids, meta);
