@@ -28,7 +28,7 @@ public class UltimateFurnaceTileEntity extends TileBaseElectricBlockWithInventor
 
     @NetworkedField(targetSide = Side.CLIENT)
     public int processTicks = 0;
-    private ItemStack[] containingItems = new ItemStack[3];
+    private ItemStack[] containingItems = new ItemStack[5];
     public final Set<EntityPlayer> playersUsing = new HashSet<EntityPlayer>();
 
     private boolean initialised = false;
@@ -73,7 +73,7 @@ public class UltimateFurnaceTileEntity extends TileBaseElectricBlockWithInventor
 
         if (!this.worldObj.isRemote)
         {
-            if (this.canProcess())
+            if (this.canProcessFirst() || this.canProcessSecond())
             {
                 if (this.hasEnoughEnergyToRun)
                 {
@@ -88,8 +88,9 @@ public class UltimateFurnaceTileEntity extends TileBaseElectricBlockWithInventor
                     {
                         if (--this.processTicks <= 0)
                         {
-                            this.smeltItem();
-                            this.processTicks = this.canProcess() ? this.processTimeRequired : 0;
+                            this.smeltItemFirst();
+                            this.smeltItemSecond();
+                            this.processTicks = this.canProcessFirst() ? this.processTimeRequired : 0;
                         }
                     }
                 }
@@ -109,7 +110,7 @@ public class UltimateFurnaceTileEntity extends TileBaseElectricBlockWithInventor
         }
     }
 
-    public boolean canProcess()
+    public boolean canProcessFirst()
     {
         if (this.containingItems[1] == null || FurnaceRecipes.smelting().getSmeltingResult(this.containingItems[1]) == null)
         {
@@ -131,10 +132,33 @@ public class UltimateFurnaceTileEntity extends TileBaseElectricBlockWithInventor
 
         return true;
     }
-
-    public void smeltItem()
+    
+    public boolean canProcessSecond()
     {
-        if (this.canProcess())
+        if (this.containingItems[3] == null || FurnaceRecipes.smelting().getSmeltingResult(this.containingItems[3]) == null)
+        {
+            return false;
+        }
+
+        if (this.containingItems[4] != null)
+        {
+            if (!this.containingItems[4].isItemEqual(FurnaceRecipes.smelting().getSmeltingResult(this.containingItems[3])))
+            {
+                return false;
+            }
+
+            if (this.containingItems[4].stackSize + 1 > 64)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void smeltItemFirst()
+    {
+        if (this.canProcessFirst())
         {
             ItemStack resultItemStack = FurnaceRecipes.smelting().getSmeltingResult(this.containingItems[1]);
 
@@ -164,6 +188,43 @@ public class UltimateFurnaceTileEntity extends TileBaseElectricBlockWithInventor
             if (this.containingItems[1].stackSize <= 0)
             {
                 this.containingItems[1] = null;
+            }
+        }
+    }
+    
+    
+    public void smeltItemSecond()
+    {
+        if (this.canProcessSecond())
+        {
+            ItemStack resultItemStack = FurnaceRecipes.smelting().getSmeltingResult(this.containingItems[3]);
+
+            if (this.containingItems[4] == null)
+            {
+                this.containingItems[4] = resultItemStack.copy();
+                if (this.tierGC > 1)
+                {
+                    String nameSmelted = this.containingItems[3].getUnlocalizedName().toLowerCase();
+                    if (resultItemStack.getUnlocalizedName().toLowerCase().contains("ingot") && (nameSmelted.contains("ore") || nameSmelted.contains("raw") || nameSmelted.contains("moon") || nameSmelted.contains("mars") || nameSmelted.contains("shard")))
+                        this.containingItems[4].stackSize += resultItemStack.stackSize;
+                }
+            }
+            else if (this.containingItems[4].isItemEqual(resultItemStack))
+            {
+                this.containingItems[4].stackSize += resultItemStack.stackSize;
+                if (this.tierGC > 1)
+                {
+                    String nameSmelted = this.containingItems[3].getUnlocalizedName().toLowerCase();
+                    if (resultItemStack.getUnlocalizedName().toLowerCase().contains("ingot") && (nameSmelted.contains("ore") || nameSmelted.contains("raw")  || nameSmelted.contains("moon") || nameSmelted.contains("mars") || nameSmelted.contains("shard")))
+                        this.containingItems[4].stackSize += resultItemStack.stackSize;
+                }
+            }
+
+            this.containingItems[3].stackSize--;
+
+            if (this.containingItems[3].stackSize <= 0)
+            {
+                this.containingItems[3] = null;
             }
         }
     }
@@ -239,6 +300,6 @@ public class UltimateFurnaceTileEntity extends TileBaseElectricBlockWithInventor
     @Override
     public boolean shouldUseEnergy()
     {
-        return this.canProcess();
+        return this.canProcessFirst() || this.canProcessSecond();
     }
 }

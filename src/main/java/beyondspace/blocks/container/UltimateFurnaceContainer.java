@@ -24,11 +24,11 @@ public class UltimateFurnaceContainer extends Container
 
         // To be smelted
         this.addSlotToContainer(new Slot(tileEntity, 1, 47, 27));
-        //this.addSlotToContainer(new Slot(tileEntity, 1, 23, 27));
+        this.addSlotToContainer(new Slot(tileEntity, 3, 23, 27));
 
         // Smelting result
         this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player, tileEntity, 2, 111, 27));
-        //this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player, tileEntity, 2, 135, 27));
+        this.addSlotToContainer(new SlotFurnace(par1InventoryPlayer.player, tileEntity, 4, 135, 27));
         int var3;
 
         for (var3 = 0; var3 < 3; ++var3)
@@ -67,72 +67,6 @@ public class UltimateFurnaceContainer extends Container
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par1) {
     	ItemStack var2 = null;
-        Slot var3 = (Slot) this.inventorySlots.get(par1);
-
-        if (var3 != null && var3.getHasStack())
-        {
-            ItemStack var4 = var3.getStack();
-            var2 = var4.copy();
-
-            if (par1 == 2)
-            {
-                if (!this.mergeItemStack(var4, 3, 39, true))
-                {
-                    return null;
-                }
-
-                var3.onSlotChange(var4, var2);
-            }
-            else if (par1 != 1 && par1 != 0)
-            {
-                if (var4.getItem() instanceof IItemElectric)
-                {
-                    if (!this.mergeItemStack(var4, 0, 1, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (FurnaceRecipes.smelting().getSmeltingResult(var4) != null)
-                {
-                    if (!this.mergeItemStack(var4, 1, 2, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (par1 >= 3 && par1 < 30)
-                {
-                    if (!this.mergeItemStack(var4, 30, 39, false))
-                    {
-                        return null;
-                    }
-                }
-                else if (par1 >= 30 && par1 < 39 && !this.mergeItemStack(var4, 3, 30, false))
-                {
-                    return null;
-                }
-            }
-            else if (!this.mergeItemStack(var4, 3, 39, false))
-            {
-                return null;
-            }
-
-            if (var4.stackSize == 0)
-            {
-                var3.putStack((ItemStack) null);
-            }
-            else
-            {
-                var3.onSlotChanged();
-            }
-
-            if (var4.stackSize == var2.stackSize)
-            {
-                return null;
-            }
-
-            var3.onPickupFromSlot(par1EntityPlayer, var4);
-        }
-
         return var2;
       }
 }
