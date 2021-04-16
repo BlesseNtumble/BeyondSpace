@@ -2,7 +2,6 @@ package beyondspace.world.dimension.SaturnRings;
 
 import java.util.Random;
 
-import beyondspace.utils.RegistrationsList;
 import cpw.mods.fml.common.FMLLog;
 import micdoodle8.mods.galacticraft.api.entity.IRocketType;
 import micdoodle8.mods.galacticraft.api.recipe.SchematicRegistry;

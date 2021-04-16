@@ -3,7 +3,6 @@ package beyondspace.world.dimension.SaturnNew;
 import java.util.Random;
 
 import beyondspace.utils.BSUtilities;
-import beyondspace.utils.RegistrationsList;
 import beyondspace.utils.world.EmptyBiomeDecorator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
