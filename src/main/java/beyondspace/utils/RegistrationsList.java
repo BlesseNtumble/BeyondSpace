@@ -220,7 +220,7 @@ public class RegistrationsList {
 		// Items
 		// WARNING: register ammo BEFORE weapon!!!
 		advancedOxygenTank = new AdvancedOxygenEPPTank(4, "AdvancedOxygenEPPTank", true);
-		bigOxygenCanister = new BigOxygenCanister("BigOxygenCanitser", 40000);
+		bigOxygenCanister = new BigOxygenCanister("BigOxygenCanister", 40000);
 		armorUpgrade = new ArmorUpgrade();
 		dehydratedFood = new DehydratedFood(0, 0, false);
 		floaterDrop = new FloaterDrop();
@@ -283,9 +283,6 @@ public class RegistrationsList {
 		.atmosphereComponent(IAtmosphericGas.ARGON)
 		.atmosphereComponent(IAtmosphericGas.WATER);
 		}*/
-
-		DimensionManager.unregisterDimension(1);
-		DimensionManager.unregisterProviderType(1);
 		
 		SolarSystemBodies.planetJupiter.setTierRequired(6)
 		.setDimensionInfo(BSConfig.jupiter, WorldProviderJupiterNew.class)
@@ -322,12 +319,12 @@ public class RegistrationsList {
 		registerBlock(HCloud, getBlockName(HCloud));
 		registerBlock(H2ONH3CH4Ice, getBlockName(H2ONH3CH4Ice));
 		registerBlock(sulfurTorch, getBlockName(sulfurTorch));
-		registerBlock(ultimateFurnace, getBlockName(ultimateFurnace));
-		registerBlock(advancedRefinery, getBlockName(advancedRefinery));
+		registerBlock(ultimateFurnace, ItemBlockDesc.class, getBlockName(ultimateFurnace));
+		registerBlock(advancedRefinery, ItemBlockDesc.class, getBlockName(advancedRefinery));
 		registerBlock(gasGenerator, ItemBlockDesc.class, getBlockName(gasGenerator));
-		registerBlock(ultimateOxygenModule, getBlockName(ultimateOxygenModule));
+		registerBlock(ultimateOxygenModule, ItemBlockDesc.class, getBlockName(ultimateOxygenModule));
 		//registerBlock(nuclearReactor, getBlockName(nuclearReactor));
-		registerBlock(lightningrodBase, getBlockName(lightningrodBase));
+		registerBlock(lightningrodBase, ItemBlockDesc.class, getBlockName(lightningrodBase));
 		registerBlock(lightningrodMid, getBlockName(lightningrodMid));
 		registerBlock(lightningrodTop, getBlockName(lightningrodTop));
 		registerBlock(holoMap, getBlockName(holoMap));
@@ -468,7 +465,7 @@ public class RegistrationsList {
 			'V', new ItemStack(GSItems.CompressedPlates, 1, 9)});*/
 		
 		addRecipe(new ItemStack(advancedOxygenTank),
-			new Object[] {"PRP", "TOT", "YWT",
+			new Object[] {"PRP", "TOT", "TWT",
 			'O', new ItemStack(GSItems.OxygenTankEPPTier1, 1, 0),
 			'P', new ItemStack(GCItems.basicItem, 1, 9),
 			'W', new ItemStack(GCItems.oxygenConcentrator, 1, 0),
