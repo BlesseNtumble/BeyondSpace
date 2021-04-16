@@ -7,5 +7,5 @@ public class Switches {
 	public static final boolean parseObj = true;
 	
 	/** Change this to operate space dimension functionals */
-	public static final boolean spaceDim = true;
+	public static final boolean spaceDim = false;
 }

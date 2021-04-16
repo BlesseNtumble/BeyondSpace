@@ -3,6 +3,7 @@ package beyondspace.proxy.network;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
 
+import beyondspace.items.AdvancedOxygenEPPTank;
 import beyondspace.utils.RegistrationsList;
 import beyondspace.world.dimension.Jupiter.CloudRendererJupiter;
 import beyondspace.world.dimension.Jupiter.SkyProviderJupiter;
@@ -146,12 +147,12 @@ public class ClientEventHandler {
 
     public static boolean onCheckAdvancedOxygenTankInSlot1(EntityPlayerMP player) {
 	    IInventoryGC invGC = AccessInventoryGC.getGCInventoryForPlayer(player);
-	    return ((invGC.getStackInSlot(2) != null) && (invGC.getStackInSlot(2).getItem() instanceof ItemOxygenTank));
+	    return ((invGC.getStackInSlot(2) != null) && (invGC.getStackInSlot(2).getItem() instanceof AdvancedOxygenEPPTank));
     }	
 
     public static boolean onCheckAdvancedOxygenTankInSlot2(EntityPlayerMP player) {
 	    IInventoryGC invGC = AccessInventoryGC.getGCInventoryForPlayer(player);
-	    return ((invGC.getStackInSlot(3) != null) && (invGC.getStackInSlot(3).getItem() instanceof ItemOxygenTank));
+	    return ((invGC.getStackInSlot(3) != null) && (invGC.getStackInSlot(3).getItem() instanceof AdvancedOxygenEPPTank));
     }
     
 	/**Render Loop around Saturn*/

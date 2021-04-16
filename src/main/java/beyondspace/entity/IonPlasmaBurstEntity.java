@@ -90,12 +90,12 @@ public class IonPlasmaBurstEntity extends Entity {
 							if (entity instanceof EntityPlayer) {
 								if ((EntityPlayer) entity != exploder) {
 									EntityPlayer player = (EntityPlayer) entity;
-									player.attackEntityFrom(DamageSource.magic, damage);
+									player.attackEntityFrom(DamageSource.causePlayerDamage(exploder), damage);
 								}
 							}
 							if (entity instanceof EntityLiving) {
 								EntityLiving living = (EntityLiving) entity;
-								living.attackEntityFrom(DamageSource.magic, damage);
+								living.attackEntityFrom(DamageSource.causePlayerDamage(exploder), damage);
 							}
 							damage = 0.0F;
 						}

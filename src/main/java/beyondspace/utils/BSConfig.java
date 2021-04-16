@@ -37,11 +37,10 @@ public class BSConfig extends Configuration {
 	
 	// Features
 	public static boolean isSaturnDiamondRain = true;
-	public static boolean isOverworldMeteors = true;
 	
 	public static double debugscale = 1;
 	/** Absolute Star Size */
-	public static double StarSize = 16384.0;
+	public static double StarSize = 2048.0;
 	/** Absolute Planet Size */
 	public static double PlanetSize = 1024.0;
 	/** Absolute Moon Size */
@@ -83,7 +82,6 @@ public class BSConfig extends Configuration {
 		isHalloween = BeyondSpace.config.get(PLANETS, "Override calendar for Halloween Planet", isHalloween).getBoolean(isHalloween);
 
 		isSaturnDiamondRain = BeyondSpace.config.get(FEATURES, "Enable Diamond rain on Saturn", isSaturnDiamondRain).getBoolean(isSaturnDiamondRain);
-		isOverworldMeteors = BeyondSpace.config.get(FEATURES, "Enable meteors in Overworld", isOverworldMeteors).getBoolean(isOverworldMeteors);
 
 		StarSize = BeyondSpace.config.get(FEATURES, "Absolute Star Size", StarSize).getDouble(StarSize);
 		PlanetSize = BeyondSpace.config.get(FEATURES, "Absolute Planet Size", PlanetSize).getDouble(PlanetSize);

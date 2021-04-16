@@ -2,9 +2,8 @@ package beyondspace.world.dimension.Space;
 
 import java.util.Random;
 
-import beyondspace.utils.BSUtilities;
 import beyondspace.utils.RegistrationsList;
-import beyondspace.utils.space.GASpaceUtilities;
+import beyondspace.utils.space.BSSpaceUtilities;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import galaxyspace.api.dimension.IAdvancedSpace;
@@ -47,7 +46,7 @@ public class WorldProviderSpace extends WorldProviderAdvancedSpace implements IG
 	@Override
 	public Vector3 getPlayerSpawnLocation(WorldServer world, EntityPlayerMP player) {
 		if (player != null) {
-			Vec3 pos = GASpaceUtilities.getBodyPositionFromDimID(player.dimension);
+			Vec3 pos = BSSpaceUtilities.getBodyPositionFromDimID(player.dimension);
 			return new Vector3(pos.xCoord, pos.yCoord, pos.zCoord);
 		}
 		return null;
@@ -55,7 +54,7 @@ public class WorldProviderSpace extends WorldProviderAdvancedSpace implements IG
 
 	@Override
 	public Vector3 getEntitySpawnLocation(WorldServer world, Entity entity) {
-		Vec3 pos = GASpaceUtilities.getBodyPositionFromDimID(entity.dimension);
+		Vec3 pos = BSSpaceUtilities.getBodyPositionFromDimID(entity.dimension);
 		return new Vector3(pos.xCoord, pos.yCoord, pos.zCoord);
 	}
 
@@ -82,7 +81,7 @@ public class WorldProviderSpace extends WorldProviderAdvancedSpace implements IG
 
 	@Override
 	public float getGravity() {
-		return BSUtilities.calculateGravity(0);
+		return 0.086F;
 	}
 
 	@Override
@@ -227,7 +226,7 @@ public class WorldProviderSpace extends WorldProviderAdvancedSpace implements IG
     
     @Override
     public boolean canCoordinateBeSpawn(int x, int z) {
-        return GASpaceUtilities.getStarAt(x, z) == null ;
+        return BSSpaceUtilities.getStarAt(x, z) == null ;
     }
     
     @Override
@@ -276,7 +275,7 @@ public class WorldProviderSpace extends WorldProviderAdvancedSpace implements IG
     
     @Override
     public ChunkCoordinates getRandomizedSpawnPoint() {
-        return GASpaceUtilities.getEarthPosition();
+        return BSSpaceUtilities.getEarthPosition();
     }
     
     @Override
@@ -324,7 +323,7 @@ public class WorldProviderSpace extends WorldProviderAdvancedSpace implements IG
     
     @Override
     public ChunkCoordinates getSpawnPoint() {
-        return GASpaceUtilities.getEarthPosition();
+        return BSSpaceUtilities.getEarthPosition();
     }
     
     @Override

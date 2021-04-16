@@ -62,7 +62,7 @@ public class AdvancedRefineryGui extends GuiContainerGC
 		List<String> batterySlotDesc = new ArrayList<String>();
 		batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.0"));
 		batterySlotDesc.add(GCCoreUtil.translate("gui.batterySlot.desc.1"));
-		this.infoRegions.add(new GuiElementInfoRegion((this.width - this.xSize) / 2 + 49, (this.height - this.ySize) / 2 + 50, 18, 18, batterySlotDesc, this.width, this.height, this));
+		this.infoRegions.add(new GuiElementInfoRegion((this.width - this.xSize) / 2 + 49, (this.height - this.ySize) / 2 + 60, 18, 18, batterySlotDesc, this.width, this.height, this));
 		List<String> fuelTankDesc = new ArrayList<String>();
 		fuelTankDesc.add(GCCoreUtil.translate("gui.fuelTank.desc.4"));
 		int fuelLevel = this.tileEntity.fuelTank != null && this.tileEntity.fuelTank.getFluid() != null ? this.tileEntity.fuelTank.getFluid().amount : 0;

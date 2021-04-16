@@ -10,7 +10,9 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
+import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import net.minecraft.block.Block;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy {
@@ -52,6 +54,7 @@ public class CommonProxy {
 		regs.constructSpace();
 		regs.RegisterPlanets();
     	regs.RegisterMoons();
+    	GalacticraftCore.planetOverworld.setBodyIcon(new ResourceLocation("beyondspace:textures/gui/celestialbodies/earth.png"));
 		FMLCommonHandler.instance().bus().register(new EventReactions());
 	}
 	

@@ -155,7 +155,7 @@ public class WorldProviderThanatos extends WorldProviderAdvancedSpace implements
 
 	@Override
 	public float getGravity() {
-		return 0.086F;
+		return 0.071F;
 	}
 
 	@Override

@@ -17,10 +17,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
@@ -46,7 +44,7 @@ public class PlasmaHammer extends ItemTool implements IItemElectric {
 	
 	public PlasmaHammer() {
 		super(0.0F, ToolMaterial.WOOD, someVanillaStuff);
-		this.setCreativeTab(BeyondSpace.gaTab);
+		this.setCreativeTab(BeyondSpace.bsTab);
 		this.setUnlocalizedName("PlasmaHammer");
 		this.setMaxDamage(100000);
 		this.setMaxStackSize(1);
@@ -58,7 +56,16 @@ public class PlasmaHammer extends ItemTool implements IItemElectric {
 		textures[0] = iconRegister.registerIcon(ModInfo.MODID + ":PlasmaHammerOff");
 		textures[1] = iconRegister.registerIcon(ModInfo.MODID + ":PlasmaHammer");
 	}
+	
+	@Override
+	public IIcon getIconFromDamage(int meta) {
+		return meta < 100000 ? textures[1] : textures[0];
+	}
 
+	@Override
+	public float getDigSpeed(ItemStack stack, Block block, int meta) {
+		return getElectricityStored(stack) > 0 ? 12.5F : 0;
+	}
 	  
 	@Override
 	public float getElectricityStored(ItemStack stack) {
