@@ -1,7 +1,9 @@
 package beyondspace.proxy;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
 
+import beyondspace.ModInfo;
 import beyondspace.Switches;
 import beyondspace.blocks.SulfurTorch;
 import beyondspace.blocks.render.BlockRendererSulfurTorch;
@@ -9,12 +11,15 @@ import beyondspace.blocks.render.HoloMapRender;
 import beyondspace.blocks.render.LightningrodMidRender;
 import beyondspace.blocks.render.LightningrodTopRender;
 import beyondspace.blocks.render.NuclearReactorRender;
+import beyondspace.blocks.render.RenderItemToyRocket;
+import beyondspace.blocks.render.RenderToyRocketTile;
 import beyondspace.blocks.render.SealableChameleonBlockRender;
 import beyondspace.blocks.tileentity.HoloMapTileEntity;
 import beyondspace.blocks.tileentity.LightningRodMidTileEntity;
 import beyondspace.blocks.tileentity.LightningRodTopTileEntity;
 import beyondspace.blocks.tileentity.NuclearReactorTileEntity;
 import beyondspace.blocks.tileentity.SealableChameleonBlockTileEntity;
+import beyondspace.blocks.tileentity.ToyRocketTileEntity;
 import beyondspace.entity.EntityFire;
 import beyondspace.entity.FloaterEntity;
 import beyondspace.entity.IonPlasmaBurstEntity;
@@ -29,19 +34,24 @@ import beyondspace.items.render.StandartScaledTileItemRender;
 import beyondspace.proxy.network.ClientEventHandler;
 import beyondspace.proxy.network.ClientTickHandler;
 import beyondspace.utils.RegistrationsList;
+import beyondspace.utils.UpdateChecker;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import micdoodle8.mods.galacticraft.core.client.render.block.BlockRendererMachine;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.client.model.AdvancedModelLoader;
+import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy {
 	
-	
+	public static int[] displayList = new int[1];
 	
 	public static int blockOxygenModuleRenderID;
 	public static int blockUltimateFurnaceRenderID;
@@ -71,10 +81,25 @@ public class ClientProxy extends CommonProxy {
 		// Entity
         if (Switches.parseObj) RenderingRegistry.registerEntityRenderingHandler(IonPlasmaBurstEntity.class, new IonPlasmaBurstEntityRender());
 		RenderingRegistry.registerEntityRenderingHandler(EntityFire.class, new RenderFire());
-		
+
 		// Mob
 		RenderingRegistry.registerEntityRenderingHandler(FloaterEntity.class, new FloaterEntityRender());
 		RenderingRegistry.registerEntityRenderingHandler(RedLightningEntity.class, new RedLightningEntityRender());
+		
+		//Toy Rocket
+		final IModelCustom model = AdvancedModelLoader.loadModel(new ResourceLocation(ModInfo.MODID, "model/ToyRocket.obj"));
+
+		//Plasma Rifle
+        //MinecraftForgeClient.registerItemRenderer(RegistrationsList.ionPlasmaRifle, (IItemRenderer)new PlasmaGunRender(RegistrationsList.ionPlasmaRifle));
+		
+		displayList[0] = GLAllocation.generateDisplayLists(1);
+		GL11.glNewList(displayList[0], GL11.GL_COMPILE);
+		model.renderAll();
+		GL11.glEndList();
+
+		//Blocks
+		ClientRegistry.bindTileEntitySpecialRenderer(ToyRocketTileEntity.class, new RenderToyRocketTile());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(RegistrationsList.toyRocket), new RenderItemToyRocket());
 		
 	//	MinecraftForgeClient.registerItemRenderer(RegistrationsList.superSpaceIonPlasmaRifle, new SuperSpaceIonPlasmaRifleRender());
 	//	MinecraftForgeClient.registerItemRenderer(RegistrationsList.plasmaAmmo, new IonPlasmaAmmoRender());
@@ -119,6 +144,7 @@ public class ClientProxy extends CommonProxy {
 	
 	public void initializeAndRegisterHandlers() {
 		super.initializeAndRegisterHandlers();
+		FMLCommonHandler.instance().bus().register(new UpdateChecker());
 		ClientEventHandler clientEventHandler = new ClientEventHandler();
 		FMLCommonHandler.instance().bus().register(clientEventHandler);
         MinecraftForge.EVENT_BUS.register(clientEventHandler);
