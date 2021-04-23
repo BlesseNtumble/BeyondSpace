@@ -17,9 +17,11 @@ public class IonPlasmaRifle extends WeaponBase {
 
 	@Override
 	public void spawnProjectile(World world, EntityPlayer player) {
+		if(player != null) {
 		MovingObjectPosition mop = ASJUtilities.getSelectedBlock(player, 1.0F, 256.0D, true);
 		if (mop != null) {
 			world.spawnEntityInWorld(new IonPlasmaBurstEntity(world, mop.blockX, mop.blockY, mop.blockZ, player));
+		}
 		}
 	}	
 }

@@ -366,6 +366,17 @@ public class ASJUtilities {
         return entity.worldObj.func_147447_a(vec3, vec32, false, false, true);
     }
 	
+	  public static final Vec3 getPosition(EntityLivingBase living, float par1) {
+		    EntityPlayer entityPlayer = (living instanceof EntityPlayer) ? (EntityPlayer)living : null;
+		    float f1 = entityPlayer.getDefaultEyeHeight(), i = (entityPlayer == null) ? 0.0F : f1;
+		    Vec3 vec3 = Vec3.createVectorHelper(living.posX, living.posY + (living.getEyeHeight() - i), living.posZ);
+		    double d0 = living.prevPosX + (living.posX - living.prevPosX) * (Float.valueOf(par1).doubleValue());
+		    double d1 = living.prevPosY + (living.posY - living.prevPosY) * (Float.valueOf(par1).doubleValue()) + (Float.valueOf(living.getEyeHeight() - i).doubleValue());
+		    double d2 = living.prevPosZ + (living.posZ - living.prevPosZ) * (Float.valueOf(par1).doubleValue());
+		    vec3 = Vec3.createVectorHelper(d0, d1, d2);
+		    return ((par1 == 1.0F)) ? vec3 : vec3;
+		  }
+	
 	/**
 	 * Returns MOP with only blocks.
 	 * @param player Player to calculate vector from
@@ -374,12 +385,15 @@ public class ASJUtilities {
 	 * @param interact Can player interact with blocks (not sure)
 	 */
 	public static MovingObjectPosition getSelectedBlock(EntityPlayer player, float fasc, double dist, boolean interact) {
-		Vec3 vec3 = player.getPosition(fasc);
+		if(player != null) {
+		Vec3 vec3 = getPosition(player, 1.0F);
 		vec3.yCoord += player.getEyeHeight();
 		Vec3 vec31 = player.getLook(fasc);
 		Vec3 vec32 = vec3.addVector(vec31.xCoord * dist, vec31.yCoord * dist, vec31.zCoord * dist);
 		MovingObjectPosition movingobjectposition = player.worldObj.rayTraceBlocks(vec3, vec32, interact);
 		return movingobjectposition;
+		}
+		return null;
 	}
 	
 	/**

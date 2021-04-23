@@ -17,7 +17,6 @@ public class FloaterDrop extends Item {
 	
 	public static final String[] drops = new String[] { "FloaterGasBags", "FloaterHeart" };
 	
-	@SideOnly(Side.CLIENT)
 	private IIcon[] texture = new IIcon[drops.length];
 	public static Random rand = new Random();
 	
@@ -44,7 +43,6 @@ public class FloaterDrop extends Item {
     	}
     }
 
-    @SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs tab, List list) {
         for (int i = 0; i < drops.length; ++i) {
             list.add(new ItemStack(item, 1, i));

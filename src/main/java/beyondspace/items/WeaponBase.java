@@ -113,10 +113,9 @@ public class WeaponBase extends Item {
 	 */
 	public void fire(ItemStack stack, World world, EntityPlayer player) {
 		if (!world.isRemote){ 
-
         	// Checking if there is no ammo
             if (stack.stackTagCompound.getInteger("Bullets") <= 0) {
-            	player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.DARK_RED + "No ammo! | ��� ��������!"));
+            	player.addChatComponentMessage(new ChatComponentText(EnumChatFormatting.DARK_RED + "No ammo! | Shooting without bullets is impossible!"));
             }
             
             // Shooting projectile

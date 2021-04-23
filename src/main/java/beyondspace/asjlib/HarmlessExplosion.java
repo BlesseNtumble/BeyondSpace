@@ -79,12 +79,11 @@ public class HarmlessExplosion {
                     d7 /= d9;
                     double d10 = (double)this.worldObj.getBlockDensity(vec3, entity.boundingBox);
                     double d11 = (1.0D - d4) * d10;
-                    entity.attackEntityFrom(DamageSource.setExplosionSource((Explosion)null), (float)((int)((d11 * d11 + d11) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D)));
+                    entity.attackEntityFrom(DamageSource.causePlayerDamage(exploder), (float)((int)((d11 * d11 + d11) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D)));
                     double d8 = EnchantmentProtection.func_92092_a(entity, d11);
                     entity.motionX += d5 * d8;
                     entity.motionY += d6 * d8;
                     entity.motionZ += d7 * d8;
-
                     if (entity instanceof EntityPlayer) {
                         this.field_77288_k.put((EntityPlayer)entity, Vec3.createVectorHelper(d5 * d11, d6 * d11, d7 * d11));
                     }
