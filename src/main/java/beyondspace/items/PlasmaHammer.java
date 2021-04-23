@@ -123,9 +123,11 @@ public class PlasmaHammer extends ItemTool implements IItemElectric {
 						continue;
 
 					if (!super.onBlockStartBreak(stack, xPos, yPos, zPos, player) && !player.isSneaking()) {
+						if(!player.capabilities.isCreativeMode)
 						CommonEventHandler.dischargeStack(stack, 50.0F);
 						breakExtraBlock(player.worldObj, xPos, yPos, zPos, sideHit, player, x, y, z);
 					}else{
+						if(!player.capabilities.isCreativeMode)
 						CommonEventHandler.dischargeStack(stack, 10.0F);
 					}
 				}

@@ -225,13 +225,13 @@ public class WorldProviderJupiterNew extends WE_WorldProvider implements IGalact
 	@Override
 	public void genSettings(WE_ChunkProvider cp) {
 		WE_OreGen ores = new WE_OreGen();
-		ores.add(Blocks.coal_ore    , (byte)0, Blocks.stone, 6, 32, 128, 16, 48, 60, 56);
-		ores.add(Blocks.iron_ore    , (byte)0, Blocks.stone, 6,  0,  64,  8, 32, 90, 72);
+		ores.add(Blocks.coal_ore    , (byte)0, Blocks.stone, 6, 32, 128, 16, 48, 45, 56);
+		ores.add(Blocks.iron_ore    , (byte)0, Blocks.stone, 6,  0,  64,  8, 32, 60, 72);
 		ores.add(Blocks.lapis_ore   , (byte)0, Blocks.stone, 4,  0,  16,  8, 24, 30, 16);
 		ores.add(Blocks.redstone_ore, (byte)0, Blocks.stone, 4,  0,  16,  8, 24, 30, 16);
-		ores.add(Blocks.gold_ore    , (byte)0, Blocks.stone, 4,  0,  32,  4, 24, 45, 16);
-		ores.add(Blocks.diamond_ore , (byte)0, Blocks.stone, 3,  0,  16,  4, 24, 45, 16);
-		ores.add(Blocks.emerald_ore , (byte)0, Blocks.stone, 2,  0,  16,  4, 24, 45, 24);
+		ores.add(Blocks.gold_ore    , (byte)0, Blocks.stone, 4,  0,  32,  4, 24, 20, 16);
+		ores.add(Blocks.diamond_ore , (byte)0, Blocks.stone, 3,  0,  16,  12, 48, 20, 16);
+		ores.add(Blocks.emerald_ore , (byte)0, Blocks.stone, 2,  0,  16,  12, 48, 20, 24);
 		
 		cp.createChunkGen_List.clear();
 		cp.decorateChunkGen_List.clear();
