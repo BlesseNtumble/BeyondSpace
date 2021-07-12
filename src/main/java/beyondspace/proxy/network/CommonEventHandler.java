@@ -207,7 +207,8 @@ public class CommonEventHandler {
 			//if (!player.capabilities.isFlying) player.motionY = -50;
 			
 			// Just in case (avoiding NPE)
-			if (player.getCurrentArmor(0) != null && player.getCurrentArmor(0).getItem() == RegistrationsList.highPressureResistantModularArmorBoot && !player.getCurrentArmor(0).hasTagCompound()) player.getCurrentArmor(0).stackTagCompound = new NBTTagCompound();
+			
+		    /*if (player.getCurrentArmor(0) != null && player.getCurrentArmor(0).getItem() == RegistrationsList.highPressureResistantModularArmorBoot && !player.getCurrentArmor(0).hasTagCompound()) player.getCurrentArmor(0).stackTagCompound = new NBTTagCompound();
 			if (player.getCurrentArmor(1) != null && player.getCurrentArmor(1).getItem() == RegistrationsList.highPressureResistantModularArmorLegs && !player.getCurrentArmor(1).hasTagCompound()) player.getCurrentArmor(1).stackTagCompound = new NBTTagCompound();
 			if (player.getCurrentArmor(2) != null && player.getCurrentArmor(2).getItem() == RegistrationsList.highPressureResistantModularArmorBody && !player.getCurrentArmor(2).hasTagCompound()) player.getCurrentArmor(2).stackTagCompound = new NBTTagCompound();
 			if (player.getCurrentArmor(3) != null && player.getCurrentArmor(3).getItem() == RegistrationsList.highPressureResistantModularArmorHead && !player.getCurrentArmor(3).hasTagCompound()) player.getCurrentArmor(3).stackTagCompound = new NBTTagCompound();
@@ -233,6 +234,7 @@ public class CommonEventHandler {
 					}
 				}	
 			}
+			*/
 			chestLastTick = player.getCurrentArmor(2);	
 			
 			// Frostwalking stuff
