@@ -6,6 +6,8 @@ import java.util.Random;
 
 import beyondspace.ModInfo;
 import beyondspace.asjlib.HarmlessExplosion;
+import beyondspace.bukkit.BukkitUtils;
+import beyondspace.utils.BSUtilities;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
@@ -79,9 +81,17 @@ public class IonPlasmaBurstEntity extends Entity {
 								continue;
 							}
 						}
+						if(BSUtilities.hasBukkit()) {
+							if(!BukkitUtils.cantDamage(exploder, entity)) {
 							entity.motionX = (this.posX - entity.posX) / 10.0F;
 							entity.motionY = (this.posY - entity.posY) / 10.0F;
 							entity.motionZ = (this.posZ - entity.posZ) / 10.0F;
+						}
+						}else{
+							entity.motionX = (this.posX - entity.posX) / 10.0F;
+							entity.motionY = (this.posY - entity.posY) / 10.0F;
+							entity.motionZ = (this.posZ - entity.posZ) / 10.0F;
+						}
 						
 						if (burstprogress == 48) {
 							for (int i = 0; i < 50; i++) {
@@ -100,9 +110,10 @@ public class IonPlasmaBurstEntity extends Entity {
 							damage = 0.0F;
 						}
 					}
-				}
+				
 			}
 		}
+      }
     }
 	
 	@Override

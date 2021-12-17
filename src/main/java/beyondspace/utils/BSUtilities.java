@@ -15,6 +15,19 @@ import net.minecraft.item.ItemStack;
 
 public class BSUtilities {
 	
+	public static boolean hasBukkit() {
+		return isClassExists("org.bukkit.Bukkit");
+	}
+	
+	private static boolean isClassExists(String className) {
+		try {
+			Class.forName(className);
+			return true;
+		} catch (ClassNotFoundException event) {
+			return false;
+		}
+	}
+	
 	/** Converts gravity from m/s^2 to galacticraft gravity units
 	 * @param Si gravity acceleration (ex: Earth 9.8)
 	 * @return GGU equivalent */
